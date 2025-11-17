@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CORS测试</title>
+</head>
+<body>
+    <h1>CORS跨域测试</h1>
+    <button onclick="testN8N()">测试N8N连接</button>
+    <div id="result"></div>
+    
+    <script>
+        async function testN8N() {
+            const result = document.getElementById('result');
+            result.innerHTML = '正在测试...';
+            
+            try {
+                // 尝试访问N8N工作流
+                const response = await fetch('http://localhost:5678/webhook/1e50cbd3-cc31-4ab8-80c4-aa4aadf1e5fc', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: 'test',
+                        workflowType: 'code'
+                    })
+                });
+                
+                if (response.ok) {
+                    result.innerHTML = '✅ 连接成功！';
+                } else {
+                    result.innerHTML = '❌ 连接失败：' + response.status;
+                }
+            } catch (error) {
+                result.innerHTML = '❌ 错误：' + error.message;
+                console.error('详细错误：', error);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,466 @@
+{
+  "name": "代码后端",
+  "nodes": [
+    {
+      "parameters": {
+        "model": "deepseek-reasoner",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        -280,
+        560
+      ],
+      "id": "b5659869-ec59-46e1-bc4c-02f1c234656c",
+      "name": "DeepSeek Chat Model",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "mMNKT7aX2Ff8VHGT",
+          "name": "DeepSeek account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "documentURL": "https://docs.google.com/document/d/1XqXFmoWruLv5dbZ-N01LMgQPQq_fAKYEGI5ZyHZsSn0/edit?usp=sharing"
+      },
+      "type": "n8n-nodes-base.googleDocsTool",
+      "typeVersion": 2,
+      "position": [
+        -120,
+        580
+      ],
+      "id": "6e3fc36f-edd0-4e2a-9180-e87c3f79c649",
+      "name": "test1",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "cXnNkEn6ReghCrJd",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "documentURL": "https://docs.google.com/document/d/1VCLAXupnK97PaRFWRrBkhvLJ1EG_ZLieyPAhpMv13EQ/edit?usp=sharing"
+      },
+      "type": "n8n-nodes-base.googleDocsTool",
+      "typeVersion": 2,
+      "position": [
+        20,
+        580
+      ],
+      "id": "0ce89481-db6f-4873-bd9b-d67480c92fa9",
+      "name": "test2",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "cXnNkEn6ReghCrJd",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "documentURL": "https://docs.google.com/document/d/1eiel9lkWyu3PDWL_X8p2MduWDtu1iby6qZ_tZcu68tM/edit?usp=sharing"
+      },
+      "type": "n8n-nodes-base.googleDocsTool",
+      "typeVersion": 2,
+      "position": [
+        120,
+        580
+      ],
+      "id": "4f456edf-19f7-4ee8-aa44-6c73da84ce26",
+      "name": "test3",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "cXnNkEn6ReghCrJd",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "documentURL": "https://docs.google.com/document/d/11ozdZcjrd0skxEPKyYbMBWDALaPljoeD14GFNypkXZE/edit?usp=sharing"
+      },
+      "type": "n8n-nodes-base.googleDocsTool",
+      "typeVersion": 2,
+      "position": [
+        220,
+        580
+      ],
+      "id": "8d934890-65b1-4967-9a7b-32a4241145ae",
+      "name": "test4",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "cXnNkEn6ReghCrJd",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "documentURL": "https://docs.google.com/document/d/1J01unHZ-srO4QWBzF9tV8k2CutjbH2xbo8mQBBX58z0/edit?usp=sharing"
+      },
+      "type": "n8n-nodes-base.googleDocsTool",
+      "typeVersion": 2,
+      "position": [
+        440,
+        560
+      ],
+      "id": "3c314759-b624-414a-8e15-d5ea63abe18f",
+      "name": "tesst00",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "cXnNkEn6ReghCrJd",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        280,
+        760
+      ],
+      "id": "c5910e4d-0464-468e-8f6f-9516cb43e05a",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "documentURL": "https://docs.google.com/document/d/1NU-spWzU3RQBlVMl1ffGd-1q4EwdaD2vaI0bdxtWoZQ/edit?usp=sharing"
+      },
+      "type": "n8n-nodes-base.googleDocsTool",
+      "typeVersion": 2,
+      "position": [
+        340,
+        580
+      ],
+      "id": "5e827841-7917-4736-8cd2-3215cf4d3094",
+      "name": "test5",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "cXnNkEn6ReghCrJd",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        600,
+        540
+      ],
+      "id": "c0bb15c3-9854-4de3-9de7-78624ff9c867",
+      "name": "DeepSeek Chat Model1",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "y32CFebrJHPpfyne",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=你是一名专业的芯片测试程序生成助手。你有两个功能 \n功能1.当用户要求你攥写测试代码时 你可以根据用户提供的芯片型号和需求，生成相应的测试代码。如果仅要求写代码没有说明芯片型号则要求用户先输入芯片型号\n功能2.如果用户向你咨询其他问题则正常回答 不需要进行下方工作流程\n下方括号内为用户的问题（{{ $json.body.message }}）\n警告！以下工作流程为用户需要你完成功能1时使用：\n1. 首先分析用户输入的芯片型号 如果没有说明芯片型号则要求用户先输入 （如SN74LS192、SN74LS08等）\n2. 从《tesst00》数据手册中查找是否有用户需要的芯片 提取该芯片的管脚定义、电气参数和功能特性\n3. 根据用户需求生成相应的测试代码\n\n## 代码生成顺序：\n1. 依据《test1》编写初始化代码\n2. 依据《test2》编写CON与FUN代码\n3. 依据《test3》编写VOH与VOL代码\n4. 依据《test4》编写VIH与VIL代码\n5. 依据《test5》编写IIH与IIL与II代码\n\n## 输出要求：\n- 代码必须完整、可执行\n- 包含详细的注释说明\n- 严格按照手册参数设置测试条件\n- 输出格式要适合网页显示\n\n## 数据来源：\n- 只使用《test00》中的数据手册内容\n- 禁止使用外部资料或模型记忆\n- 管脚定义必须与手册完全一致\n\n请根据用户输入的芯片型号和具体需求，生成相应的测试代码。",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        600,
+        240
+      ],
+      "id": "825513f7-e0c8-430e-9a16-e7bbd9680a3e",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.webhookUrl }}",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -660,
+        240
+      ],
+      "id": "9bd50f6e-dd4e-4628-a757-343b5d1dcd18",
+      "name": "HTTP Request - 转发到AI Agent"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 格式化AI Agent的输出，使其适合网站显示\nconst inputData = $input.all();\nconst results = [];\n\nfor (const item of inputData) {\n  const data = item.json;\n  \n  // 检查是否有AI Agent的输出\n  if (data.output) {\n    const formattedOutput = {\n      success: true,\n      timestamp: new Date().toISOString(),\n      workflowType: data.workflowType || 'code',\n      output: data.output,\n      message: '测试代码生成完成',\n      status: 'completed'\n    };\n    \n    results.push({ json: formattedOutput });\n  } else if (data.error) {\n    const errorOutput = {\n      success: false,\n      timestamp: new Date().toISOString(),\n      workflowType: data.workflowType || 'code',\n      output: null,\n      message: '处理过程中出现错误',\n      error: data.error,\n      status: 'error'\n    };\n    \n    results.push({ json: errorOutput });\n  } else {\n    // 处理其他类型的数据\n    results.push({ json: data });\n  }\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -900,
+        520
+      ],
+      "id": "c75122f5-8c89-4c52-af73-62d9aebdcf59",
+      "name": "格式化响应"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              },
+              {
+                "name": "Access-Control-Allow-Methods",
+                "value": "GET, POST, OPTIONS"
+              },
+              {
+                "name": "Access-Control-Allow-Headers",
+                "value": "Content-Type, Authorization"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        -660,
+        520
+      ],
+      "id": "cd0cd204-04e4-4b89-aebd-932dc66890dd",
+      "name": "Webhook响应"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 路由节点：根据工作流类型选择不同的处理方式\nconst inputData = $input.all();\nconst results = [];\n\nfor (const item of inputData) {\n  const data = item.json;\n  \n  // 根据工作流类型设置路由信息\n  if (data.workflowType === 'code' || data.workflowType === 'quick') {\n    // 测试代码生成工作流\n    results.push({\n      json: {\n        ...data,\n        route: 'code_generation',\n        targetAgent: 'AI Agent'\n      }\n    });\n  } else if (data.workflowType === 'plan') {\n    // 测试方案生成工作流\n    results.push({\n      json: {\n        ...data,\n        route: 'test_plan',\n        targetAgent: 'AI Agent1'\n      }\n    });\n  } else {\n    // 默认使用代码生成工作流\n    results.push({\n      json: {\n        ...data,\n        route: 'code_generation',\n        targetAgent: 'AI Agent',\n        workflowType: 'code'\n      }\n    });\n  }\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -100,
+        60
+      ],
+      "id": "09cf3238-a563-45cf-8e25-8c4aaa003258",
+      "name": "工作流路由"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 错误处理节点\nconst inputData = $input.all();\nconst results = [];\n\nfor (const item of inputData) {\n  try {\n    const data = item.json;\n    \n    // 检查是否有错误\n    if (data.error || data.message?.includes('error')) {\n      const errorResponse = {\n        success: false,\n        timestamp: new Date().toISOString(),\n        workflowType: data.workflowType || 'unknown',\n        output: null,\n        message: '工作流执行失败',\n        error: data.error || data.message,\n        status: 'error'\n      };\n      \n      results.push({ json: errorResponse });\n    } else {\n      // 正常数据直接传递\n      results.push({ json: data });\n    }\n  } catch (error) {\n    // 捕获处理过程中的错误\n    const errorResponse = {\n      success: false,\n      timestamp: new Date().toISOString(),\n      workflowType: 'unknown',\n      output: null,\n      message: '数据处理失败',\n      error: error.message,\n      status: 'error'\n    };\n    \n    results.push({ json: errorResponse });\n  }\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -760,
+        740
+      ],
+      "id": "76bd4915-14b3-4a83-86ac-fc0f5d2a7f27",
+      "name": "错误处理"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "1e50cbd3-cc31-4ab8-80c4-aa4aadf1e5fc",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -660,
+        80
+      ],
+      "id": "78023f51-23a7-45c9-9a8d-d701c4e51609",
+      "name": "Webhook测试代码",
+      "webhookId": "1e50cbd3-cc31-4ab8-80c4-aa4aadf1e5fc"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "test1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "test2": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "test3": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "test4": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tesst00": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "test5": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "格式化响应",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request - 转发到AI Agent": {
+      "main": [
+        [
+          {
+            "node": "工作流路由",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "格式化响应": {
+      "main": [
+        [
+          {
+            "node": "Webhook响应",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "工作流路由": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "格式化响应",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "错误处理": {
+      "main": [
+        [
+          {
+            "node": "格式化响应",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook测试代码": {
+      "main": [
+        [
+          {
+            "node": "工作流路由",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "3bbb37dc-ba5d-45a3-b86a-ee951959073a",
+  "meta": {
+    "instanceId": "b966cebfbe89ff61846ab90f2e0613a89ebed223d7d35ecaae9be09153402bf6"
+  },
+  "id": "dMjXQR6wMeweCDlQ",
+  "tags": []
+}

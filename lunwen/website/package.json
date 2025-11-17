@@ -1,0 +1,20 @@
+{
+  "name": "dai-xu-website",
+  "version": "1.0.0",
+  "description": "戴煦个人网站 - AI芯片测试技术专家",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "chip-testing",
+    "ai",
+    "n8n",
+    "automation"
+  ],
+  "author": "戴煦",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}

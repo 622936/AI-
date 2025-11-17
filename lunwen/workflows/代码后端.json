@@ -1,0 +1,357 @@
+{
+  "name": "方案后端",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "f27ab7f0-1c71-4929-8163-24d372a8761b",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -500,
+        100
+      ],
+      "id": "314a838d-b61b-42c6-afc4-2312c5408c14",
+      "name": "Webhook - 测试方案生成",
+      "webhookId": "f27ab7f0-1c71-4929-8163-24d372a8761b"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "documentURL": "https://docs.google.com/document/d/1HfkCb-g-udWzlQo9OruFI-bkxtx_BKS3uYYN2egVnCM/edit?tab=t.0"
+      },
+      "type": "n8n-nodes-base.googleDocsTool",
+      "typeVersion": 2,
+      "position": [
+        800,
+        660
+      ],
+      "id": "8d28d2bd-7f1c-4665-9490-31e7d383f2ca",
+      "name": "tesst00",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "cXnNkEn6ReghCrJd",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "deepseek-reasoner",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        620,
+        660
+      ],
+      "id": "11f97302-8039-4f4d-a04c-68c321811507",
+      "name": "DeepSeek Chat Model1",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "y32CFebrJHPpfyne",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=你是一名专业的芯片测试方案生成助手。你有两个功能1.如果用户要求你攥写测试方案 则请根据用户提供的芯片型号和需求，生成完整的测试方案和测试向量。如果没有说明芯片型号则要求用户先输入芯片型号\n2.如果用户向你咨询其他问题则正常根据你的能力回答 不需要进行下方工作流程\n下方括号内为用户的问题（{{ $json.body.message }}）\n\n警告！以下工作流程为用户需要你完成功能1时使用：\n1. 分析用户输入的芯片型号 如果没有说明芯片型号则要求用户先输入芯片型号（如SN74LS192、SN74LS08等）\n2. 从《tesst00》数据手册中提取芯片参数\n3. 根据《tesst000》模板生成测试方案\n4. 生成详细的测试向量表格\n\n## 测试方案内容：\n- VOH/VOL: 输出高低电平测试\n- IOH/IOL: 输出电流测试\n- ICC: 电源电流测试\n- VIK: 输入钳位电压测试\n- CON: 连接性测试\n- FUN: 功能测试\n\n## 测试向量格式：\n请按照以下表格格式生成FUN功能测试向量：\n\n| 输入: A | B | C | G1 | G2A | G2B | 输出: Y0 | Y1 | Y2 | Y3 | Y4 | Y5 | Y6 | Y7 |\n| ----- | - | - | -- | --- | --- | ------ | -- | -- | -- | -- | -- | -- | -- |\n| 0     | 0 | 0 | 0  | 0   | 0   | 1      | 1  | 1  | 1  | 1  | 1  | 1  | 1  |\n| 1     | 0 | 0 | 0  | 0   | 0   | 1      | 1  | 1  | 1  | 1  | 1  | 1  | 1  |\n\n## 输出要求：\n- 测试方案要完整、详细\n- 测试向量要覆盖所有功能状态\n- 输出格式要适合网页显示\n- 包含测试条件和合格标准\n\n请根据用户输入的芯片型号，生成相应的测试方案和测试向量。",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        620,
+        360
+      ],
+      "id": "19772d95-4d84-4c28-8742-e922d302c7d8",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "https://docs.google.com/document/d/1n26cYaKpxJKGF4jkruGKqNYlDMcAq8mrXoRNv-JtdiA/edit?tab=t.0",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "insert",
+              "text": "={{ $json.output }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        1020,
+        440
+      ],
+      "id": "a1ad2315-6d2e-4cdc-8891-be9a9f1532a8",
+      "name": "Google Docs",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "cXnNkEn6ReghCrJd",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "documentURL": "https://docs.google.com/document/d/1J01unHZ-srO4QWBzF9tV8k2CutjbH2xbo8mQBBX58z0/edit?usp=sharing"
+      },
+      "type": "n8n-nodes-base.googleDocsTool",
+      "typeVersion": 2,
+      "position": [
+        1000,
+        660
+      ],
+      "id": "bf8b9e66-fd7f-4831-852a-1d9f65269726",
+      "name": "tesst000",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "cXnNkEn6ReghCrJd",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "1e50cbd3-cc31-4ab8-80c4-aa4aadf1e5fc",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -1340,
+        740
+      ],
+      "id": "6340e821-5900-451a-9708-2729bfb65bcb",
+      "name": "Webhook",
+      "webhookId": "1e50cbd3-cc31-4ab8-80c4-aa4aadf1e5fc"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.webhookUrl }}",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1080,
+        560
+      ],
+      "id": "54d68713-22dd-4795-9052-c77b568b7135",
+      "name": "HTTP Request - 转发到AI Agent"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 格式化AI Agent的输出，使其适合网站显示\nconst inputData = $input.all();\nconst results = [];\n\n// 找到正确的AI Agent输出\nlet correctOutput = null;\nlet workflowType = 'code';\n\nfor (const item of inputData) {\n  const data = item.json;\n  \n  // 检查是否有AI Agent的输出\n  if (data.output) {\n    // 根据workflowType和route信息判断这是否是正确的输出\n    if (data.workflowType === 'code' || data.workflowType === 'quick') {\n      // 代码生成请求 - 只处理包含C++代码的输出\n      if (data.output.includes('#include') || data.output.includes('FOVI') || data.output.includes('DIO_V3')) {\n        correctOutput = data.output;\n        workflowType = data.workflowType;\n        break;\n      }\n    } else if (data.workflowType === 'plan') {\n      // 测试方案生成请求 - 只处理包含测试方案的输出\n      if (data.output.includes('测试方案') || data.output.includes('测试向量') || data.output.includes('VOH/VOL')) {\n        correctOutput = data.output;\n        workflowType = data.workflowType;\n        break;\n      }\n    }\n  }\n}\n\n// 如果没有找到正确的输出，使用第一个有输出的数据\nif (!correctOutput) {\n  for (const item of inputData) {\n    const data = item.json;\n    if (data.output) {\n      correctOutput = data.output;\n      workflowType = data.workflowType || 'code';\n      break;\n    }\n  }\n}\n\nif (correctOutput) {\n  // 根据workflowType确定消息类型\n  let message = '处理完成';\n  if (workflowType === 'code' || workflowType === 'quick') {\n    message = '测试代码生成完成';\n  } else if (workflowType === 'plan') {\n    message = '测试方案生成完成';\n  }\n  \n  const formattedOutput = {\n    success: true,\n    timestamp: new Date().toISOString(),\n    workflowType: workflowType,\n    output: correctOutput,\n    message: message,\n    status: 'completed'\n  };\n  \n  results.push({ json: formattedOutput });\n} else {\n  // 没有找到有效输出\n  const errorOutput = {\n    success: false,\n    timestamp: new Date().toISOString(),\n    workflowType: 'unknown',\n    output: null,\n    message: '未找到有效的AI Agent输出',\n    error: 'No valid output found',\n    status: 'error'\n  };\n  \n  results.push({ json: errorOutput });\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -860,
+        560
+      ],
+      "id": "f8113c83-625e-435f-a4d1-632e1be9274b",
+      "name": "格式化响应"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              },
+              {
+                "name": "Access-Control-Allow-Methods",
+                "value": "GET, POST, OPTIONS"
+              },
+              {
+                "name": "Access-Control-Allow-Headers",
+                "value": "Content-Type, Authorization"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        -660,
+        560
+      ],
+      "id": "9168f156-1840-4b32-bc89-19e1a17faf08",
+      "name": "Webhook响应"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 路由节点：根据工作流类型选择不同的处理方式\nconst inputData = $input.all();\nconst results = [];\n\nfor (const item of inputData) {\n  const data = item.json;\n  \n  // 根据工作流类型设置路由信息\n  if (data.workflowType === 'code' || data.workflowType === 'quick') {\n    // 测试代码生成工作流\n    results.push({\n      json: {\n        ...data,\n        route: 'code_generation',\n        targetAgent: 'AI Agent'\n      }\n    });\n  } else if (data.workflowType === 'plan') {\n    // 测试方案生成工作流\n    results.push({\n      json: {\n        ...data,\n        route: 'test_plan',\n        targetAgent: 'AI Agent1'\n      }\n    });\n  } else {\n    // 默认使用代码生成工作流\n    results.push({\n      json: {\n        ...data,\n        route: 'code_generation',\n        targetAgent: 'AI Agent',\n        workflowType: 'code'\n      }\n    });\n  }\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -80,
+        180
+      ],
+      "id": "a2aef636-df64-45bf-88d6-940ffc9e5a49",
+      "name": "工作流路由"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 错误处理节点\nconst inputData = $input.all();\nconst results = [];\n\nfor (const item of inputData) {\n  try {\n    const data = item.json;\n    \n    // 检查是否有错误\n    if (data.error || data.message?.includes('error')) {\n      const errorResponse = {\n        success: false,\n        timestamp: new Date().toISOString(),\n        workflowType: data.workflowType || 'unknown',\n        output: null,\n        message: '工作流执行失败',\n        error: data.error || data.message,\n        status: 'error'\n      };\n      \n      results.push({ json: errorResponse });\n    } else {\n      // 正常数据直接传递\n      results.push({ json: data });\n    }\n  } catch (error) {\n    // 捕获处理过程中的错误\n    const errorResponse = {\n      success: false,\n      timestamp: new Date().toISOString(),\n      workflowType: 'unknown',\n      output: null,\n      message: '数据处理失败',\n      error: error.message,\n      status: 'error'\n    };\n    \n    results.push({ json: errorResponse });\n  }\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -740,
+        860
+      ],
+      "id": "d0d6c4e5-4f7d-469c-a4c9-3c62a039e5d5",
+      "name": "错误处理"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "工作流路由",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook - 测试方案生成": {
+      "main": [
+        [
+          {
+            "node": "工作流路由",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tesst00": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "格式化响应",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tesst000": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "格式化响应": {
+      "main": [
+        [
+          {
+            "node": "Webhook响应",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "工作流路由": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "格式化响应",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "错误处理": {
+      "main": [
+        [
+          {
+            "node": "格式化响应",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "7147b932-b3a2-406e-8ab8-9cac06ea780a",
+  "meta": {
+    "instanceId": "b966cebfbe89ff61846ab90f2e0613a89ebed223d7d35ecaae9be09153402bf6"
+  },
+  "id": "Mz3Xy1T69B08tTXH",
+  "tags": []
+}

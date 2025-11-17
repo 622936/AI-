@@ -1,0 +1,374 @@
+ Vol.35 No.8 2025
+25
+大语言模型赋能的创意写作： 
+应用框架与案例实践*
+ 
+卢淑怡 1
+ 褚乐阳 2
+ 王浙栋 1
+ 陈向东 1
+[通讯作者]
+（1．华东师范大学 教育信息技术学系，上海 200062；
+2．扬州大学 新闻与传媒学院，江苏扬州 225009）
+摘要：当前，大语言模型（Large Language Model，LLM）在语言写作教学中的创新潜力日益显现，其中创意写作作
+为培养学生情感表达、批判性思维与创新能力的重要手段，正面临教学模式僵化、教学资源匮乏、评价模式单一等现
+实挑战，LLM 的发展为其带来了新的机遇。为此，文章从世界知识、涌现能力、心理理论、思维链、硅基样本等角
+度分析了 LLM 在创意写作教学中的适用性，提出了基于 LLM 的创意写作应用框架，以通过多媒体创意激发和交互
+式创意激发相结合的形式，在写作过程中融入动态分析与个性化反馈。基于此框架，文章开发了相应的 LLM4Writing
+平台，并在上海市 S 小学开展了为期 5 周的案例实践。案例结果表明，在 LLM 的技术赋能下学生在创意构思和表达
+能力等方面取得了显著进步，同时写作兴趣与创意潜力得到了有效激发。文章通过研究，旨在为 LLM 在创意写作教
+学中的应用提供理论基础和实践指导，推动写作教学模式创新和写作教学质量提升。
+关键词：创意写作；大语言模型；写作教学；LLM4Writing
+【中图分类号】G40-057 【文献标识码】A 【论文编号】1009—8097（2025）08—0025—11 【DOI】10.3969/j.issn.1009-8097.2025.08.003
+创意写作是一种依赖想象力和创造力的表达方式，强调对已有知识、经验和情感的重新整合与创新表
+达，鼓励学生打破常规思维，发展独特的视角和表达风格。随着课程改革的推进，创意写作已成为语文、
+英语等学科核心素养提升的重要手段。《义务教育语文课程标准（2022 年版）》也明确提出，鼓励学生在
+书面创作中发挥创造力，采用多样表达方式[1]。由此，越来越多的课堂将创意写作引入教学实践，以提升
+学生的表达力与综合素养。当前，以 OpenAI O1、Claude 3.5 为代表的 LLM 正以革命性方式重塑教育，通
+过实时反馈、个性化指导和生成适应性学习材料，逐步推动教学向智能化、个性化发展。其中，在 2024 年
+10 月，OpenAI 发布的协作编辑工具 Canvas 使 LLM 辅助写作成为热点，此后随着 LLM 在写作教学中的
+应用持续拓展，其在创意写作领域受到越来越多的关注[2]。学界开始探索 LLM 在写作教学中的实践路径，
+如 Escalante 等[3]开发的基于 GPT-4 的写作系统可为学生提供个性化建议与即时反馈；Bašić 等[4]通过交互
+提示帮助学生拓展思路；Jiang 等[5]尝试利用 LLM 进行写作评价。上述研究表明，LLM 不仅能模拟多样风
+格、激发写作灵感，还可辅助内容生成，有望成为推动创意写作教学的重要工具。基于此，本研究尝试探
+索 LLM 在语文创意写作教学中的应用潜力，提出 LLM 辅助的教学框架并结合自主开发的 LLM4Writing
+平台，展示其在小学语文创意写作教学中的具体应用路径，以期为 LLM 在创意写作教学中的应用提供理
+论基础和实践指导，推动写作教学模式创新和写作教学质量提升。
+一 研究综述
+1 创意写作教学的研究进展
+近年来，创意写作教学在内容主题、教学方法与评价机制等方面不断演进，反映了研究者对提升学生
+创意写作能力和创造力的系统性思考。
+Vol.35 No.8 2025 
+26
+创意写作教学的内容主题已从传统文学体裁向更广泛的表达领域延伸，强调社会议题与跨学科融合的
+价值。例如，牛津暑期课程中的创意写作专题不仅讲授小说、散文和诗歌的技法，还引导学生探究“为何
+写作”这一本质问题[6]。Winarni[7]将现实议题融入写作，通过实践性任务提高学生在主题掌握、措辞和想
+象力方面的参与度。此外，越来越多的课堂开始探讨气候变化、文化认同等复杂议题，使写作更具现实关
+照与思辨张力，学生得以在真实语境中发展其创意表达能力。
+内容的变化也衍生出教学方法的突破，创意写作教学法正经历着从单一写作技能训练向综合能力培养
+的转变，同时积极探索交互性和技术辅助在培养高阶写作能力中的潜在价值，主要涉及过程导向、跨学科
+融合和技术辅助三个方面。其中，过程导向教学强调写作的动态性与反思性，“工作坊”模式与过程写作
+法被广泛采用，强调写、评、改的循环过程，有助于激发创造力与批判性思维，如 Bouwer 等[8]提出的对话
+式干预模式，将讨论与重写纳入教学，有效提升了学生的论证能力与写作质量。在过程导向的基础上，跨
+学科融合为教学注入了新的活力。研究显示，音乐、戏剧等艺术形式能拓展学生的表达视角，激发其写作
+兴趣[9]。例如，戏剧活动通过角色扮演强化情节构建与语言表现力，有助于写作想象力的培养[10]。随着技
+术的发展，创意写作教学开始利用技术辅助为学生提供沉浸式的学习体验，如虚拟现实（VR）技术能增强
+沉浸感，激发写作灵感；数字故事创作在小学阶段的运用，已被证明对提升学生创意表达具有积极影响[11][12]。
+这些研究共同表明，技术融合正在为创意写作教学开辟新的路径。
+在教学方式不断演进的同时，评价机制也面临着革新，如杨刚等[13]构建的四维度评价量表，涵盖主题
+契合度、结构完整性、语言表达与思维创新，强调了对学生综合能力的评估。Wilson 等[14]进一步引入学生
+自我效能感与教师工具接受度等维度，使评价更具多元性与人本特征。
+尽管创意写作教学在各教育阶段的实践日益增多，但仍普遍面临素材匮乏、方法单一及评价僵化等现
+实瓶颈，导致学生的创意潜能无法被充分激发。在此背景下，LLM 的独特优势为突破上述教学困境提供了
+关键契机。因此，本研究选择以基础教育阶段为实证场域，旨在探索 LLM 弥补当前教学不足的有效路径，
+并为其他教育阶段的应用提供参考。
+2 LLM 在写作教学中的应用
+LLM 在写作教学中已展现出多元化的应用趋势，逐渐从单一技能训练拓展为支持语言认知、写作技能
+与跨学科素养的综合工具，具体体现在以下几个方面：
+（1）创意构思
+大量研究表明，LLM 在拓展学生创意思路、提升写作深度方面具有巨大潜力。例如，Bellemare-Pepin
+等[15]的研究发现，LLM 在某些任务中表现出超越人类发散性思维的能力，为其写作应用提供了理论支持。
+Qin 等[16]开发的 CharacterMeet 系统通过 AI 驱动的对话机制，帮助学生深入探索和构建故事角色，提升作
+品的创造性并深化情节。冯庆华等[17]的研究也同样指出，ChatGPT 不仅能够根据给定主题生成丰富多样的
+创意内容，还能在写作过程中提供灵感和新颖视角。这些研究共同说明，LLM 不仅能够辅助学生生成创意
+内容，还能通过互动激发学生更深层次的创造性思维，推动写作教学的创新与发展。
+（2）评价反馈
+LLM 可提供多维、实时、个性化的写作反馈，提升写作教学的针对性与效率。例如，在写作质量评估
+方面，Wang 等[18]构建了包括逻辑结构、学术词汇等九个维度的综合评价框架，并证明了 LLM 能够生成基
+本可靠的多维度评估结果。此外，在实时反馈方面，LLM 具备快速分析与反馈能力，可及时识别语法、逻
+辑与表达问题，促进学生进行即时修正与持续提升。在个性化指导方面，Seßler K 等[19]提出的 PEER 工具
+ Vol.35 No.8 2025
+27
+可根据学生水平与特征生成定制化建议，如强化叙事结构、追踪写作进展等，辅助教师优化教学策略。这
+些研究共同表明，LLM 在反馈中的价值已逐步从通用评估延伸至动态、个性化写作指导体系。
+（3）资源推荐
+LLM 在资源推荐的应用主要体现在教学资源生成和个性化学习支持两个方面。在教学资源生成方面，
+其可快速生成多样化的写作任务与教学材料，覆盖不同文体、风格与主题，为教学内容提供广度与深度支
+持，如 Wang 等[20]提出的 Weaver 模型通过预训练与函数调用整合外部知识库，实现了更具适应性的内容
+创作支持。在个性化学习支持方面，LLM 还能根据学生的水平与学习需求，生成个性化练习，如 Li 等[21]
+构建的多阶段多任务模型，基于学生的能力画像生成差异化写作任务，提升了学习效率与动机。
+上述研究展现了 LLM 在创意写作教学领域的显著潜力，但将 LLM 有效整合到创意写作教学中并非简
+单的拼接。如何将 LLM 有效整合到创意写作教学中，发挥其在深层次创作活动中的支持作用，仍需进一
+步的理论建构和实践探索。
+二 LLM 驱动的创意写作：框架与工具设计
+作为一个复杂的认知过程，创意写作涉及多个相互关联的阶段和技能。本研究将从技术的视角系统分
+析 LLM 对于创意写作的适用性，并构建覆盖写作全流程的应用框架。
+1 大模型对于创意写作的适用性
+长期以来，创意写作因其对语言理解与表达的高度要求，被认为是 AI 难以突破的领域。然而，LLM
+的出现拓展了 AI 在语言创作中的边界，为创意写作教学带来了新的工具与研究方向。通过海量文本的自
+监督学习，LLM 不仅掌握语言结构与规则，还积累了丰富的语义和世界知识，展现出接近人类认知的生成
+能力，具备激发创意表达的潜力。LLM 在创意写作中的适用性，可从世界知识、涌现能力、心理理论、思
+维链和硅基样本等方面深入探讨其技术机制。
+（1）世界知识提供创意的基础
+广泛的“世界知识”对创意写作至关重要，它为创作者提供背景信息和事实依据，激发多样化的创意
+表达，增强作品的现实感和深度。LLM 通过海量数据预训练获取的世界知识，不仅包含语言要素，还内化
+了世界的统计性描述和因果性理解，为创意写作提供了新颖且合理的支持。Lee 等[22]的研究表明，LLM 能
+将无关概念有机结合，形成连贯的思维体系，从而帮助学生拓展知识领域，产生独特创意。同时，LLM 对
+社会规范和文化背景的理解，使其能够生成符合情境的对话和行为，为创作提供真实、立体的角色与情节；
+LLM 还习得了隐性世界表征，通过对大规模语料的学习，根据上下文推断细节，自动补充内容，能使学生
+整合多学科知识，创造更具深度和真实感的作品。
+（2）涌现能力增强创意的潜力
+创意写作的核心在于突破常规，创造新颖独特的表达。涌现能力使 LLM 在创意写作中展现出超越其
+训练数据的创造性，如生成出人意料的情节转折或独特的文学意向，为学生提供更多的灵感来源。在习得
+世界知识的基础上，LLM 能够在特定任务中呈现出与人类认知过程相似的特征，包括复杂推理、因果分析
+和目标规划等，从而拓展写作边界，丰富创意多样性[23]。
+在创意写作的实践中，这种涌现能力具体体现为强大的泛化能力和复杂推理能力。LLM 的泛化能力使
+其能够基于已知信息进行推测，构建全新场景和情节。通过交互提示，模型在创造性任务中的表现得到显
+著提升，展示了其在创意生成中的适应性和灵活性。另外，复杂推理能力可使 LLM 进行类比和因果分析，
+Vol.35 No.8 2025 
+28
+发现元素间的隐含联系，并通过结构化提示进一步提升表现，甚至在某些情况下超越平均人类水平。因此，
+LLM 的涌现能力为创意写作提供了强大的技术支持，不仅拓展了创意表达的可能性，也为学生的创造性思
+维提供了新工具。
+（3）心理理论深化创意的内涵
+课标强调培养学生准确感知、深入理解和有效表达情感的能力。在创意写作过程中，学生需要学会表
+达个人情感，将情感体验转化为文字，而心理理论能够帮助学生理解人物的心理动机、情感变化和行为逻
+辑。心理理论是指个体理解和推断他人心理状态的能力，包括信念、意图、欲望和知识等，对人类的社会
+交互和认知发展至关重要。有研究表明，LLM 通过模拟和预测人类的思维、情感和行为模式，可以展现出
+类似人类的心理理论能力，与模拟心理理论的 LLM 互动有助于提高学生的元认知能力和情感理解[24][25]。
+这种能力提升可以促进学生自我反思，改进写作策略，并帮助学生更好地理解和表现不同角色的心理状态。
+通过模拟人类互动，LLM 能够帮助学生生成富有洞察力和共情性的文本，探索不同写作风格和主题，进而
+丰富创作内容。
+（4）思维链提供创意的框架
+写作不仅是情感表达，更是思维过程的外化，学生作品中的表达困难、逻辑不清等问题常反映其认知
+挑战。思维链作为 LLM 模拟人类逐步推理的方法，可将复杂问题分解为中间步骤，构建结构化的思考路
+径，有助于提升 LLM 自身在创意写作等需深度推理任务中的表现。在数学等领域，思维链已展现出强大
+潜力，而创意写作强调的是一个动态循环的过程，思维链能够有效地支持和跟踪这一过程的各个阶段，为
+写作过程提供了一个可分析的框架[26]。通过记录和分析学生不同阶段的思维链，教师可以更深入地理解学
+生的写作过程，从而提供更有针对性的指导。思维链为创意写作提供了有力的认知支持，既有助于学生系
+统发展创意，也为教师提供新的教学与评估手段。
+（5）硅基样本为人机互动提供支持
+硅基样本是由 LLM 生成的模拟人类行为与思维的虚拟实体，能够模拟作者的创作过程与思维方式，
+形成文本、图像、声音等多模态表达，其对话风格自然、逻辑连贯，具备强大的情境感知与上下文理解能
+力，为创意写作提供了更高效、个性化的支持。相较于传统人机交互模型，硅基样本在智能性、适应性与
+语境把握方面表现更优，可根据学生的个体差异提供定制化反馈，提升创作质量与互动体验[27]。在虚拟教
+学中，硅基样本可充当读者、编辑、评论者等多种角色，帮助学生多角度完善作品。同时，硅基样本还能
+作为虚拟伙伴，与学生共同构思、激发灵感，推动创意思维发展。
+综上所述，LLM 的世界知识、涌现能力、心理理论、思维链和硅基样本等特性形成了一个综合的创意
+支持体系，为写作的各个环节提供了全方位的辅助，为创意写作的理论与实践提供了新的视角。
+2 基于 LLM 的创意写作应用框架
+本研究以过程写作法为基础，将创意写作过程划分为预写、起草、修改、校订和评价五个基本阶段，
+设计了基于 LLM 的创意写作应用框架，如图 1 所示。
+①预写阶段。作为创意写作的起点，该阶段的核心在于激发创意、明确方向，构建初步的写作框架等。
+教师需设计具挑战性且能激发兴趣的写作主题，明确创作目标及所要培养的能力；学生应从多角度思考，
+丰富创作素材内容。而 LLM 具备强大的语言理解与生成能力，能快速分析文本、提供多样化思路，辅助
+学生生成写作大纲、结构建议，并拓展创作视角。受 LLM 基于图像灵感生成故事的启发，引入其文字生
+成图片功能为预写阶段增添了多媒体创意激发的维度，学生可将脑中构想通过 LLM 进行视觉化呈现，以
+ Vol.35 No.8 2025
+29
+直观反馈突破“创意瓶颈”，通过意象表征这一多感官传达手段，增强作品的表现力和感染力。
+②起草阶段。与传统写作不同，创意写作强调思想自由流动与表达独特性，需要丰富的背景知识和多
+元素材支持。此阶段的目标是将预写阶段的构思转化为具体的文字内容，形成初稿。学生需将零散想法组
+织成连贯叙事或论述，同时充实内容的深度和广度，增强创意力度。然而，信息不足和素材匮乏常导致作
+品单薄、缺乏说服力和真实感，影响写作流畅度，限制创意的展现。对此，LLM 作为强大的知识库与信息
+检索工具，能够快速提供相关的历史背景、科学知识、文化习俗等多种素材，满足创意写作对多元背景知
+识的需求。
+③修改阶段。修改阶段不仅是提升作品质量的过程，更是培养学生多方面能力的关键环节。LLM 在这
+一阶段能够通过交互式讨论提供个性化的建议，协助学生识别并解决写作问题，使学生的自我反思和自主
+修改能力得到提升，将修改过程由被动转为主动。通过修改的过程数据，LLM 还可生成学生的学习进展报
+告，为教师提供全面的动态评价，反映学生的能力发展轨迹。然而，使用 LLM 辅助修改时还需平衡技术
+支持与学生原创性，同时教师应引导学生批判性地思考 LLM 建议，保持个人创意和风格。
+④校订阶段。该阶段主要关注文章内容的精细化处理，包括语言表达准确性、结构完整性和风格一致
+性，要求学生具备敏锐的语言感知能力和文本把控能力，这对学生来说通常是一个挑战。LLM 可作为智能
+校对助手，灵活模拟不同类型的读者，为学生提供个性化反馈，适应学生最近发展区动态变化。在模拟不
+同的读者时，LLM 可逐步提供由简到繁的反馈，并根据学生的进步调整难度和深度，始终保持适应性。例
+如，LLM 可模拟普通读者指出难以理解的部分，或模拟文学评论家对作品的艺术性提出建议，这种自适应
+反馈机制能激发学生潜力，促进写作能力的持续提升。
+⑤评价阶段。传统评价方法依赖主观判断，忽视过程且反馈模糊，无法得到全面的评价，更难以形成
+个性化学习计划。LLM 则能通过量化分析与可视化、客观评估创意和表达等多个维度，生成个性化建议并
+推送相关学习资源，帮助学生清晰了解自身的写作水平。然而，LLM 的评价仍需教师结合其专业判断进行
+审阅、调整与补充，以确保最终反馈的有效性。
+图 1 基于 LLM 的创意写作应用框架
+3 应用框架的特点和优势
+图 1 所示的应用框架通过融合文本生成、多媒体创作、交互对话和个性化评估等多元功能，重塑了传
+Vol.35 No.8 2025 
+30
+统的创意写作教学模式，为教师和学生提供了全方位、个性化的教学体验。这种新型的创意写作应用框架
+呈现出以下特点和优势：首先，LLM 实现了全过程智能辅助，从预写到评价，提供针对性支持，全面评估
+学生的创作过程和成果，大大提升了写作教学效率和质量。其次，该框架具备多模态创作支持能力，学生
+可将抽象构思转化为视觉、听觉呈现，拓展了创作维度并激发新的灵感。最后，该框架为学生提供了个性
+化学习体验。借助 LLM 的互动功能，学生可获得实时反馈，培养独特的写作风格和创作特色。通过该框
+架，教师、学生与 LLM 共同协作，教师专注高层次指导，学生获得更多个性化实践，而 LLM 提供持续支
+持，实现了教学资源的优化配置。
+三 解释案例
+1 案例设计
+为检验上述应用框架的实际效果，本研究开发了 LLM4Writing 创意写作教学平台，并于 2024 年 5 月
+至 6 月与上海市 S 小学合作，针对该校四年级的一个班级（34 名学生）开展了为期 5 周的教学实验。整个
+教学过程严格遵循本研究提出的应用框架实施（详细流程如图 2 所示），旨在探索 LLM 对学生创意构思
+与表达能力的影响。
+图 2 案例活动详细流程
+在准备阶段（第 1 周），教师通过课堂讲授向学生介绍 LLM 辅助创意写作的方法，引导学生熟悉
+LLM4Writing 平台的功能和使用方法，并通过实际操作演练帮助学生掌握如何利用平台进行创意构思与互
+动修改等任务。
+实践阶段（第 2～5 周）分为两轮，每轮持续两周，涵盖预写、起草、修改、校订和评价五个环节。其
+中，前四个环节在每轮的第一周完成，评价环节则在每轮的第二周进行。为更充分地观察学生在 LLM 辅
+助下的创作过程变化，增强研究结果的可靠性，本研究选取沪教版《语文 四年级 下册》中的两个代表性
+写作主题《我的自画像》和《故事新编》开展案例分析，分别侧重于写人记叙和虚构创作，旨在覆盖不同
+类型的写作任务，观察平台在多种语境下的支持效果的同时，通过两轮写作实践，有助于提升测试结果的
+全面性和说服力。学生可根据创作需要灵活使用平台的各项功能，如在自我描述中借助多媒体素材丰富表
+达，在故事创作中通过交互对话拓展情节思路。
+在评价设计方面，本案例采用混合研究方法，结合问卷调查、文本分析和质性访谈三种方式进行案例
+评价。其中，问卷调查的评价维度包括以下内容：①写作自我效能感。本案例采用基于 Bruning 等[28]提出
+的写作自我效能感量表，并根据研究情境进行适当改编。该量表全面评估学生的整体写作能力感知，包含
+ Vol.35 No.8 2025
+31
+专门设计用于衡量创意激发的项目。量表共 16 个项目（Cronbach’s α=0.81），涵盖创意构思、表达能力等
+多个方面。②技术接受度。从易用性、有用性等方面评估学生对 LLM4Writing 平台的功能评价和使用意愿。
+在此基础上，本案例对学生的过程性文本进行分析，重点关注创意构思和表达能力两个维度。通过评估词
+组使用和句子复杂度等指标，全面衡量学生的写作表现。本研究还采用半结构化访谈的方式，收集师生对
+平台的使用体验、创意写作过程中遇到的挑战，以及平台在促进创意表达方面的作用等方面的反馈。
+2 案例评价
+在教学实践中，34 名学生在教师引导下逐步开展创意写作活动。初期操作时，部分学生因打字慢或语
+音输入受环境干扰而遇到困难。对此，教师采取分组协作、分批录音的方式优化使用流程，随着练习的深
+入，学生逐渐熟练并能专注于写作内容。在平台辅助下，学生均能顺利完成写作任务。评价结果如下：
+（1）问卷调查
+本案例采用前后测对比设计，在教学实验开始前（第 1 周）和结束后（第 5 周）分别对学生进行问卷
+调查，重点测量写作自我效能感和平台接受度两个维度。最终，本研究共收集 32 份有效数据，并采用 t 检
+验评估学生写作自我效能感的前后变化，如表 1 所示。
+表 1 写作自我效能感的 t 检验分析（N=32）
+评价维度 前测 M 前测 SD 后测 M 后测 SD t p
+创意构思 6.44 2.09 7.86 2.48 -2.45 0.020*
+表达能力 6.47 2.49 7.97 2.31 -2.60 0.014*
+词汇运用 6.53 2.57 7.80 2.42 -2.08 0.046*
+写作组织 6.31 2.65 7.42 2.71 -1.91 0.066
+写作专注度 7.98 2.42 7.88 2.63 0.16 0.874
+总体 6.75 2.44 7.79 2.51 -2.67 0.012*
+注：M 表示平均值，SD 表示标准差；*p＜0.05。
+表 1 的 t 检验分析结果表明，学生在创意构思（t=-2.45，p＜0.05）、表达能力（t=-2.60，p＜0.05）、
+词汇运用（t=-2.08，p＜0.05）和总体写作自我效能感（t=-2.67，p＜0.05）方面均有显著提升。然而，在写
+作组织和写作专注度方面的提升尚不显著，可能因短期的结构化建议难以内化为学生的自主能力，以及与
+平台交互过程中注意力容易分散。
+此外，本案例从易用性、有用性等方面对学生进行了平台接受度调查，如表 2 所示。调查结果从学生
+使用体验的角度进一步验证了 LLM4Writing 平台辅助创意写作的有效性和价值。同时，这些反馈也为平台
+的未来优化和发展提供了指导方向，特别是在提高平台易访问程度方面。
+表 2 LLM4Writing 平台接受度调查结果（N=32）
+维度 均值 标准差 中位数 最小值 最大值 
+易用性 4.54 0.89 5 2 5
+有用性 4.56 0.80 5 1 5
+学习体验 4.47 1.02 5 1 5
+易访问程度 4.13 1.13 5 1 5
+整体满意度 4.58 0.98 5 1 5
+Vol.35 No.8 2025 
+32
+（2）文本分析
+本案例进一步对学生在整个创意写作过程中产生的文本进行了深入分析。在词汇使用方面，经过平台
+辅助的完整写作过程后，学生的作文不仅词汇总量增加，描写性词语的使用频率也显著提高（如图 3 所示）。
+在句子结构方面，学生作文的句式变得更加多样，简单句比例下降（如图 4 所示），反映了学生在表达复
+杂思想和情感时能够运用更加成熟的语言结构。
+图 3 词组-词云图分析 图 4 句子复杂度分析
+除了词汇和句法层面的改善，本案例还从创意（新颖性、原创性和稀有性）和情感（愉悦度、幽默度
+和情节转折）两个维度评估作文质量。为消除评估偏见，评价环节采用严格的双盲方法，由两名评估者对
+随机混合的样本独立评分。结果发现，LLM 辅助在创意维度的新颖性、稀有性和情感维度方面产生了显著
+的正向效应，而在原创性方面影响较小，具体如图 5 所示。
+图 5 对作文创意维度和情感维度的评估
+（3）质性访谈结果
+本研究采用半结构化访谈的方式，收集师生对平台的使用体验、创意写作过程中遇到的挑战，以及平
+台在促进创意表达方面的作用等方面的反馈。在创意构思方面，多位学生表示平台激发了他们的创意思维，
+帮助突破传统写作局限，如一位学生提到“利用平台让自己的思维更加宽广”，也有学生表示能“产生很
+多不一样的想法”，这些反馈表明平台在拓展认知视野和提升构思能力方面具有积极作用。在表达能力方
+面，学生的反馈也表明平台有效提升了他们的语言表达信心，如一位学生表示“比如说我想象要用潜艇过
+河，平台能用图片展现那个潜艇入河的瞬间，然后我就能把河里面的情形状况写得很清楚”，另一位学生
+ Vol.35 No.8 2025
+33
+提到自己能够“用更多的修辞手法来写作，使文章更加生动”。
+问卷调查、文本分析和质性访谈的结果表明，LLM4Writing 平台在促进学生创意构思和表达能力方面
+具有显著的效果。
+3 案例小结
+本案例探讨了 LLM4Writing 平台在小学四年级创意写作课程中的应用。基于创意写作领域的相关研
+究，案例对 LLM 在基础教育中的适应性进行了评估，并针对性地优化了写作过程和师生互动方式。平台
+通过整合多媒体创意激发和交互对话等功能，为学生提供个性化写作指导和实时反馈，旨在提升学生的写
+作能力和学习体验。研究结果表明，使用 LLM4Writing 平台的学生在创意构思和表达能力方面均有显著的
+提升。
+四 结语
+LLM 正在深刻重塑创意写作的格局，越来越多的研究证明合理利用 LLM 辅助可以显著提高学生的写
+作质量和创造力[29]。基于此，本研究提出的基于 LLM 的创意写作框架，融合多媒体与交互式激发创意方
+式，嵌入动态分析和个性化反馈功能，为人工智能在创意写作教学中的应用提供了新的解决方案。在理论
+层面，该框架深化了对 LLM 在创意生成中作用机制的理解；在实践层面，基于此开发的 LLM4Writing 平
+台在 S 小学的应用验证了框架的可行性，提供了实证支持，展现了其教学优势。然而，LLM 的广泛应用也
+可能削弱学生的自主能力，导致过度依赖，并带来创作伦理与知识产权等问题；其内容生成在多元文化语
+境下可能导致表达同质化，冲击本土文化认同[30]。未来还需在效率与创造力、普适性与文化多样性之间寻
+求平衡，推动 LLM 在创意写作中的合理应用。
+————————
+参考文献
+[1]中华人民共和国教育部.义务教育语文课程标准(2022 年版)[S].北京:北京师范大学出版社,2022:4.
+[2]中国质量认证中心.2023 产业大模型应用白皮书[OL].
+<https://gongxintech.oss-cn-beijing.aliyuncs.com/2023Industry-white-paper.pdf>
+[3]Escalante J, Pack A, Barrett A. AI-generated feedback on writing: Insights into efficacy and ENL student preference[J]. 
+International Journal of Educational Technology in Higher Education, 2023,(1):57.
+[4]Bašić Ž, Banovac A, Kružić I, et al. ChatGPT-3.5 as writing assistance in students’ essays[J]. Humanities and Social 
+Sciences Communications, 2023,(1):1-5.
+[5]Jiang Z, Xu Z, Pan Z, et al. Exploring the role of artificial intelligence in facilitating assessment of writing performance in 
+second language learning[J]. Languages, 2023,(4):247.
+[6]Oxford Summer Courses. Oxford summer courses[OL]. <https://oxfordsummercourses.com/>
+[7]Winarni R. The effect of project based learning on creative writing skills in elementary school students: Multivariate analysis 
+of variance on themes, diction, imagination[J]. Jurnal Iqra’: Kajian Ilmu Pendidikan, 2023,(2):120-129.
+[8]Bouwer R, van der Veen C. Write, talk and rewrite: The effectiveness of a dialogic writing intervention in upper elementary 
+education[J]. Reading and Writing, 2024,(6):1435-1456.
+[9]Yende S J. Effectiveness of music education in developing and fostering reading and writing for learners[J]. Reading & 
+Vol.35 No.8 2025 
+34
+Writing, 2023,(1):1-10.
+[10]Bayraktar A, Okvuran A. Improving student’s writing through creative drama[J]. Procedia-Social and Behavioral Sciences, 
+2012,51:662-665.
+[11]Chen Y T, Li M, Cukurova M. Unleashing imagination: An effective pedagogical approach to integrate into spherical video based virtual reality to improve students’ creative writing[J]. Education and Information Technologies, 2024,(6):6499-6523.
+[12]Demirbaş İ, Şahin A. The effect of digital stories on primary school students’ creative writing skills[J]. Education and 
+Information Technologies, 2023,(7):7997-8025.
+[13]杨刚,邱创楷,郑晓丽,等.基于虚拟全景的学习方式促进学习动机与写作成绩的实证研究[J].电化教育研
+究,2020,(1):91-98、121.
+[14]Wilson J, Roscoe R D. Automated writing evaluation and feedback: Multiple metrics of efficacy[J]. Journal of Educational 
+Computing Research, 2020,(1):87-125.
+[15]Bellemare-Pepin A, Lespinasse F, Thölke P, et al. Divergent creativity in humans and large language models[OL]. 
+<https://arxiv.org/pdf/2405.13012>
+[16]Qin H X, Jin S, Gao Z, et al. CharacterMeet: Supporting creative writers’ entire story character construction processes 
+through conversation with LLM-powered chatbot avatars[A]. Proceedings of the CHI Conference on Human Factors in 
+Computing Systems[C]. New York: Association for Computing Machinery, 2024:1-19.
+[17]冯庆华,张开翼.人工智能辅助外语教学与研究的能力探析——以 ChatGPT-4o 和文心大模型 4.0 为例[J].外语电化
+教学,2024,(3):3-12、109.
+[18]Wang Z, Makarova V, Li Z, et al. LLMs can perform multi-dimensional analytic writing assessments: A case study of L2 
+graduate-level academic English writing[OL]. <https://arxiv.org/pdf/2502.11368>
+[19]Seßler K, Xiang T, Bogenrieder L, et al. Peer: Empowering writing with large language models[A]. European Conference 
+on Technology Enhanced Learning[C]. Cham: Springer Nature Switzerland, 2023:755-761.
+[20]Wang T, Chen J, Jia Q, et al. Weaver: Foundation models for creative writing[OL]. <https://arxiv.org/pdf/2401.17268>
+[21]Li C, Zhang M, Mei Q, et al. Teach LLMs to personalize: An approach inspired by writing education[OL].
+<https://arxiv.org/pdf/2308.07968>
+[22]Lee B C, Chung J. An empirical investigation of the impact of ChatGPT on creativity[J]. Nature Human Behaviour, 
+2024,(10):1906-1914..
+[23]陈向东,赵丽娟,刘泽民.拓展学科的疆域:大模型的涌现能力对学习科学的影响[J].现代教育技术,2024,(1):44-54.
+[24]潘香霖,褚乐阳,陈向东.窥探机器之窍:机器心理学视角下的大模型教育应用[J].远程教育杂志,2023,(6):52-61.
+[25]Wang X, Li X, Yin Z, et al. Emotional intelligence of large language models[J]. Journal of Pacific Rim Psychology, 
+2023,17:18344909231213958.
+[26]Wei J, Wang X, Schuurmans D, et al. Chain-of-thought prompting elicits reasoning in large language models[J]. Advances 
+in Neural Information Processing Systems, 2022,35:24824-24837.
+[27]刘泽民,陈向东.教育研究的硅基样本——基于大模型技术路线的分析[J].远程教育杂志,2025,(1):19-32、45.
+[28]Bruning R, Dempsey M, Kauffman D F, et al. Examining dimensions of self-efficacy for writing[J]. Journal of Educational 
+Psychology, 2013,(1):25.
+[29]金皓月,余敏杰,张紫徽,等.生成式人工智能辅助学术写作调查研究[J].开放教育研究,2024,(4):79-90.
+[30]陈向东,卢淑怡,易乐湘.文化冲突:大语言模型教育应用中的张力与调适[J].远程教育杂志,2025,(3):3-15、43.
+ Vol.35 No.8 2025
+35
+Creative Writing Empowered by Large Language Models: Application Framework and Case Studies
+LU Shu-Yi1
+ CHU Le-Yang2
+ WANG Zhe-Dong1
+ CHEN Xiang-Dong1[Corresponding Author]
+(1. Department of Educational Information Technology, East China Normal University, Shanghai, China 200062;
+2. Journalism and Media College, Yangzhou University, Yangzhou Jiangsu, China 225009)
+Abstract: At present, the innovative potential of large language models (LLM) in language writing instruction is becoming 
+increasingly evident. Among them, creative writing, as an important means to cultivate students’ emotional expression, critical 
+thinking, and innovative abilities, is facing practical challenges such as rigid teaching models, scarce teaching resources and 
+single evaluation models, and the development of LLM has brought new opportunities to it. Therefore, this paper analyzed the 
+applicability of LLM in creative writing instruction from the perspectives of world knowledge, emergent capabilities, theory 
+of mind, chain of thought, and silicon-based samples, and proposed an LLM-based creative writing application framework 
+aimed at integrating dynamic analysis and personalized feedback into the writing process through a combination of multimedia inspired and interactive creativity stimulation. Based on this framework, a corresponding LLM4Writing platform was 
+developed and implemented in a 5-week case study at S Elementary School in Shanghai. The case results showed that students 
+have made significant improvements in creative conception and expression abilities, while their writing interest and creative 
+potential have been effectively stimulated. Through research, this article was aimed to provide a theoretical foundation and 
+practical guidance for the application of LLM in creative writing instruction, thereby promoting innovation of writing teaching 
+models and the improvement of writing teaching quality.
+Keywords: creative writing; large language models; writing instruction; LLM4Writing
+————————
+*基金项目：本文为 2023 年度全国教育科学规划一般课题“基于大语言模型的青少年人工智能教育研究”（项目编
+号：BCA230276）的阶段性研究成果。
+作者简介：卢淑怡，在读博士，研究方向为大语言模型教育应用、群体感知和共享调节研究，邮箱为 shuyi_lu@126.com。
+收稿日期：2025 年 2 月 7 日
+编辑：小时

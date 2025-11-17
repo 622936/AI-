@@ -1,0 +1,4445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>戴煦 - AI驱动芯片测试技术专家</title>
+    
+    <!-- 内联样式替代外部CDN -->
+    
+    <style>
+        /* Custom Styles for Semiconductor Design */
+        :root {
+            --chip-gold: #fbbf24;
+            --circuit-blue: #3b82f6;
+            --deep-slate: #0f172a;
+            --semiconductor-gray: #1e293b;
+            --pcb-green: #10b981;
+        }
+        
+        
+        .chip-gradient {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(251, 191, 36, 0.1) 100%);
+        }
+        
+        .circuit-pattern {
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .particle-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .light-effect {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            animation: pulse 4s ease-in-out infinite;
+            z-index: 2;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        /* 基础样式 */
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f8fafc;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            background: rgba(15, 23, 42, 0.9) !important;
+            backdrop-filter: blur(10px) !important;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2) !important;
+            z-index: 1000 !important;
+            transition: all 0.5s ease !important;
+            padding: 1rem 0 !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            transform: translateY(0) !important;
+            opacity: 1 !important;
+        }
+        
+        .navbar.hidden {
+            transform: translateY(-100%) !important;
+            opacity: 0 !important;
+        }
+        
+        .navbar.scrolled {
+            background: rgba(15, 23, 42, 0.95) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        /* 导航栏链接样式 - 柔和蓝色方块 */
+        .navbar a {
+            color: white !important;
+            text-decoration: none !important;
+            padding: 12px 24px !important;
+            border-radius: 8px !important;
+            background: rgba(59, 130, 246, 0.3) !important;
+            border: 2px solid rgba(59, 130, 246, 0.4) !important;
+            transition: all 0.3s ease !important;
+            position: relative !important;
+            display: inline-block !important;
+            font-weight: 600 !important;
+            box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2) !important;
+            min-width: 120px !important;
+            text-align: center !important;
+            margin: 0 8px !important;
+            white-space: nowrap !important;
+        }
+        
+        .navbar a:hover {
+            background: rgba(59, 130, 246, 0.5) !important;
+            border-color: rgba(59, 130, 246, 0.6) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3) !important;
+        }
+        
+        .navbar a:active {
+            transform: translateY(0) !important;
+            background: rgba(59, 130, 246, 0.6) !important;
+        }
+        
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chat-button {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .chat-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+            border-color: #fbbf24;
+        }
+        
+        .tech-card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+        
+        .tech-card:hover {
+            transform: translateY(-5px);
+            border-color: #fbbf24;
+            box-shadow: 0 20px 40px rgba(251, 191, 36, 0.1);
+        }
+        
+        
+        .section-title {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #3b82f6, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(251, 191, 36, 0.2));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: #3b82f6;
+            border-radius: 50%;
+            border: 3px solid #0f172a;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 12px;
+            width: 2px;
+            height: calc(100% + 1rem);
+            background: linear-gradient(to bottom, #3b82f6, transparent);
+        }
+        
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        
+        .n8n-node {
+            background: rgba(59, 130, 246, 0.1);
+            border: 2px solid var(--circuit-blue);
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 0.5rem;
+            display: inline-block;
+            min-width: 150px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        
+        .n8n-node:hover {
+            transform: translateY(-2px);
+            border-color: var(--chip-gold);
+            box-shadow: 0 10px 20px rgba(251, 191, 36, 0.1);
+        }
+        
+        .n8n-node::after {
+            content: '→';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--chip-gold);
+            font-weight: bold;
+        }
+        
+        .n8n-node:last-child::after {
+            display: none;
+        }
+        
+        /* 工作流按钮样式 */
+        .workflow-btn {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #93c5fd;
+        }
+        
+        .workflow-btn.active {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: #3b82f6;
+            color: #60a5fa;
+        }
+        
+        .workflow-btn:hover {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: #60a5fa;
+        }
+        
+        
+        /* 游戏界面优化 */
+        #gameModal .bg-gray-800 {
+            max-height: 95vh;
+            overflow-y: auto;
+        }
+        
+        #startScreen {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            z-index: 100 !important;
+        }
+        
+        #gameOverScreen {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            z-index: 100 !important;
+        }
+        
+        
+        /* 聊天界面优化样式 */
+        #chatMessages {
+            scrollbar-width: thin;
+            scrollbar-color: #c1c1c1 #f1f1f1;
+        }
+        
+        #chatMessages::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        #chatMessages::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+        
+        #chatMessages::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+        
+        #chatMessages::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        /* 消息气泡动画 */
+        .message-enter {
+            animation: messageSlideIn 0.3s ease-out;
+        }
+        
+        @keyframes messageSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 桌面端样式 */
+        .hero-section h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+        }
+        
+        .hero-section p {
+            font-size: 1.25rem;
+            line-height: 1.6;
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+        }
+        
+        .timeline-item {
+            padding-left: 3rem;
+        }
+        
+        .n8n-node {
+            min-width: 180px;
+            padding: 1.5rem;
+        }
+        
+        /* 隐藏移动端菜单 */
+            .mobile-menu {
+            display: none;
+            }
+            
+            .desktop-menu {
+            display: flex;
+        }
+        
+        /* 修复容器居中对齐问题 */
+        .max-w-6xl {
+            max-width: 72rem !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+        
+        .mx-auto {
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+        
+        .text-center {
+            text-align: center !important;
+        }
+        
+        .px-6 {
+            padding-left: 1.5rem !important;
+            padding-right: 1.5rem !important;
+        }
+        
+        /* 确保网格布局正常 */
+        .grid {
+            display: grid !important;
+        }
+        
+        .md\\:grid-cols-2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        }
+        
+        .md\\:grid-cols-3 {
+            grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        }
+        
+        .lg\\:grid-cols-4 {
+            grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        }
+        
+        .gap-6 {
+            gap: 1.5rem !important;
+        }
+        
+        .gap-8 {
+            gap: 2rem !important;
+        }
+        
+        .gap-12 {
+            gap: 3rem !important;
+        }
+        
+        /* 确保flex布局正常 */
+        .flex {
+            display: flex !important;
+        }
+        
+        .items-center {
+            align-items: center !important;
+        }
+        
+        .justify-between {
+            justify-content: space-between !important;
+        }
+        
+        .justify-center {
+            justify-content: center !important;
+        }
+        
+        .space-x-2 > * + * {
+            margin-left: 0.5rem !important;
+        }
+        
+        .space-x-8 > * + * {
+            margin-left: 2rem !important;
+        }
+        
+        /* 页面布局样式 */
+        .section {
+            padding: 80px 0 !important;
+            position: relative !important;
+        }
+            
+        .section-title {
+            font-size: 2.5rem !important;
+            font-weight: bold !important;
+            text-align: center !important;
+            margin-bottom: 3rem !important;
+            background: linear-gradient(135deg, #3b82f6, #fbbf24) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+        }
+        
+        .tech-card {
+            background: rgba(30, 41, 59, 0.8) !important;
+            backdrop-filter: blur(10px) !important;
+            border: 1px solid rgba(59, 130, 246, 0.2) !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            border-radius: 12px !important;
+        }
+        
+        .tech-card:hover {
+            transform: translateY(-5px) !important;
+            border-color: #fbbf24 !important;
+            box-shadow: 0 20px 40px rgba(251, 191, 36, 0.1) !important;
+        }
+        
+        /* 基础工具类样式 - 只保留实际使用的 */
+        .max-w-6xl { max-width: 72rem; margin-left: auto; margin-right: auto; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+        .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+        .text-center { text-align: center; }
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .justify-center { justify-content: center; }
+        .space-x-2 > * + * { margin-left: 0.5rem; }
+        .space-x-4 > * + * { margin-left: 1rem; }
+        .space-x-8 > * + * { margin-left: 2rem; }
+        .space-y-2 > * + * { margin-top: 0.5rem; }
+        .space-y-3 > * + * { margin-top: 0.75rem; }
+        .space-y-4 > * + * { margin-top: 1rem; }
+        .space-y-8 > * + * { margin-top: 2rem; }
+        .grid { display: grid; }
+        .md\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .md\\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .lg\\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        .gap-6 { gap: 1.5rem; }
+        .gap-8 { gap: 2rem; }
+        .gap-12 { gap: 3rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mb-12 { margin-bottom: 3rem; }
+        .mr-2 { margin-right: 0.5rem; }
+        .mr-4 { margin-right: 1rem; }
+        .mt-4 { margin-top: 1rem; }
+        .mt-6 { margin-top: 1.5rem; }
+        .mt-8 { margin-top: 2rem; }
+        .text-sm { font-size: 0.875rem; }
+        .text-lg { font-size: 1.125rem; }
+        .text-xl { font-size: 1.25rem; }
+        .text-2xl { font-size: 1.5rem; }
+        .text-3xl { font-size: 1.875rem; }
+        .text-6xl { font-size: 3.75rem; }
+        .font-bold { font-weight: 700; }
+        .font-semibold { font-weight: 600; }
+        .text-white { color: white; }
+        .text-gray-300 { color: #d1d5db; }
+        .text-gray-400 { color: #9ca3af; }
+        .text-blue-400 { color: #60a5fa; }
+        .text-green-400 { color: #34d399; }
+        .text-yellow-400 { color: #fbbf24; }
+        .text-purple-400 { color: #a78bfa; }
+        .text-red-400 { color: #f87171; }
+        .bg-blue-500 { background-color: #3b82f6; }
+        .bg-green-500 { background-color: #10b981; }
+        .bg-yellow-500 { background-color: #f59e0b; }
+        .bg-purple-500 { background-color: #8b5cf6; }
+        .bg-red-500 { background-color: #ef4444; }
+        .bg-gray-700 { background-color: #374151; }
+        .bg-gray-800 { background-color: #1f2937; }
+        .bg-gray-900 { background-color: #111827; }
+        .rounded-lg { border-radius: 0.5rem; }
+        .rounded-xl { border-radius: 0.75rem; }
+        .rounded-2xl { border-radius: 1rem; }
+        .rounded-full { border-radius: 9999px; }
+        .border-2 { border-width: 2px; }
+        .border-blue-400 { border-color: #60a5fa; }
+        .border-gray-700 { border-color: #374151; }
+        .border-t { border-top-width: 1px; }
+        .border-b { border-bottom-width: 1px; }
+        .hover\\:bg-blue-400:hover { background-color: #60a5fa; }
+        .hover\\:bg-blue-600:hover { background-color: #2563eb; }
+        .hover\\:bg-green-600:hover { background-color: #059669; }
+        .hover\\:bg-gray-600:hover { background-color: #4b5563; }
+        .hover\\:bg-gray-700:hover { background-color: #374151; }
+        .hover\\:text-white:hover { color: white; }
+        .transition-all { transition: all 0.3s ease; }
+        .transition-colors { transition: color 0.3s ease, background-color 0.3s ease; }
+        .hidden { display: none; }
+        .relative { position: relative; }
+        .absolute { position: absolute; }
+        .fixed { position: fixed; }
+        .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+        .z-50 { z-index: 50; }
+        .z-1000 { z-index: 1000; }
+        .overflow-hidden { overflow: hidden; }
+        .overflow-auto { overflow: auto; }
+        .overflow-y-auto { overflow-y: auto; }
+        .min-h-screen { min-height: 100vh; }
+        .h-95vh { height: 95vh; }
+        .w-full { width: 100%; }
+        .max-w-4xl { max-width: 56rem; }
+        .max-w-2xl { max-width: 42rem; }
+        .max-w-xs { max-width: 20rem; }
+        .p-2 { padding: 0.5rem; }
+        .p-3 { padding: 0.75rem; }
+        .p-4 { padding: 1rem; }
+        .p-6 { padding: 1.5rem; }
+        .p-8 { padding: 2rem; }
+        .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+        .px-4 { padding-left: 1rem; padding-right: 1rem; }
+        .px-8 { padding-left: 2rem; padding-right: 2rem; }
+        .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+        .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+        .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+        .leading-relaxed { line-height: 1.625; }
+        .flex-col { flex-direction: column; }
+        .flex-row { flex-direction: row; }
+        .flex-1 { flex: 1 1 0%; }
+        .items-start { align-items: flex-start; }
+        .w-8 { width: 2rem; }
+        .h-8 { height: 2rem; }
+        .w-16 { width: 4rem; }
+        .h-16 { height: 4rem; }
+        .w-20 { width: 5rem; }
+        .h-20 { height: 5rem; }
+        .bg-opacity-50 { background-color: rgba(0, 0, 0, 0.5); }
+        .bg-opacity-80 { background-color: rgba(0, 0, 0, 0.8); }
+        .bg-gradient-to-b { background-image: linear-gradient(to bottom, var(--tw-gradient-stops)); }
+        .from-gray-900 { --tw-gradient-from: #111827; }
+        .to-gray-800 { --tw-gradient-to: #1f2937; }
+        .text-xs { font-size: 0.75rem; }
+        .text-left { text-align: left; }
+        .text-right { text-align: right; }
+        .font-normal { font-weight: 400; }
+        .font-medium { font-weight: 500; }
+        .text-base { font-size: 1rem; }
+        .text-4xl { font-size: 2.25rem; }
+        .text-5xl { font-size: 3rem; }
+        .leading-tight { line-height: 1.25; }
+        .leading-snug { line-height: 1.375; }
+        .leading-normal { line-height: 1.5; }
+        .leading-loose { line-height: 2; }
+        .tracking-tight { letter-spacing: -0.025em; }
+        .tracking-normal { letter-spacing: 0em; }
+        .tracking-wide { letter-spacing: 0.025em; }
+        .text-transparent { color: transparent; }
+        .text-current { color: currentColor; }
+        .text-black { color: #000000; }
+        .text-gray-50 { color: #f9fafb; }
+        .text-gray-100 { color: #f3f4f6; }
+        .text-gray-200 { color: #e5e7eb; }
+        .text-gray-500 { color: #6b7280; }
+        .text-gray-600 { color: #4b5563; }
+        .text-gray-700 { color: #374151; }
+        .text-gray-800 { color: #1f293b; }
+        .text-gray-900 { color: #111827; }
+        .text-blue-100 { color: #dbeafe; }
+        .text-blue-500 { color: #3b82f6; }
+        .text-blue-600 { color: #2563eb; }
+        .text-green-500 { color: #10b981; }
+        .text-green-600 { color: #059669; }
+        .text-yellow-500 { color: #f59e0b; }
+        .text-purple-500 { color: #8b5cf6; }
+        .text-red-500 { color: #ef4444; }
+        .bg-blue-600 { background-color: #2563eb; }
+        .bg-green-600 { background-color: #059669; }
+        .bg-yellow-600 { background-color: #d97706; }
+        .bg-purple-600 { background-color: #7c3aed; }
+        .bg-red-600 { background-color: #dc2626; }
+        .bg-gray-600 { background-color: #4b5563; }
+        .border { border-width: 1px; }
+        .border-gray-600 { border-color: #4b5563; }
+        .whitespace-pre-wrap { white-space: pre-wrap; }
+        .flex-shrink-0 { flex-shrink: 0; }
+        .ml-2 { margin-left: 0.5rem; }
+        .ml-4 { margin-left: 1rem; }
+        .mr-1 { margin-right: 0.25rem; }
+        .mr-3 { margin-right: 0.75rem; }
+        .mt-1 { margin-top: 0.25rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-3 { margin-bottom: 0.75rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        
+        /* Overflow 相关类 */
+        .overflow-hidden { overflow: hidden; }
+        .overflow-y-auto { overflow-y: auto; }
+        .overflow-x-hidden { overflow-x: hidden; }
+        .min-h-0 { min-height: 0; }
+        
+        /* 图标样式 - 只保留实际使用的 */
+        .fas { font-family: "Font Awesome 6 Free"; font-weight: 900; }
+        .fa-microchip:before { content: "🔷"; }
+        .fa-comments:before { content: "💬"; }
+        .fa-user:before { content: "👤"; }
+        .fa-envelope:before { content: "📧"; }
+        .fa-gamepad:before { content: "🎮"; }
+        .fa-microscope:before { content: "🔬"; }
+        .fa-robot:before { content: "🤖"; }
+        .fa-chart-line:before { content: "📈"; }
+        .fa-project-diagram:before { content: "📊"; }
+        .fa-drafting-compass:before { content: "📐"; }
+        .fa-industry:before { content: "🏭"; }
+        .fa-cube:before { content: "📦"; }
+        .fa-vial:before { content: "🧪"; }
+        .fa-brain:before { content: "🧠"; }
+        .fa-cogs:before { content: "⚙️"; }
+        .fa-star:before { content: "⭐"; }
+        .fa-user-graduate:before { content: "🎓"; }
+        .fa-user-tie:before { content: "👔"; }
+        .fa-crown:before { content: "👑"; }
+        .fa-running:before { content: "🏃"; }
+        .fa-times:before { content: "✕"; }
+        .fa-trash-alt:before { content: "🗑️"; }
+        .fa-code:before { content: "💻"; }
+        .fa-clipboard-list:before { content: "📋"; }
+        .fa-bolt:before { content: "⚡"; }
+        .fa-redo:before { content: "🔄"; }
+        .fa-link:before { content: "🔗"; }
+        .fa-database:before { content: "🗄️"; }
+        .fa-chart-bar:before { content: "📊"; }
+        .fa-thermometer-half:before { content: "🌡️"; }
+        .fa-play:before { content: "▶️"; }
+        .fa-expand:before { content: "⛶"; }
+        .fa-compress:before { content: "⛷"; }
+        .fa-paper-plane:before { content: "✈️"; }
+        .fa-leaf:before { content: "🍃"; }
+        .fa-balance-scale:before { content: "⚖️"; }
+        .fa-fire:before { content: "🔥"; }
+        .fa-mouse-pointer:before { content: "🖱️"; }
+        .fa-keyboard:before { content: "⌨️"; }
+        .fa-check:before { content: "✅"; }
+        .fa-home:before { content: "🏠"; }
+        
+        /* 游戏界面优化 */
+        #gameModal .bg-gray-800 {
+            max-height: 95vh;
+            overflow-y: auto;
+        }
+        
+        #gameModal canvas {
+            max-width: 100%;
+            max-height: 100%;
+            border: 2px solid #4b5563;
+            border-radius: 10px;
+            background: #111827;
+        }
+        
+        #quizModal .bg-gray-800 {
+            max-height: 95vh;
+            overflow-y: auto;
+        }
+        
+        /* 全屏游戏界面样式 */
+        #gameModal {
+            background: rgba(0, 0, 0, 0.95) !important;
+        }
+        
+        #gameModal .max-w-7xl {
+            max-width: 100vw !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            max-height: 100vh !important;
+            border-radius: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        #gameModal .flex.items-center.justify-center {
+            padding: 0 !important;
+            align-items: stretch !important;
+        }
+        
+        #gameModal .bg-gray-800 {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+        }
+        
+        /* 游戏画布全屏优化 */
+        #gameCanvas {
+            width: 100% !important;
+            height: 100% !important;
+            max-width: none !important;
+            max-height: none !important;
+            border: none !important;
+            border-radius: 0 !important;
+        }
+        
+        /* 游戏头部优化 */
+        #gameModal .flex.items-center.justify-between.p-6 {
+            padding: 1rem 2rem !important;
+            background: rgba(0, 0, 0, 0.8) !important;
+            backdrop-filter: blur(10px) !important;
+        }
+        
+        /* 游戏控制区域优化 */
+        #gameModal .p-4.border-t {
+            padding: 0.75rem 2rem !important;
+            background: rgba(0, 0, 0, 0.6) !important;
+            backdrop-filter: blur(10px) !important;
+        }
+        
+        /* 全屏切换按钮 */
+        .fullscreen-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .fullscreen-toggle:hover {
+            background: rgba(0, 0, 0, 0.9);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        /* 全屏模式样式 */
+        .fullscreen-mode {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            max-width: 100vw !important;
+            max-height: 100vh !important;
+            border-radius: 0 !important;
+            z-index: 9999 !important;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+        }
+        
+        .fullscreen-mode .flex-1 {
+            height: calc(100vh - 120px) !important;
+        }
+        
+        .fullscreen-mode #gameCanvas {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: contain !important;
+        }
+        
+        /* 响应式游戏界面 */
+        @media (max-width: 768px) {
+            #gameModal .max-w-7xl {
+                max-width: 100vw !important;
+                height: 100vh !important;
+            }
+            
+            #quizModal .max-w-6xl {
+                max-width: 95vw;
+                height: 90vh;
+            }
+            
+            #gameModal .flex.items-center.justify-between.p-6 {
+                padding: 0.75rem 1rem !important;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            #gameModal .flex.items-center.space-x-4 {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+        
+        /* 修复按钮样式 */
+        
+        /* Hero section 样式优化 */
+        .hero-section h1 {
+            font-size: 3.5rem !important;
+            font-weight: bold !important;
+            margin-bottom: 1.5rem !important;
+            background: linear-gradient(135deg, #3b82f6, #fbbf24) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+        }
+        
+        .hero-section p {
+            font-size: 1.25rem !important;
+            color: #cbd5e1 !important;
+            margin-bottom: 2rem !important;
+        }
+        
+        /* 聊天界面滚动修复 */
+        #chatModal {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            z-index: 50 !important;
+        }
+        
+        #chatModal > div {
+            height: 100vh !important;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+        
+        #chatMessages {
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            overscroll-behavior: contain !important;
+            -webkit-overflow-scrolling: touch !important;
+            flex: 1 !important;
+            min-height: 0 !important;
+            scrollbar-width: thin !important;
+            scrollbar-color: #4b5563 #1f2937 !important;
+        }
+        
+        #chatMessages::-webkit-scrollbar {
+            width: 6px !important;
+        }
+        
+        #chatMessages::-webkit-scrollbar-track {
+            background: #1f2937 !important;
+        }
+        
+        #chatMessages::-webkit-scrollbar-thumb {
+            background: #4b5563 !important;
+            border-radius: 3px !important;
+        }
+        
+        #chatMessages::-webkit-scrollbar-thumb:hover {
+            background: #6b7280 !important;
+        }
+        
+        /* 防止聊天界面滚动时影响主页面 */
+        body.chat-open {
+            overflow: hidden !important;
+            position: fixed !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-microchip text-blue-400 text-2xl"></i>
+                    <span class="text-xl font-bold text-white">戴煦</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="desktop-menu flex items-center space-x-8">
+                    <a href="#home" class="text-gray-300 hover:text-white transition-colors">首页</a>
+                    <a href="#about" class="text-gray-300 hover:text-white transition-colors">关于我</a>
+                    <a href="#expertise" class="text-gray-300 hover:text-white transition-colors">专业领域</a>
+                    <a href="#ic-process" class="text-gray-300 hover:text-white transition-colors">IC制造</a>
+                    <a href="#ai-innovation" class="text-gray-300 hover:text-white transition-colors">AI创新</a>
+                    <a href="#case-study" class="text-gray-300 hover:text-white transition-colors">案例演示</a>
+                    <a href="#roadmap" class="text-gray-300 hover:text-white transition-colors">技术路线</a>
+                    <a href="#future-prospects" class="text-gray-300 hover:text-white transition-colors">职业发展</a>
+                    <a href="#contact" class="text-gray-300 hover:text-white transition-colors">联系方式</a>
+                    <button onclick="openGameInterface()" class="text-gray-300 hover:text-white transition-colors">
+                        <i class="fas fa-gamepad mr-1"></i>游戏
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="particle-bg circuit-pattern"></div>
+        <div class="light-effect"></div>
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <div class="text-center" >
+                <div class="floating-element mb-8">
+                    <i class="fas fa-microchip text-6xl text-blue-400 mb-6"></i>
+                </div>
+                <h1 class="font-bold mb-6 text-white">
+                    AI驱动芯片测试技术
+                </h1>
+                <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                    专注于微电子测试技术、AI自动化工作流设计，致力于推动芯片测试技术的智能化发展
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <button class="chat-button px-8 py-4 rounded-lg text-white font-semibold text-lg" onclick="openChatInterface()" style="cursor: pointer; z-index: 10; position: relative;">
+                        <i class="fas fa-comments mr-2"></i>
+                        开始对话
+                    </button>
+                    <button onclick="scrollToSection('about')" class="px-8 py-4 border-2 border-blue-400 text-blue-400 rounded-lg font-semibold text-lg hover:bg-blue-400 hover:text-white transition-all" style="cursor: pointer; z-index: 10; position: relative;">
+                        <i class="fas fa-user mr-2"></i>
+                        了解更多
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="section-title" >关于我</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div >
+                    <div class="tech-card p-8 rounded-2xl">
+                        <h3 class="text-2xl font-bold mb-4 text-blue-400">个人简介</h3>
+                        <p class="text-gray-300 mb-6 leading-relaxed">
+                            我是戴煦，专注于AI驱动的芯片测试技术研究与应用。拥有丰富的微电子测试经验，
+                            致力于将人工智能技术融入传统芯片测试流程，提高测试效率和准确性。
+                        </p>
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <i class="fas fa-graduation-cap text-blue-400 mr-3"></i>
+                                <span class="text-gray-300">微电子专业背景</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-cogs text-blue-400 mr-3"></i>
+                                <span class="text-gray-300">AI工作流设计专家</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-microchip text-blue-400 mr-3"></i>
+                                <span class="text-gray-300">芯片测试技术专家</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div >
+                    <div class="tech-card p-8 rounded-2xl">
+                        <h3 class="text-2xl font-bold mb-4 text-blue-400">核心技能</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-gray-300">芯片测试技术</span>
+                                    <span class="text-blue-400">95%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="bg-blue-400 h-2 rounded-full" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-gray-300">AI工作流设计</span>
+                                    <span class="text-blue-400">90%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="bg-blue-400 h-2 rounded-full" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-gray-300">自动化测试</span>
+                                    <span class="text-blue-400">88%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="bg-blue-400 h-2 rounded-full" style="width: 88%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-gray-300">数据分析</span>
+                                    <span class="text-blue-400">85%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="bg-blue-400 h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section id="expertise" class="section chip-gradient">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="section-title" >专业领域</h2>
+            
+            <!-- 主要专业领域 -->
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="tech-card p-8 rounded-2xl text-center"  >
+                    <div class="feature-icon">
+                        <i class="fas fa-microscope text-3xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-white">芯片测试技术</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        精通数字芯片测试、模拟芯片测试、混合信号测试等各类测试技术，
+                        熟悉测试设备操作和测试程序开发。
+                    </p>
+                </div>
+                <div class="tech-card p-8 rounded-2xl text-center"  >
+                    <div class="feature-icon">
+                        <i class="fas fa-robot text-3xl text-green-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-white">AI自动化工作流</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        基于N8N平台设计智能测试工作流，实现测试流程自动化，
+                        提高测试效率和准确性。
+                    </p>
+                </div>
+                <div class="tech-card p-8 rounded-2xl text-center"  >
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line text-3xl text-yellow-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-white">数据分析与优化</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        运用数据分析技术优化测试流程，提高测试覆盖率，
+                        降低测试成本，提升产品质量。
+                    </p>
+                </div>
+            </div>
+
+            <!-- 芯片测试技术详解 -->
+            <div class="tech-card p-8 rounded-2xl mb-12" >
+                <h3 class="text-3xl font-bold text-center mb-8 text-white">
+                    <i class="fas fa-microscope text-blue-400 mr-4"></i>
+                    芯片测试技术详解
+                </h3>
+                
+                <!-- 测试类型对比 -->
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <!-- CP测试 -->
+                    <div class="tech-card p-6 rounded-xl">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-microchip text-4xl text-blue-400 mb-3"></i>
+                            <h4 class="text-xl font-bold">CP测试 (Chip Probing)</h4>
+                            <p class="text-sm text-gray-400">晶圆级测试</p>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span class="text-gray-300">测试时机：</span>
+                                <span class="text-blue-400">晶圆制造后</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-300">测试对象：</span>
+                                <span class="text-blue-400">裸芯片</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-300">测试内容：</span>
+                                <span class="text-blue-400">基础功能测试</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-300">测试精度：</span>
+                                <span class="text-blue-400">中等</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- FT测试 -->
+                    <div class="tech-card p-6 rounded-xl">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-cube text-4xl text-green-400 mb-3"></i>
+                            <h4 class="text-xl font-bold">FT测试 (Final Test)</h4>
+                            <p class="text-sm text-gray-400">封装后测试</p>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span class="text-gray-300">测试时机：</span>
+                                <span class="text-green-400">封装完成后</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-300">测试对象：</span>
+                                <span class="text-green-400">封装芯片</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-300">测试内容：</span>
+                                <span class="text-green-400">全面功能测试</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-300">测试精度：</span>
+                                <span class="text-green-400">高</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 测试项目详解 -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="text-center p-4 bg-white/5 rounded-lg">
+                        <i class="fas fa-link text-3xl text-blue-400 mb-3"></i>
+                        <h4 class="font-bold mb-2">CON连接性测试</h4>
+                        <p class="text-sm text-gray-300">检测芯片管脚连接是否正常</p>
+                    </div>
+                    <div class="text-center p-4 bg-white/5 rounded-lg">
+                        <i class="fas fa-cogs text-3xl text-green-400 mb-3"></i>
+                        <h4 class="font-bold mb-2">FUNC功能测试</h4>
+                        <p class="text-sm text-gray-300">验证芯片逻辑功能是否正确</p>
+                    </div>
+                    <div class="text-center p-4 bg-white/5 rounded-lg">
+                        <i class="fas fa-bolt text-3xl text-yellow-400 mb-3"></i>
+                        <h4 class="font-bold mb-2">电气参数测试</h4>
+                        <p class="text-sm text-gray-300">VIH/VIL/VOH/VOL等参数测试</p>
+                    </div>
+                    <div class="text-center p-4 bg-white/5 rounded-lg">
+                        <i class="fas fa-thermometer-half text-3xl text-red-400 mb-3"></i>
+                        <h4 class="font-bold mb-2">可靠性测试</h4>
+                        <p class="text-sm text-gray-300">长期稳定性验证</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- N8N AI工作流架构 -->
+            <div class="tech-card p-8 rounded-2xl" >
+                <h3 class="text-3xl font-bold text-center mb-8 text-white">
+                    <i class="fas fa-project-diagram text-green-400 mr-4"></i>
+                    N8N AI自动化测试工作流
+                </h3>
+                
+                <!-- 工作流可视化 -->
+                <div class="mb-8">
+                    <div class="flex flex-wrap justify-center items-center mb-8">
+                        <div class="n8n-node">
+                            <i class="fas fa-play-circle text-green-400 text-2xl mb-2"></i>
+                            <div class="font-bold">触发器</div>
+                            <div class="text-sm text-gray-300">代码提交</div>
+                        </div>
+                        <div class="n8n-node">
+                            <i class="fas fa-brain text-blue-400 text-2xl mb-2"></i>
+                            <div class="font-bold">AI分析</div>
+                            <div class="text-sm text-gray-300">Cloud4节点</div>
+                        </div>
+                        <div class="n8n-node">
+                            <i class="fas fa-code text-yellow-400 text-2xl mb-2"></i>
+                            <div class="font-bold">代码生成</div>
+                            <div class="text-sm text-gray-300">测试用例</div>
+                        </div>
+                        <div class="n8n-node">
+                            <i class="fas fa-vial text-purple-400 text-2xl mb-2"></i>
+                            <div class="font-bold">执行测试</div>
+                            <div class="text-sm text-gray-300">自动化运行</div>
+                        </div>
+                        <div class="n8n-node" style="margin-right: 0;">
+                            <i class="fas fa-chart-line text-green-400 text-2xl mb-2"></i>
+                            <div class="font-bold">结果分析</div>
+                            <div class="text-sm text-gray-300">AI诊断</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- N8N节点详解 -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="tech-card p-6 rounded-xl text-center">
+                        <i class="fas fa-robot text-4xl text-blue-400 mb-4"></i>
+                        <h4 class="text-lg font-bold mb-2">AI Agent节点</h4>
+                        <ul class="text-sm text-gray-300 text-left">
+                            <li>• Cloud4模型集成</li>
+                            <li>• 自然语言处理</li>
+                            <li>• 智能代码生成</li>
+                            <li>• 故障诊断分析</li>
+                        </ul>
+                    </div>
+                    <div class="tech-card p-6 rounded-xl text-center">
+                        <i class="fas fa-database text-4xl text-green-400 mb-4"></i>
+                        <h4 class="text-lg font-bold mb-2">数据存储节点</h4>
+                        <ul class="text-sm text-gray-300 text-left">
+                            <li>• 芯片参数数据库</li>
+                            <li>• 测试结果存储</li>
+                            <li>• 历史数据分析</li>
+                            <li>• 知识库管理</li>
+                        </ul>
+                    </div>
+                    <div class="tech-card p-6 rounded-xl text-center">
+                        <i class="fas fa-cogs text-4xl text-yellow-400 mb-4"></i>
+                        <h4 class="text-lg font-bold mb-2">自动化执行</h4>
+                        <ul class="text-sm text-gray-300 text-left">
+                            <li>• 测试程序执行</li>
+                            <li>• 设备控制接口</li>
+                            <li>• 并行测试管理</li>
+                            <li>• 结果收集处理</li>
+                        </ul>
+                    </div>
+                    <div class="tech-card p-6 rounded-xl text-center">
+                        <i class="fas fa-chart-bar text-4xl text-purple-400 mb-4"></i>
+                        <h4 class="text-lg font-bold mb-2">数据分析节点</h4>
+                        <ul class="text-sm text-gray-300 text-left">
+                            <li>• 实时监控仪表板</li>
+                            <li>• 预测性分析</li>
+                            <li>• 质量趋势分析</li>
+                            <li>• 报告自动生成</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- IC Manufacturing Process Section -->
+    <section id="ic-process" class="section">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="section-title" >集成电路制造四大步骤</h2>
+            
+            <!-- 四个步骤流程图 -->
+            <div class="tech-card p-8 rounded-2xl mb-12" >
+                <h3 class="text-3xl font-bold text-center mb-8 text-white">IC制造全流程</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="tech-card p-6 rounded-xl text-center">
+                        <i class="fas fa-drafting-compass text-4xl text-blue-400 mb-4"></i>
+                        <h4 class="text-xl font-bold mb-3">1. 设计阶段</h4>
+                        <p class="text-sm text-gray-400 mb-3">Design</p>
+                        <ul class="text-sm text-gray-300 text-left space-y-1">
+                            <li>• 系统设计：功能规格定义</li>
+                            <li>• 电路设计：逻辑电路实现</li>
+                            <li>• 版图设计：物理布局规划</li>
+                            <li>• 验证仿真：功能与时序验证</li>
+                        </ul>
+                    </div>
+                    <div class="tech-card p-6 rounded-xl text-center">
+                        <i class="fas fa-industry text-4xl text-green-400 mb-4"></i>
+                        <h4 class="text-xl font-bold mb-3">2. 制造阶段</h4>
+                        <p class="text-sm text-gray-400 mb-3">Fabrication</p>
+                        <ul class="text-sm text-gray-300 text-left space-y-1">
+                            <li>• 晶圆制备：硅片清洗与处理</li>
+                            <li>• 光刻工艺：图形转移技术</li>
+                            <li>• 刻蚀工艺：材料去除加工</li>
+                            <li>• 薄膜沉积：多层结构构建</li>
+                        </ul>
+                    </div>
+                    <div class="tech-card p-6 rounded-xl text-center">
+                        <i class="fas fa-cube text-4xl text-yellow-400 mb-4"></i>
+                        <h4 class="text-xl font-bold mb-3">3. 封装阶段</h4>
+                        <p class="text-sm text-gray-400 mb-3">Packaging</p>
+                        <ul class="text-sm text-gray-300 text-left space-y-1">
+                            <li>• 芯片切割：晶圆分离成单个芯片</li>
+                            <li>• 引线键合：芯片与封装连接</li>
+                            <li>• 塑封成型：保护性外壳制作</li>
+                            <li>• 引脚成型：外部连接接口</li>
+                        </ul>
+                    </div>
+                    <div class="tech-card p-6 rounded-xl text-center">
+                        <i class="fas fa-vial text-4xl text-purple-400 mb-4"></i>
+                        <h4 class="text-xl font-bold mb-3">4. 测试阶段</h4>
+                        <p class="text-sm text-gray-400 mb-3">Testing</p>
+                        <ul class="text-sm text-gray-300 text-left space-y-1">
+                            <li>• CP测试：晶圆级功能测试</li>
+                            <li>• FT测试：封装后最终测试</li>
+                            <li>• 可靠性测试：长期稳定性验证</li>
+                            <li>• 质量分级：性能等级分类</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Innovation Section -->
+    <section id="ai-innovation" class="section chip-gradient">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="section-title" >AI+芯片测试融合创新方案</h2>
+            
+            <!-- AI融合架构图 -->
+            <div class="tech-card p-8 rounded-2xl mb-12" >
+                <h3 class="text-3xl font-bold text-center mb-8 text-white">智能化测试架构</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="bg-blue-500/20 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-brain text-3xl text-blue-400"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">智能分析层</h4>
+                        <p class="text-gray-300 text-sm">AI模型训练<br>数据挖掘分析<br>模式识别算法</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-green-500/20 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-cogs text-3xl text-green-400"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">自动化执行层</h4>
+                        <p class="text-gray-300 text-sm">N8N工作流引擎<br>测试设备控制<br>并行测试管理</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-yellow-500/20 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-chart-line text-3xl text-yellow-400"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">数据洞察层</h4>
+                        <p class="text-gray-300 text-sm">实时监控仪表板<br>预测性分析<br>质量趋势分析</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 传统方法 vs AI方法对比 -->
+            <div class="tech-card p-8 rounded-2xl" >
+                <h3 class="text-3xl font-bold text-center mb-8 text-white">传统测试方法 vs AI增强方法</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-4 bg-red-500/10 rounded-lg">
+                            <span class="text-gray-300">测试用例开发时间</span>
+                            <div class="flex gap-4">
+                                <span class="text-red-400">传统: 2周</span>
+                                <span class="text-green-400">AI: 1天</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center p-4 bg-blue-500/10 rounded-lg">
+                            <span class="text-gray-300">真值表覆盖率</span>
+                            <div class="flex gap-4">
+                                <span class="text-red-400">传统: 90%</span>
+                                <span class="text-green-400">AI: 100%</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center p-4 bg-yellow-500/10 rounded-lg">
+                            <span class="text-gray-300">逻辑功能验证率</span>
+                            <div class="flex gap-4">
+                                <span class="text-red-400">传统: 85%</span>
+                                <span class="text-green-400">AI: 99%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-4 bg-green-500/10 rounded-lg">
+                            <span class="text-gray-300">故障诊断准确率</span>
+                            <div class="flex gap-4">
+                                <span class="text-red-400">传统: 70%</span>
+                                <span class="text-green-400">AI: 95%</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center p-4 bg-purple-500/10 rounded-lg">
+                            <span class="text-gray-300">测试成本降低</span>
+                            <div class="flex gap-4">
+                                <span class="text-red-400">传统: 基准</span>
+                                <span class="text-green-400">AI: -60%</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center p-4 bg-indigo-500/10 rounded-lg">
+                            <span class="text-gray-300">测试效率提升</span>
+                            <div class="flex gap-4">
+                                <span class="text-red-400">传统: 基准</span>
+                                <span class="text-green-400">AI: +300%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Study Section -->
+    <section id="case-study" class="section">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="section-title" >实际应用案例演示</h2>
+            
+            <!-- 案例概述 -->
+            <div class="tech-card p-8 rounded-2xl mb-12" >
+                <div class="text-center mb-8">
+                    <h3 class="text-3xl font-bold mb-4">案例: SN74LS138 3-8译码器芯片测试项目</h3>
+                    <p class="text-xl text-gray-300">基于N8N AI工作流的数字逻辑芯片测试解决方案</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="bg-blue-500/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-microchip text-2xl text-blue-400"></i>
+                        </div>
+                        <div class="text-2xl font-bold text-white mb-2">3-8译码器</div>
+                        <p class="text-gray-300">芯片功能类型</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-green-500/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-cube text-2xl text-green-400"></i>
+                        </div>
+                        <div class="text-2xl font-bold text-white mb-2">16引脚</div>
+                        <p class="text-gray-300">DIP封装引脚数</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-yellow-500/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-bolt text-2xl text-yellow-400"></i>
+                        </div>
+                        <div class="text-2xl font-bold text-white mb-2">TTL逻辑</div>
+                        <p class="text-gray-300">逻辑电平标准</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 测试结果展示 -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="tech-card p-6 rounded-xl" >
+                    <h4 class="text-xl font-bold mb-4 text-blue-400">测试项目</h4>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 bg-blue-500/10 rounded">
+                            <span class="text-gray-300">CON连接性测试</span>
+                            <span class="text-green-400">PASS</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-green-500/10 rounded">
+                            <span class="text-gray-300">FUNC功能测试</span>
+                            <span class="text-green-400">PASS</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-yellow-500/10 rounded">
+                            <span class="text-gray-300">VIH输入高电平</span>
+                            <span class="text-green-400">PASS</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-purple-500/10 rounded">
+                            <span class="text-gray-300">VIL输入低电平</span>
+                            <span class="text-green-400">PASS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-card p-6 rounded-xl" >
+                    <h4 class="text-xl font-bold mb-4 text-green-400">测试结果</h4>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 bg-green-500/10 rounded">
+                            <span class="text-gray-300">测试通过率</span>
+                            <span class="text-green-400">100%</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-blue-500/10 rounded">
+                            <span class="text-gray-300">测试时间</span>
+                            <span class="text-blue-400">2.5秒</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-yellow-500/10 rounded">
+                            <span class="text-gray-300">代码生成时间</span>
+                            <span class="text-yellow-400">30秒</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-purple-500/10 rounded">
+                            <span class="text-gray-300">人工干预</span>
+                            <span class="text-purple-400">0次</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Roadmap Section -->
+    <section id="roadmap" class="section chip-gradient">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="section-title" >技术发展路线图与未来展望</h2>
+            
+            <!-- 发展路线图 -->
+            <div class="tech-card p-8 rounded-2xl mb-12" >
+                <h3 class="text-3xl font-bold text-center mb-8 text-white">AI芯片测试技术演进路线</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- 第一阶段 -->
+                    <div class="text-center">
+                        <div class="bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4 text-xl font-bold">1</div>
+                        <h4 class="font-bold text-green-400 mb-2">当前阶段</h4>
+                        <div class="text-sm text-gray-300 space-y-1">
+                            <p>• N8N AI工作流集成</p>
+                            <p>• 基础测试自动化</p>
+                            <p>• GPT-4代码生成</p>
+                            <p>• 简单故障诊断</p>
+                        </div>
+                        <div class="mt-3 text-xs text-green-400">2025年完成</div>
+                    </div>
+                    
+                    <!-- 第二阶段 -->
+                    <div class="text-center">
+                        <div class="bg-blue-500 text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4 text-xl font-bold">2</div>
+                        <h4 class="font-bold text-blue-400 mb-2">优化阶段</h4>
+                        <div class="text-sm text-gray-300 space-y-1">
+                            <p>• 深度学习模型训练</p>
+                            <p>• 预测性测试维护</p>
+                            <p>• 多模态AI集成</p>
+                            <p>• 边缘计算部署</p>
+                        </div>
+                        <div class="mt-3 text-xs text-blue-400">2026年Q2</div>
+                    </div>
+                    
+                    <!-- 第三阶段 -->
+                    <div class="text-center">
+                        <div class="bg-yellow-500 text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4 text-xl font-bold">3</div>
+                        <h4 class="font-bold text-yellow-400 mb-2">智能阶段</h4>
+                        <div class="text-sm text-gray-300 space-y-1">
+                            <p>• 自主测试决策</p>
+                            <p>• 强化学习优化</p>
+                            <p>• 量子计算集成</p>
+                            <p>• 数字孪生技术</p>
+                        </div>
+                        <div class="mt-3 text-xs text-yellow-400">2027年Q1</div>
+                    </div>
+                    
+                    <!-- 第四阶段 -->
+                    <div class="text-center">
+                        <div class="bg-purple-500 text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4 text-xl font-bold">4</div>
+                        <h4 class="font-bold text-purple-400 mb-2">革新阶段</h4>
+                        <div class="text-sm text-gray-300 space-y-1">
+                            <p>• AGI测试助手</p>
+                            <p>• 自我进化系统</p>
+                            <p>• 跨域知识迁移</p>
+                            <p>• 全自主测试生态</p>
+                        </div>
+                        <div class="mt-3 text-xs text-purple-400">2028年</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 未来展望 -->
+            <div class="tech-card p-8 rounded-2xl" >
+                <h3 class="text-3xl font-bold text-center mb-8 text-white">
+                    <i class="fas fa-star text-yellow-400 mr-3"></i>
+                    未来十年：我们的机遇与挑战
+                </h3>
+                <div class="text-center">
+                    <p class="text-xl text-gray-300 mb-6">
+                        芯片测试技术正站在历史的十字路口，AI的融入将彻底改变这个行业的面貌。
+                    </p>
+                    <p class="text-lg text-blue-400 mb-8">
+                        从传统的手工测试到智能化的AI驱动测试，我们正在见证一个时代的变革。
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <i class="fas fa-microchip text-3xl text-blue-400 mb-3"></i>
+                            <h4 class="font-bold mb-2">AI芯片</h4>
+                            <p class="text-gray-300 text-sm">专用AI处理器测试技术</p>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-atom text-3xl text-green-400 mb-3"></i>
+                            <h4 class="font-bold mb-2">量子计算</h4>
+                            <p class="text-gray-300 text-sm">下一代计算芯片测试</p>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-brain text-3xl text-yellow-400 mb-3"></i>
+                            <h4 class="font-bold mb-2">神经形态芯片</h4>
+                            <p class="text-gray-300 text-sm">仿生计算芯片测试</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Prospects Section -->
+    <section id="future-prospects" class="section">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="section-title" >未来前景与职业发展</h2>
+            
+            <!-- 核心成果总结 -->
+            <div class="tech-card p-8 rounded-2xl mb-12" >
+                <h3 class="text-3xl font-bold text-center mb-8 text-white">技术分享核心要点</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="bg-blue-500/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-project-diagram text-2xl text-blue-400"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">工作流自动化</h4>
+                        <p class="text-gray-300 text-sm">N8N平台集成</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-green-500/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-microchip text-2xl text-green-400"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">芯片测试技术</h4>
+                        <p class="text-gray-300 text-sm">全面覆盖测试场景</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-yellow-500/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-rocket text-2xl text-yellow-400"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">AI融合创新</h4>
+                        <p class="text-gray-300 text-sm">人工智能赋能测试</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-purple-500/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-graduation-cap text-2xl text-purple-400"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">教学应用</h4>
+                        <p class="text-gray-300 text-sm">实践性学习平台</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 职业发展路径 -->
+            <div class="tech-card p-8 rounded-2xl" >
+                <h3 class="text-3xl font-bold text-center mb-8 text-white">职业发展路径</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="bg-blue-500/20 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-user-graduate text-3xl text-blue-400"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">初级工程师</h4>
+                        <p class="text-gray-300 text-sm mb-4">年薪: 15-25万</p>
+                        <ul class="text-sm text-gray-300 text-left space-y-1">
+                            <li>• 测试程序开发</li>
+                            <li>• 设备操作维护</li>
+                            <li>• 基础数据分析</li>
+                        </ul>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-green-500/20 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-user-tie text-3xl text-green-400"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">高级工程师</h4>
+                        <p class="text-gray-300 text-sm mb-4">年薪: 25-50万</p>
+                        <ul class="text-sm text-gray-300 text-left space-y-1">
+                            <li>• 测试方案设计</li>
+                            <li>• AI工作流开发</li>
+                            <li>• 团队管理</li>
+                        </ul>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-yellow-500/20 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-crown text-3xl text-yellow-400"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">技术专家</h4>
+                        <p class="text-gray-300 text-sm mb-4">年薪: 50-100万+</p>
+                        <ul class="text-sm text-gray-300 text-left space-y-1">
+                            <li>• 技术架构设计</li>
+                            <li>• 创新技术研发</li>
+                            <li>• 行业标准制定</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section chip-gradient">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="section-title" >联系方式</h2>
+            <div class="max-w-2xl mx-auto text-center">
+                <div class="tech-card p-8 rounded-2xl" >
+                    <h3 class="text-2xl font-bold mb-6 text-white">让我们开始合作</h3>
+                    <p class="text-gray-300 mb-8">
+                        如果您对AI驱动的芯片测试技术感兴趣，或者有相关项目需求，
+                        欢迎与我联系，我们可以一起探讨技术方案。
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button class="chat-button px-8 py-4 rounded-lg text-white font-semibold text-lg" onclick="openChatInterface()">
+                            <i class="fas fa-comments mr-2"></i>
+                            开始技术交流
+                        </button>
+                        <a href="mailto:3350222390@qq.com" class="px-8 py-4 border-2 border-blue-400 text-blue-400 rounded-lg font-semibold text-lg hover:bg-blue-400 hover:text-white transition-all">
+                            <i class="fas fa-envelope mr-2"></i>
+                            发送邮件
+                        </a>
+                        <a href="tel:19397018449" class="px-8 py-4 border-2 border-green-400 text-green-400 rounded-lg font-semibold text-lg hover:bg-green-400 hover:text-white transition-all">
+                            <i class="fas fa-phone mr-2"></i>
+                            拨打电话
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-8">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-4">
+                <i class="fas fa-microchip text-blue-400 text-xl"></i>
+                <span class="text-white font-semibold">戴煦 - AI芯片测试专家</span>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-6 mb-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-envelope text-blue-400"></i>
+                    <a href="mailto:3350222390@qq.com" class="text-gray-300 hover:text-white transition-colors">3350222390@qq.com</a>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-phone text-green-400"></i>
+                    <a href="tel:19397018449" class="text-gray-300 hover:text-white transition-colors">19397018449</a>
+                </div>
+            </div>
+            <p class="text-gray-400">
+                © 2024 戴煦. 专注于AI驱动的芯片测试技术创新
+            </p>
+        </div>
+    </footer>
+
+    <!-- Chat Interface Modal -->
+    <div id="chatModal" class="fixed inset-0 bg-gray-900 z-50 hidden">
+        <div class="w-full h-full flex flex-col bg-gray-800">
+            <!-- 头部 -->
+            <div class="flex items-center justify-between p-3 md:p-6 border-b border-gray-700 flex-shrink-0">
+                <h3 class="text-lg md:text-xl font-bold text-white">
+                    <i class="fas fa-robot text-blue-400 mr-2"></i>
+                    <span class="hidden sm:inline">AI芯片测试助手</span>
+                    <span class="sm:hidden">AI助手</span>
+                </h3>
+                <div class="flex items-center space-x-2 md:space-x-4">
+                    <div class="hidden md:flex items-center space-x-2">
+                        <span class="text-sm text-gray-300">工作流状态:</span>
+                        <span id="workflowStatus" class="text-sm text-green-400">就绪</span>
+                    </div>
+                    <button onclick="clearChat()" class="text-gray-400 hover:text-white transition-colors p-2" title="清空对话">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                    <button onclick="closeChatInterface()" class="text-gray-400 hover:text-white p-2">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 功能选择区域 -->
+            <div class="p-2 md:p-4 border-b border-gray-700 flex-shrink-0">
+                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                    <button id="codeBtn" onclick="selectWorkflow('code')" class="workflow-btn active bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg transition-colors text-sm">
+                        <i class="fas fa-code mr-1 md:mr-2"></i>
+                        <span class="hidden sm:inline">测试代码生成</span>
+                        <span class="sm:hidden">代码生成</span>
+                    </button>
+                    <button id="planBtn" onclick="selectWorkflow('plan')" class="workflow-btn bg-gray-600 hover:bg-gray-700 text-white px-3 py-2 rounded-lg transition-colors text-sm">
+                        <i class="fas fa-clipboard-list mr-1 md:mr-2"></i>
+                        <span class="hidden sm:inline">测试方案生成</span>
+                        <span class="sm:hidden">方案生成</span>
+                    </button>
+                    <button id="quickBtn" onclick="selectWorkflow('quick')" class="workflow-btn bg-gray-600 hover:bg-gray-700 text-white px-3 py-2 rounded-lg transition-colors text-sm">
+                        <i class="fas fa-bolt mr-1 md:mr-2"></i>
+                        <span class="hidden sm:inline">快速测试</span>
+                        <span class="sm:hidden">快速测试</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 主要内容区域 -->
+            <div class="flex-1 flex flex-col lg:flex-row min-h-0">
+                <!-- 聊天区域 -->
+                <div class="flex-1 flex flex-col min-h-0">
+                    <!-- 消息区域 -->
+                    <div id="chatMessages" class="flex-1 overflow-y-auto bg-gray-800 p-3 md:p-6">
+                            <div class="flex items-start space-x-3 mb-4">
+                                <div class="bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center">
+                                    <i class="fas fa-robot text-white text-sm"></i>
+                                </div>
+                                <div class="bg-gray-700 rounded-lg p-3 max-w-xs">
+                                    <p class="text-white text-sm">您好！我是AI芯片测试助手，可以帮您：</p>
+                                    <ul class="text-white text-sm mt-2 space-y-1">
+                                        <li>• 生成芯片测试代码</li>
+                                        <li>• 制定测试方案</li>
+                                        <li>• 创建测试向量</li>
+                                    </ul>
+                                    <p class="text-white text-sm mt-2">请告诉我您需要测试的芯片型号。</p>
+                                </div>
+                            </div>
+                            
+                            <!-- 添加更多测试内容来验证滚动功能 -->
+                            <div class="flex items-start space-x-3 mb-4">
+                                <div class="bg-green-500 rounded-full w-8 h-8 flex items-center justify-center">
+                                    <i class="fas fa-user text-white text-sm"></i>
+                                </div>
+                                <div class="bg-gray-700 rounded-lg p-3 max-w-xs">
+                                    <p class="text-white text-sm">我想测试SN74LS192芯片</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3 mb-4">
+                                <div class="bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center">
+                                    <i class="fas fa-robot text-white text-sm"></i>
+                                </div>
+                                <div class="bg-gray-700 rounded-lg p-3 max-w-xs">
+                                    <p class="text-white text-sm">好的！SN74LS192是一个4位二进制计数器芯片。我来为您生成测试代码：</p>
+                                    <div class="bg-gray-800 rounded p-2 mt-2 text-xs text-green-400 font-mono">
+                                        // SN74LS192 测试代码<br>
+                                        // 测试项目：CON, FUN, VOH, VOL, VIH, VIL<br>
+                                        // 测试条件：VCC = 5V, 温度 = 25°C
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3 mb-4">
+                                <div class="bg-green-500 rounded-full w-8 h-8 flex items-center justify-center">
+                                    <i class="fas fa-user text-white text-sm"></i>
+                                </div>
+                                <div class="bg-gray-700 rounded-lg p-3 max-w-xs">
+                                    <p class="text-white text-sm">请提供更详细的测试方案</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3 mb-4">
+                                <div class="bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center">
+                                    <i class="fas fa-robot text-white text-sm"></i>
+                                </div>
+                                <div class="bg-gray-700 rounded-lg p-3 max-w-xs">
+                                    <p class="text-white text-sm">以下是SN74LS192的详细测试方案：</p>
+                                    <div class="bg-gray-800 rounded p-2 mt-2 text-xs text-yellow-400">
+                                        <strong>1. 连接性测试 (CON)</strong><br>
+                                        - 检查所有管脚连接<br>
+                                        - 验证电源和地线连接<br><br>
+                                        <strong>2. 功能测试 (FUN)</strong><br>
+                                        - 测试计数功能<br>
+                                        - 验证清零和置数功能<br><br>
+                                        <strong>3. 电气参数测试</strong><br>
+                                        - VOH: 输出高电平电压<br>
+                                        - VOL: 输出低电平电压<br>
+                                        - VIH: 输入高电平电压<br>
+                                        - VIL: 输入低电平电压
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3 mb-4">
+                                <div class="bg-green-500 rounded-full w-8 h-8 flex items-center justify-center">
+                                    <i class="fas fa-user text-white text-sm"></i>
+                                </div>
+                                <div class="bg-gray-700 rounded-lg p-3 max-w-xs">
+                                    <p class="text-white text-sm">测试向量如何生成？</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3 mb-4">
+                                <div class="bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center">
+                                    <i class="fas fa-robot text-white text-sm"></i>
+                                </div>
+                                <div class="bg-gray-700 rounded-lg p-3 max-w-xs">
+                                    <p class="text-white text-sm">测试向量生成方法：</p>
+                                    <div class="bg-gray-800 rounded p-2 mt-2 text-xs text-purple-400">
+                                        <strong>测试向量格式：</strong><br>
+                                        CLK | CLR | LD | UP | DOWN | D3 | D2 | D1 | D0 | Q3 | Q2 | Q1 | Q0<br>
+                                        ----|-----|----|----|----|----|----|----|----|----|----|----|----<br>
+                                        1   | 0   | 1  | 1  | 1   | 0  | 0  | 0  | 0  | 0  | 0  | 0  | 0<br>
+                                        1   | 0   | 1  | 1  | 1   | 1  | 0  | 0  | 1  | 1  | 0  | 0  | 1
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3 mb-4">
+                                <div class="bg-green-500 rounded-full w-8 h-8 flex items-center justify-center">
+                                    <i class="fas fa-user text-white text-sm"></i>
+                                </div>
+                                <div class="bg-gray-700 rounded-lg p-3 max-w-xs">
+                                    <p class="text-white text-sm">谢谢！这个测试方案很详细</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3 mb-4">
+                                <div class="bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center">
+                                    <i class="fas fa-robot text-white text-sm"></i>
+                                </div>
+                                <div class="bg-gray-700 rounded-lg p-3 max-w-xs">
+                                    <p class="text-white text-sm">不客气！如果您需要测试其他芯片或有其他问题，随时告诉我。我可以帮您：</p>
+                                    <ul class="text-white text-sm mt-2 space-y-1">
+                                        <li>• 生成其他芯片的测试代码</li>
+                                        <li>• 制定完整的测试流程</li>
+                                        <li>• 优化测试参数</li>
+                                        <li>• 分析测试结果</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 输入区域 -->
+                    <div class="p-3 md:p-6 border-t border-gray-700 bg-gray-800 flex-shrink-0">
+                        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                            <input type="text" id="chatInput" placeholder="请输入芯片型号或测试需求..." 
+                                   class="flex-1 bg-gray-700 text-white rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                   onkeypress="handleKeyPress(event)">
+                            <button onclick="sendMessage()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors text-sm">
+                                <i class="fas fa-paper-plane mr-1 md:mr-2"></i>
+                                发送
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 侧边栏 - 工作流信息 -->
+                <div class="hidden lg:block w-80 bg-gray-900 p-4 border-l border-gray-700 flex-shrink-0">
+                        <h4 class="text-white font-semibold mb-4">工作流信息</h4>
+                        <div id="workflowInfo" class="space-y-3">
+                            <div class="bg-gray-800 rounded-lg p-3">
+                                <h5 class="text-blue-400 font-medium mb-2">当前工作流</h5>
+                                <p class="text-gray-300 text-sm">测试代码生成</p>
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-3">
+                                <h5 class="text-green-400 font-medium mb-2">支持芯片</h5>
+                                <p class="text-gray-300 text-sm">SN74LS192, SN74LS08, 等</p>
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-3">
+                                <h5 class="text-yellow-400 font-medium mb-2">测试项目</h5>
+                                <p class="text-gray-300 text-sm">CON, FUN, VOH, VOL, VIH, VIL, IIH, IIL, II</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 快速输入模板 -->
+                        <div class="mt-6">
+                            <h5 class="text-white font-medium mb-3">快速输入</h5>
+                            <div class="space-y-2">
+                                <button onclick="quickInput('SN74LS192')" class="w-full text-left bg-gray-800 hover:bg-gray-700 rounded-lg p-2 text-sm text-gray-300 transition-colors">
+                                    SN74LS192 测试代码
+                                </button>
+                                <button onclick="quickInput('SN74LS08')" class="w-full text-left bg-gray-800 hover:bg-gray-700 rounded-lg p-2 text-sm text-gray-300 transition-colors">
+                                    SN74LS08 测试方案
+                                </button>
+                                <button onclick="quickInput('测试向量')" class="w-full text-left bg-gray-800 hover:bg-gray-700 rounded-lg p-2 text-sm text-gray-300 transition-colors">
+                                    生成测试向量
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Selection Modal -->
+    <div id="gameSelectionModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-gray-800 rounded-2xl w-full max-w-2xl p-8">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold text-white mb-6">
+                        <i class="fas fa-gamepad text-blue-400 mr-2"></i>
+                        选择游戏
+                    </h2>
+                    <p class="text-gray-300 mb-8">选择一个游戏开始挑战吧！</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- 跳跃游戏 -->
+                        <div class="bg-gray-700 rounded-xl p-6 hover:bg-gray-600 transition-colors cursor-pointer" onclick="openJumpGame()">
+                            <div class="text-center">
+                                <div class="w-16 h-16 mx-auto mb-4 bg-blue-500 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-running text-white text-2xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-white mb-2">芯片跳跃</h3>
+                                <p class="text-gray-300 text-sm mb-4">控制芯片在平台间跳跃，挑战你的反应速度和技巧！</p>
+                                <div class="text-xs text-gray-400">
+                                    <div>• 轻飘飘的跳跃体验</div>
+                                    <div>• 多种角色皮肤选择</div>
+                                    <div>• 逐渐增加的难度</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 问答游戏 -->
+                        <div class="bg-gray-700 rounded-xl p-6 hover:bg-gray-600 transition-colors cursor-pointer" onclick="openQuizGame()">
+                            <div class="text-center">
+                                <div class="w-16 h-16 mx-auto mb-4 bg-green-500 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-brain text-white text-2xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-white mb-2">芯片知识问答</h3>
+                                <p class="text-gray-300 text-sm mb-4">测试你的芯片知识，挑战100道专业题目！</p>
+                                <div class="text-xs text-gray-400">
+                                    <div>• 100道专业题库</div>
+                                    <div>• 随机10题挑战</div>
+                                    <div>• 实时计分系统</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="closeGameSelection()" class="mt-8 text-gray-400 hover:text-white transition-colors">
+                        <i class="fas fa-times mr-2"></i>关闭
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Interface Modal -->
+    <div id="gameModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-2">
+            <div class="bg-gray-800 rounded-2xl w-full max-w-7xl h-95vh flex flex-col relative">
+                <!-- 全屏切换按钮 -->
+                <button id="fullscreenToggle" class="fullscreen-toggle" onclick="toggleFullscreen()" title="切换全屏模式">
+                    <i class="fas fa-expand text-lg"></i>
+                </button>
+                <div class="flex items-center justify-between p-6 border-b border-gray-700">
+                    <h3 class="text-xl font-bold text-white">
+                        <i class="fas fa-gamepad text-blue-400 mr-2"></i>
+                        芯片跳跃游戏
+                        <span id="currentDifficulty" class="text-sm font-normal text-gray-400 ml-2"></span>
+                    </h3>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-gray-300">分数:</span>
+                            <span id="gameScore" class="text-sm text-green-400">0</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-gray-300">最高分:</span>
+                            <span id="highScore" class="text-sm text-yellow-400">0</span>
+                        </div>
+                        <button onclick="closeGameInterface()" class="text-gray-400 hover:text-white">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Game Canvas -->
+                <div class="flex-1 flex items-center justify-center bg-gradient-to-b from-gray-900 to-gray-800 relative overflow-auto">
+                    <canvas id="gameCanvas" class="border border-gray-600 rounded-lg bg-gray-900"></canvas>
+                    
+                    <!-- Game Over Screen -->
+                    <div id="gameOverScreen" class="absolute inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
+                        <div class="text-center">
+                            <h2 class="text-3xl font-bold text-white mb-4">游戏结束</h2>
+                            <p class="text-gray-300 mb-6">最终分数: <span id="finalScore" class="text-green-400">0</span></p>
+                            <button onclick="restartGame()" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold">
+                                <i class="fas fa-redo mr-2"></i>重新开始
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Start Screen -->
+                    <div id="startScreen" class="absolute inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+                        <div class="text-center">
+                            <h2 class="text-3xl font-bold text-white mb-4">芯片跳跃</h2>
+                            <p class="text-gray-300 mb-6">点击或按空格键控制芯片跳跃</p>
+                            <p class="text-sm text-gray-400 mb-6">跳跃距离由按压时间决定</p>
+                            
+                            <!-- 皮肤选择 -->
+                            <div class="mb-6">
+                                <h3 class="text-lg font-semibold text-white mb-4">选择角色皮肤</h3>
+                                <div class="grid grid-cols-3 gap-3 mb-4">
+                                    <button onclick="selectSkin('classic')" class="skin-btn bg-gray-700 hover:bg-gray-600 text-white p-3 rounded-lg transition-colors">
+                                        <div class="w-8 h-8 mx-auto mb-1 rounded" style="background-color: #3b82f6;"></div>
+                                        <div class="text-xs">经典</div>
+                                    </button>
+                                    <button onclick="selectSkin('golden')" class="skin-btn bg-gray-700 hover:bg-gray-600 text-white p-3 rounded-lg transition-colors">
+                                        <div class="w-8 h-8 mx-auto mb-1 rounded" style="background-color: #fbbf24;"></div>
+                                        <div class="text-xs">黄金</div>
+                                    </button>
+                                    <button onclick="selectSkin('emerald')" class="skin-btn bg-gray-700 hover:bg-gray-600 text-white p-3 rounded-lg transition-colors">
+                                        <div class="w-8 h-8 mx-auto mb-1 rounded" style="background-color: #10b981;"></div>
+                                        <div class="text-xs">翡翠</div>
+                                    </button>
+                                    <button onclick="selectSkin('ruby')" class="skin-btn bg-gray-700 hover:bg-gray-600 text-white p-3 rounded-lg transition-colors">
+                                        <div class="w-8 h-8 mx-auto mb-1 rounded" style="background-color: #ef4444;"></div>
+                                        <div class="text-xs">红宝石</div>
+                                    </button>
+                                    <button onclick="selectSkin('purple')" class="skin-btn bg-gray-700 hover:bg-gray-600 text-white p-3 rounded-lg transition-colors">
+                                        <div class="w-8 h-8 mx-auto mb-1 rounded" style="background-color: #8b5cf6;"></div>
+                                        <div class="text-xs">紫水晶</div>
+                                    </button>
+                                    <button onclick="selectSkin('silver')" class="skin-btn bg-gray-700 hover:bg-gray-600 text-white p-3 rounded-lg transition-colors">
+                                        <div class="w-8 h-8 mx-auto mb-1 rounded" style="background-color: #6b7280;"></div>
+                                        <div class="text-xs">银质</div>
+                                    </button>
+                                </div>
+                                <!-- 皮肤预览 -->
+                                <div id="skinPreview" class="text-center">
+                                    <div class="w-16 h-16 mx-auto mb-2 rounded-lg flex items-center justify-center" style="background-color: #3b82f6;">
+                                        <div class="text-xs font-bold" style="color: #1f2937;">IC</div>
+                                    </div>
+                                    <div class="text-xs text-center text-gray-300">经典芯片</div>
+                                </div>
+                            </div>
+                            
+                            <!-- 难度选择 -->
+                            <div class="mb-6">
+                                <h3 class="text-lg font-semibold text-white mb-4">选择难度</h3>
+                                <div class="flex flex-col space-y-3">
+                                    <button onclick="selectDifficulty('easy')" class="difficulty-btn bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                                        <i class="fas fa-leaf mr-2"></i>简单模式
+                                        <div class="text-sm opacity-80">重力低，平台近，节奏慢</div>
+                                    </button>
+                                    <button onclick="selectDifficulty('normal')" class="difficulty-btn bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                                        <i class="fas fa-balance-scale mr-2"></i>普通模式
+                                        <div class="text-sm opacity-80">平衡的难度设置</div>
+                                    </button>
+                                    <button onclick="selectDifficulty('hard')" class="difficulty-btn bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                                        <i class="fas fa-fire mr-2"></i>困难模式
+                                        <div class="text-sm opacity-80">重力高，平台远，节奏快</div>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <button id="startGameBtn" onclick="startGame()" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold disabled:bg-gray-500 disabled:cursor-not-allowed" disabled>
+                                <i class="fas fa-play mr-2"></i>开始游戏
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Game Controls -->
+                <div class="p-4 border-t border-gray-700">
+                    <div class="flex items-center justify-center space-x-8">
+                        <div class="text-center">
+                            <i class="fas fa-mouse-pointer text-blue-400 text-2xl mb-2"></i>
+                            <p class="text-sm text-gray-300">点击跳跃</p>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-keyboard text-green-400 text-2xl mb-2"></i>
+                            <p class="text-sm text-gray-300">空格键跳跃</p>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-microchip text-yellow-400 text-2xl mb-2"></i>
+                            <p class="text-sm text-gray-300">芯片角色</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Game Modal -->
+    <div id="quizModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-2">
+            <div class="bg-gray-800 rounded-2xl w-full max-w-6xl h-95vh flex flex-col">
+                <div class="flex items-center justify-between p-6 border-b border-gray-700">
+                    <h3 class="text-xl font-bold text-white">
+                        <i class="fas fa-brain text-green-400 mr-2"></i>
+                        芯片知识问答
+                        <span id="quizProgress" class="text-sm font-normal text-gray-400 ml-2"></span>
+                    </h3>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-gray-300">分数:</span>
+                            <span id="quizScore" class="text-sm text-green-400">0</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-gray-300">最高分:</span>
+                            <span id="quizHighScore" class="text-sm text-yellow-400">0</span>
+                        </div>
+                        <button onclick="closeQuizGame()" class="text-gray-400 hover:text-white">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Quiz Content -->
+                <div class="flex-1 flex items-center justify-center bg-gradient-to-b from-gray-900 to-gray-800 relative overflow-auto">
+                    <!-- Quiz Start Screen -->
+                    <div id="quizStartScreen" class="absolute inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+                        <div class="text-center">
+                            <h2 class="text-3xl font-bold text-white mb-4">芯片知识问答</h2>
+                            <p class="text-gray-300 mb-6">挑战你的芯片专业知识！</p>
+                            <p class="text-sm text-gray-400 mb-8">从100道题目中随机选择10道进行挑战</p>
+                            
+                            <div class="mb-8">
+                                <h3 class="text-lg font-semibold text-white mb-4">游戏规则</h3>
+                                <div class="text-left text-gray-300 space-y-2 max-w-md mx-auto">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2"></i>
+                                        <span>每题10分，答对得分</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2"></i>
+                                        <span>每题限时30秒</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2"></i>
+                                        <span>共10道题目</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2"></i>
+                                        <span>涵盖芯片设计、制造、测试等知识</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button onclick="startQuiz()" class="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-lg font-semibold">
+                                <i class="fas fa-play mr-2"></i>开始挑战
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Quiz Question Screen -->
+                    <div id="quizQuestionScreen" class="absolute inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
+                        <div class="text-center w-full max-w-2xl p-6">
+                            <div class="mb-6">
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-sm text-gray-400">题目 <span id="currentQuestionNum">1</span>/10</span>
+                                    <span class="text-sm text-gray-400">剩余时间: <span id="timeLeft">30</span>s</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div id="timeProgress" class="bg-green-500 h-2 rounded-full transition-all duration-1000" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            
+                            <h3 id="questionText" class="text-xl font-bold text-white mb-8 leading-relaxed"></h3>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <button onclick="selectAnswer(0)" class="answer-btn bg-gray-700 hover:bg-gray-600 text-white p-4 rounded-lg text-left transition-colors">
+                                    <span class="font-semibold">A. </span><span id="answer0"></span>
+                                </button>
+                                <button onclick="selectAnswer(1)" class="answer-btn bg-gray-700 hover:bg-gray-600 text-white p-4 rounded-lg text-left transition-colors">
+                                    <span class="font-semibold">B. </span><span id="answer1"></span>
+                                </button>
+                                <button onclick="selectAnswer(2)" class="answer-btn bg-gray-700 hover:bg-gray-600 text-white p-4 rounded-lg text-left transition-colors">
+                                    <span class="font-semibold">C. </span><span id="answer2"></span>
+                                </button>
+                                <button onclick="selectAnswer(3)" class="answer-btn bg-gray-700 hover:bg-gray-600 text-white p-4 rounded-lg text-left transition-colors">
+                                    <span class="font-semibold">D. </span><span id="answer3"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quiz Result Screen -->
+                    <div id="quizResultScreen" class="absolute inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
+                        <div class="text-center">
+                            <h2 class="text-3xl font-bold text-white mb-4">挑战完成！</h2>
+                            <div class="mb-6">
+                                <div class="text-6xl font-bold text-green-400 mb-2" id="finalQuizScore">0</div>
+                                <div class="text-gray-300">分</div>
+                            </div>
+                            <p class="text-gray-300 mb-6">正确率: <span id="accuracy" class="text-green-400">0%</span></p>
+                            <p class="text-sm text-gray-400 mb-8">答对了 <span id="correctCount">0</span> 道题，共10道题</p>
+                            
+                            <div class="space-y-3">
+                                <button onclick="restartQuiz()" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold mr-4">
+                                    <i class="fas fa-redo mr-2"></i>再来一次
+                                </button>
+                                <button onclick="closeQuizGame()" class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold">
+                                    <i class="fas fa-home mr-2"></i>返回主页
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // AOS动画已移除，使用原生CSS动画替代
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+
+        // ==================== 全屏功能相关函数 ====================
+        
+        // 全屏状态
+        let isFullscreen = false;
+        
+        // 切换全屏模式
+        function toggleFullscreen() {
+            const gameModal = document.getElementById('gameModal');
+            const gameContainer = gameModal.querySelector('.max-w-7xl');
+            const fullscreenToggle = document.getElementById('fullscreenToggle');
+            const fullscreenIcon = fullscreenToggle.querySelector('i');
+            
+            if (!isFullscreen) {
+                // 进入全屏模式
+                gameContainer.classList.add('fullscreen-mode');
+                fullscreenIcon.className = 'fas fa-compress text-lg';
+                fullscreenToggle.title = '退出全屏模式';
+                isFullscreen = true;
+            } else {
+                // 退出全屏模式
+                gameContainer.classList.remove('fullscreen-mode');
+                fullscreenIcon.className = 'fas fa-expand text-lg';
+                fullscreenToggle.title = '切换全屏模式';
+                isFullscreen = false;
+            }
+        }
+        
+        // 监听ESC键退出全屏
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && isFullscreen) {
+                toggleFullscreen();
+            }
+        });
+        
+        // ==================== 游戏选择相关函数 ====================
+        
+        // 打开游戏选择界面
+        function openGameInterface() {
+            document.getElementById('gameSelectionModal').classList.remove('hidden');
+        }
+
+        // 关闭游戏选择界面
+        function closeGameSelection() {
+            document.getElementById('gameSelectionModal').classList.add('hidden');
+        }
+
+        // 打开跳跃游戏
+        function openJumpGame() {
+            closeGameSelection();
+            document.getElementById('gameModal').classList.remove('hidden');
+            document.getElementById('highScore').textContent = gameState.highScore;
+            initGame();
+        }
+
+        // 打开问答游戏
+        function openQuizGame() {
+            closeGameSelection();
+            document.getElementById('quizModal').classList.remove('hidden');
+        }
+
+        // 关闭跳跃游戏
+        function closeGameInterface() {
+            document.getElementById('gameModal').classList.add('hidden');
+        }
+
+        // 关闭问答游戏
+        function closeQuizGame() {
+            document.getElementById('quizModal').classList.add('hidden');
+        }
+
+        // ==================== 问答游戏相关代码 ====================
+        
+        // 问答游戏状态
+        let quizState = {
+            currentQuestion: 0,
+            score: 0,
+            correctAnswers: 0,
+            selectedQuestions: [],
+            timeLeft: 30,
+            timer: null,
+            isPlaying: false
+        };
+
+        // 芯片知识题库 (100道题目)
+        const quizQuestions = [
+            {
+                question: "以下哪种材料是半导体芯片的主要材料？",
+                options: ["硅(Si)", "铜(Cu)", "铝(Al)", "金(Au)"],
+                correct: 0,
+                explanation: "硅是半导体芯片的主要材料，具有良好的半导体特性。"
+            },
+            {
+                question: "CMOS工艺中的'C'代表什么？",
+                options: ["Complementary", "Computer", "Circuit", "Chip"],
+                correct: 0,
+                explanation: "CMOS中的C代表Complementary（互补），指使用互补的NMOS和PMOS晶体管。"
+            },
+            {
+                question: "芯片制造中的光刻工艺主要目的是什么？",
+                options: ["切割晶圆", "图案转移", "清洗表面", "封装芯片"],
+                correct: 1,
+                explanation: "光刻工艺是将设计图案转移到硅片上的关键步骤。"
+            },
+            {
+                question: "以下哪个是芯片测试中的基本参数？",
+                options: ["VOH", "VOL", "VIH", "以上都是"],
+                correct: 3,
+                explanation: "VOH、VOL、VIH都是芯片测试中的基本电气参数。"
+            },
+            {
+                question: "芯片封装的主要作用是什么？",
+                options: ["保护芯片", "提供电气连接", "散热", "以上都是"],
+                correct: 3,
+                explanation: "芯片封装同时提供保护、电气连接和散热功能。"
+            },
+            {
+                question: "以下哪种是数字电路的基本逻辑门？",
+                options: ["AND门", "OR门", "NOT门", "以上都是"],
+                correct: 3,
+                explanation: "AND、OR、NOT都是数字电路的基本逻辑门。"
+            },
+            {
+                question: "芯片设计中的'版图'指的是什么？",
+                options: ["电路图", "物理布局", "功能框图", "测试向量"],
+                correct: 1,
+                explanation: "版图是芯片的物理布局设计，定义了各个元件的位置和连接。"
+            },
+            {
+                question: "以下哪个是芯片制造中的关键工艺？",
+                options: ["氧化", "扩散", "离子注入", "以上都是"],
+                correct: 3,
+                explanation: "氧化、扩散、离子注入都是芯片制造中的关键工艺。"
+            },
+            {
+                question: "芯片测试中的'功能测试'主要测试什么？",
+                options: ["电气参数", "逻辑功能", "物理缺陷", "封装质量"],
+                correct: 1,
+                explanation: "功能测试主要验证芯片的逻辑功能是否正确。"
+            },
+            {
+                question: "以下哪种是芯片设计中的主要挑战？",
+                options: ["功耗优化", "面积优化", "时序优化", "以上都是"],
+                correct: 3,
+                explanation: "功耗、面积、时序优化都是芯片设计中的主要挑战。"
+            },
+            {
+                question: "芯片制造中的'良品率'指的是什么？",
+                options: ["生产速度", "合格芯片比例", "芯片性能", "制造成本"],
+                correct: 1,
+                explanation: "良品率是指合格芯片占总生产芯片的比例。"
+            },
+            {
+                question: "以下哪个是芯片封装的主要类型？",
+                options: ["DIP", "BGA", "QFP", "以上都是"],
+                correct: 3,
+                explanation: "DIP、BGA、QFP都是常见的芯片封装类型。"
+            },
+            {
+                question: "芯片设计中的'综合'指的是什么？",
+                options: ["RTL到门级", "门级到版图", "版图到芯片", "测试到封装"],
+                correct: 0,
+                explanation: "综合是将RTL级描述转换为门级网表的过程。"
+            },
+            {
+                question: "以下哪种是芯片测试中的动态参数？",
+                options: ["传播延迟", "建立时间", "保持时间", "以上都是"],
+                correct: 3,
+                explanation: "传播延迟、建立时间、保持时间都是动态时序参数。"
+            },
+            {
+                question: "芯片制造中的'蚀刻'工艺主要目的是什么？",
+                options: ["去除材料", "添加材料", "改变材料性质", "清洗材料"],
+                correct: 0,
+                explanation: "蚀刻工艺用于去除不需要的材料，形成所需的结构。"
+            },
+            {
+                question: "以下哪个是芯片设计中的验证方法？",
+                options: ["仿真", "形式验证", "硬件验证", "以上都是"],
+                correct: 3,
+                explanation: "仿真、形式验证、硬件验证都是芯片设计验证的方法。"
+            },
+            {
+                question: "芯片制造中的'掺杂'指的是什么？",
+                options: ["添加杂质", "去除杂质", "改变晶向", "改变尺寸"],
+                correct: 0,
+                explanation: "掺杂是在半导体中故意添加杂质原子来改变其电学性质。"
+            },
+            {
+                question: "以下哪种是芯片测试中的静态参数？",
+                options: ["VOH", "VOL", "IIH", "以上都是"],
+                correct: 3,
+                explanation: "VOH、VOL、IIH都是静态直流参数。"
+            },
+            {
+                question: "芯片设计中的'时序分析'主要分析什么？",
+                options: ["信号延迟", "时钟偏斜", "建立保持时间", "以上都是"],
+                correct: 3,
+                explanation: "时序分析包括信号延迟、时钟偏斜、建立保持时间等。"
+            },
+            {
+                question: "芯片制造中的'退火'工艺主要目的是什么？",
+                options: ["修复损伤", "激活掺杂", "改善结晶", "以上都是"],
+                correct: 3,
+                explanation: "退火工艺可以修复损伤、激活掺杂、改善结晶质量。"
+            },
+            {
+                question: "以下哪个是芯片设计中的功耗类型？",
+                options: ["静态功耗", "动态功耗", "短路功耗", "以上都是"],
+                correct: 3,
+                explanation: "芯片功耗包括静态功耗、动态功耗和短路功耗。"
+            },
+            {
+                question: "芯片测试中的'边界扫描'主要用于什么？",
+                options: ["功能测试", "连接测试", "时序测试", "功耗测试"],
+                correct: 1,
+                explanation: "边界扫描主要用于测试芯片引脚之间的连接。"
+            },
+            {
+                question: "以下哪种是芯片制造中的关键尺寸？",
+                options: ["特征尺寸", "线宽", "间距", "以上都是"],
+                correct: 3,
+                explanation: "特征尺寸、线宽、间距都是芯片制造中的关键尺寸。"
+            },
+            {
+                question: "芯片设计中的'布局布线'指的是什么？",
+                options: ["元件放置", "连线设计", "时序优化", "以上都是"],
+                correct: 3,
+                explanation: "布局布线包括元件放置、连线设计和时序优化。"
+            },
+            {
+                question: "芯片制造中的'化学机械抛光'主要用于什么？",
+                options: ["表面平整", "去除材料", "改变厚度", "以上都是"],
+                correct: 3,
+                explanation: "CMP用于表面平整、去除材料和改变厚度。"
+            },
+            {
+                question: "以下哪个是芯片测试中的故障模型？",
+                options: ["固定故障", "桥接故障", "延迟故障", "以上都是"],
+                correct: 3,
+                explanation: "固定故障、桥接故障、延迟故障都是常见的故障模型。"
+            },
+            {
+                question: "芯片设计中的'功耗分析'主要分析什么？",
+                options: ["平均功耗", "峰值功耗", "功耗分布", "以上都是"],
+                correct: 3,
+                explanation: "功耗分析包括平均功耗、峰值功耗和功耗分布。"
+            },
+            {
+                question: "芯片制造中的'薄膜沉积'主要用于什么？",
+                options: ["形成导电层", "形成绝缘层", "形成保护层", "以上都是"],
+                correct: 3,
+                explanation: "薄膜沉积用于形成导电层、绝缘层和保护层。"
+            },
+            {
+                question: "以下哪种是芯片设计中的优化目标？",
+                options: ["面积最小", "功耗最低", "速度最快", "以上都是"],
+                correct: 3,
+                explanation: "面积、功耗、速度都是芯片设计中的优化目标。"
+            },
+            {
+                question: "芯片测试中的'可测试性设计'指的是什么？",
+                options: ["提高测试效率", "降低测试成本", "改善测试质量", "以上都是"],
+                correct: 3,
+                explanation: "DFT旨在提高测试效率、降低成本和改善质量。"
+            },
+            {
+                question: "芯片制造中的'光刻胶'主要作用是什么？",
+                options: ["图案转移", "保护作用", "蚀刻掩膜", "以上都是"],
+                correct: 3,
+                explanation: "光刻胶用于图案转移、保护和作为蚀刻掩膜。"
+            },
+            {
+                question: "以下哪个是芯片设计中的验证层次？",
+                options: ["RTL验证", "门级验证", "版图验证", "以上都是"],
+                correct: 3,
+                explanation: "RTL、门级、版图验证都是芯片设计验证的层次。"
+            },
+            {
+                question: "芯片制造中的'离子注入'主要用于什么？",
+                options: ["掺杂", "退火", "氧化", "蚀刻"],
+                correct: 0,
+                explanation: "离子注入主要用于在半导体中引入掺杂原子。"
+            },
+            {
+                question: "以下哪种是芯片测试中的测试向量？",
+                options: ["功能向量", "扫描向量", "边界扫描向量", "以上都是"],
+                correct: 3,
+                explanation: "功能向量、扫描向量、边界扫描向量都是测试向量类型。"
+            },
+            {
+                question: "芯片设计中的'时钟域'指的是什么？",
+                options: ["时钟频率", "时钟相位", "时钟区域", "时钟网络"],
+                correct: 2,
+                explanation: "时钟域是指使用相同时钟信号的逻辑区域。"
+            },
+            {
+                question: "芯片制造中的'湿法清洗'主要用于什么？",
+                options: ["去除污染物", "表面处理", "激活表面", "以上都是"],
+                correct: 3,
+                explanation: "湿法清洗用于去除污染物、表面处理和激活表面。"
+            },
+            {
+                question: "以下哪个是芯片设计中的时序约束？",
+                options: ["时钟周期", "建立时间", "保持时间", "以上都是"],
+                correct: 3,
+                explanation: "时钟周期、建立时间、保持时间都是时序约束。"
+            },
+            {
+                question: "芯片测试中的'故障覆盖率'指的是什么？",
+                options: ["测试效率", "故障检测率", "测试质量", "以上都是"],
+                correct: 3,
+                explanation: "故障覆盖率反映测试效率、故障检测率和测试质量。"
+            },
+            {
+                question: "芯片制造中的'干法蚀刻'主要用于什么？",
+                options: ["精确蚀刻", "各向异性蚀刻", "选择性蚀刻", "以上都是"],
+                correct: 3,
+                explanation: "干法蚀刻具有精确、各向异性和选择性好的特点。"
+            },
+            {
+                question: "以下哪种是芯片设计中的功耗优化技术？",
+                options: ["时钟门控", "电压缩放", "多阈值", "以上都是"],
+                correct: 3,
+                explanation: "时钟门控、电压缩放、多阈值都是功耗优化技术。"
+            },
+            {
+                question: "芯片测试中的'内建自测试'指的是什么？",
+                options: ["片上测试", "自动测试", "实时测试", "以上都是"],
+                correct: 3,
+                explanation: "BIST是在芯片内部实现的自测试功能。"
+            },
+            {
+                question: "芯片制造中的'化学气相沉积'主要用于什么？",
+                options: ["薄膜生长", "掺杂", "退火", "蚀刻"],
+                correct: 0,
+                explanation: "CVD主要用于在芯片表面生长各种薄膜。"
+            },
+            {
+                question: "以下哪个是芯片设计中的面积优化技术？",
+                options: ["逻辑优化", "布局优化", "布线优化", "以上都是"],
+                correct: 3,
+                explanation: "逻辑、布局、布线优化都是面积优化技术。"
+            },
+            {
+                question: "芯片测试中的'扫描链'主要用于什么？",
+                options: ["功能测试", "时序测试", "可测试性", "以上都是"],
+                correct: 3,
+                explanation: "扫描链用于功能测试、时序测试和改善可测试性。"
+            },
+            {
+                question: "芯片制造中的'物理气相沉积'主要用于什么？",
+                options: ["金属沉积", "绝缘层沉积", "保护层沉积", "以上都是"],
+                correct: 3,
+                explanation: "PVD用于金属、绝缘层和保护层的沉积。"
+            },
+            {
+                question: "以下哪种是芯片设计中的时序优化技术？",
+                options: ["缓冲器插入", "逻辑重组", "时钟树优化", "以上都是"],
+                correct: 3,
+                explanation: "缓冲器插入、逻辑重组、时钟树优化都是时序优化技术。"
+            },
+            {
+                question: "芯片测试中的'IDDQ测试'主要用于什么？",
+                options: ["功能测试", "故障检测", "功耗测试", "以上都是"],
+                correct: 3,
+                explanation: "IDDQ测试用于功能测试、故障检测和功耗测试。"
+            },
+            {
+                question: "芯片制造中的'原子层沉积'主要用于什么？",
+                options: ["精确控制", "均匀性", "保形性", "以上都是"],
+                correct: 3,
+                explanation: "ALD具有精确控制、均匀性和保形性好的特点。"
+            },
+            {
+                question: "以下哪个是芯片设计中的信号完整性？",
+                options: ["串扰", "反射", "噪声", "以上都是"],
+                correct: 3,
+                explanation: "串扰、反射、噪声都是信号完整性的问题。"
+            },
+            {
+                question: "芯片测试中的'故障模拟'主要用于什么？",
+                options: ["测试生成", "故障分析", "测试评估", "以上都是"],
+                correct: 3,
+                explanation: "故障模拟用于测试生成、故障分析和测试评估。"
+            },
+            {
+                question: "芯片制造中的'深反应离子蚀刻'主要用于什么？",
+                options: ["深槽蚀刻", "高深宽比", "各向异性", "以上都是"],
+                correct: 3,
+                explanation: "DRIE用于深槽蚀刻，具有高深宽比和各向异性。"
+            },
+            {
+                question: "以下哪种是芯片设计中的功耗管理？",
+                options: ["动态电压调节", "时钟门控", "电源门控", "以上都是"],
+                correct: 3,
+                explanation: "动态电压调节、时钟门控、电源门控都是功耗管理技术。"
+            },
+            {
+                question: "芯片测试中的'测试压缩'主要用于什么？",
+                options: ["减少测试时间", "降低测试成本", "提高测试效率", "以上都是"],
+                correct: 3,
+                explanation: "测试压缩用于减少测试时间、降低成本和提高效率。"
+            },
+            {
+                question: "芯片制造中的'分子束外延'主要用于什么？",
+                options: ["高质量薄膜", "精确控制", "低温生长", "以上都是"],
+                correct: 3,
+                explanation: "MBE用于生长高质量薄膜，具有精确控制和低温特点。"
+            },
+            {
+                question: "以下哪个是芯片设计中的可靠性？",
+                options: ["老化", "软错误", "热载流子", "以上都是"],
+                correct: 3,
+                explanation: "老化、软错误、热载流子都是可靠性问题。"
+            },
+            {
+                question: "芯片测试中的'测试调度'主要用于什么？",
+                options: ["优化测试顺序", "减少测试时间", "提高测试效率", "以上都是"],
+                correct: 3,
+                explanation: "测试调度用于优化测试顺序、减少时间和提高效率。"
+            },
+            {
+                question: "芯片制造中的'激光退火'主要用于什么？",
+                options: ["局部退火", "快速退火", "精确控制", "以上都是"],
+                correct: 3,
+                explanation: "激光退火具有局部、快速和精确控制的特点。"
+            },
+            {
+                question: "以下哪种是芯片设计中的热管理？",
+                options: ["热分析", "热设计", "热优化", "以上都是"],
+                correct: 3,
+                explanation: "热分析、热设计、热优化都是热管理的内容。"
+            },
+            {
+                question: "芯片测试中的'测试数据压缩'主要用于什么？",
+                options: ["减少存储", "提高传输", "降低成本", "以上都是"],
+                correct: 3,
+                explanation: "测试数据压缩用于减少存储、提高传输和降低成本。"
+            },
+            {
+                question: "芯片制造中的'等离子体增强化学气相沉积'主要用于什么？",
+                options: ["低温沉积", "高质量薄膜", "快速沉积", "以上都是"],
+                correct: 3,
+                explanation: "PECVD具有低温、高质量和快速沉积的特点。"
+            },
+            {
+                question: "以下哪个是芯片设计中的可制造性？",
+                options: ["设计规则", "工艺兼容", "良品率", "以上都是"],
+                correct: 3,
+                explanation: "设计规则、工艺兼容、良品率都是可制造性的内容。"
+            },
+            {
+                question: "芯片测试中的'测试质量'主要评估什么？",
+                options: ["故障覆盖率", "测试效率", "测试成本", "以上都是"],
+                correct: 3,
+                explanation: "测试质量评估故障覆盖率、测试效率和测试成本。"
+            },
+            {
+                question: "芯片制造中的'选择性外延'主要用于什么？",
+                options: ["局部生长", "精确控制", "高质量", "以上都是"],
+                correct: 3,
+                explanation: "选择性外延具有局部生长、精确控制和高质量的特点。"
+            },
+            {
+                question: "以下哪种是芯片设计中的可测试性？",
+                options: ["扫描设计", "边界扫描", "内建自测试", "以上都是"],
+                correct: 3,
+                explanation: "扫描设计、边界扫描、内建自测试都是可测试性技术。"
+            },
+            {
+                question: "芯片测试中的'测试向量生成'主要用于什么？",
+                options: ["功能测试", "故障检测", "测试优化", "以上都是"],
+                correct: 3,
+                explanation: "测试向量生成用于功能测试、故障检测和测试优化。"
+            },
+            {
+                question: "芯片制造中的'原子层蚀刻'主要用于什么？",
+                options: ["精确蚀刻", "各向异性", "选择性", "以上都是"],
+                correct: 3,
+                explanation: "ALE具有精确、各向异性和选择性好的特点。"
+            },
+            {
+                question: "以下哪个是芯片设计中的功耗分析？",
+                options: ["静态分析", "动态分析", "峰值分析", "以上都是"],
+                correct: 3,
+                explanation: "静态、动态、峰值分析都是功耗分析的内容。"
+            },
+            {
+                question: "芯片测试中的'测试优化'主要优化什么？",
+                options: ["测试时间", "测试成本", "测试质量", "以上都是"],
+                correct: 3,
+                explanation: "测试优化包括测试时间、成本和质量的优化。"
+            },
+            {
+                question: "芯片制造中的'化学机械抛光'主要用于什么？",
+                options: ["表面平整", "厚度控制", "均匀性", "以上都是"],
+                correct: 3,
+                explanation: "CMP用于表面平整、厚度控制和均匀性改善。"
+            },
+            {
+                question: "以下哪种是芯片设计中的时序分析？",
+                options: ["静态时序", "动态时序", "统计时序", "以上都是"],
+                correct: 3,
+                explanation: "静态、动态、统计时序分析都是时序分析的方法。"
+            },
+            {
+                question: "芯片测试中的'故障诊断'主要用于什么？",
+                options: ["定位故障", "分析原因", "改善设计", "以上都是"],
+                correct: 3,
+                explanation: "故障诊断用于定位故障、分析原因和改善设计。"
+            },
+            {
+                question: "芯片制造中的'激光辅助化学气相沉积'主要用于什么？",
+                options: ["局部沉积", "精确控制", "高质量", "以上都是"],
+                correct: 3,
+                explanation: "LCVD具有局部沉积、精确控制和高质量的特点。"
+            },
+            {
+                question: "以下哪个是芯片设计中的面积分析？",
+                options: ["逻辑面积", "布线面积", "总面积", "以上都是"],
+                correct: 3,
+                explanation: "逻辑面积、布线面积、总面积都是面积分析的内容。"
+            },
+            {
+                question: "芯片测试中的'测试覆盖率'主要衡量什么？",
+                options: ["故障检测", "测试完整性", "测试质量", "以上都是"],
+                correct: 3,
+                explanation: "测试覆盖率衡量故障检测、测试完整性和测试质量。"
+            },
+            {
+                question: "芯片制造中的'电子束光刻'主要用于什么？",
+                options: ["高分辨率", "小尺寸", "精确控制", "以上都是"],
+                correct: 3,
+                explanation: "电子束光刻具有高分辨率、小尺寸和精确控制的特点。"
+            },
+            {
+                question: "以下哪种是芯片设计中的功耗优化？",
+                options: ["门级优化", "RTL优化", "系统级优化", "以上都是"],
+                correct: 3,
+                explanation: "门级、RTL、系统级优化都是功耗优化的层次。"
+            },
+            {
+                question: "芯片测试中的'测试时间优化'主要优化什么？",
+                options: ["测试周期", "测试效率", "测试成本", "以上都是"],
+                correct: 3,
+                explanation: "测试时间优化包括测试周期、效率和成本的优化。"
+            },
+            {
+                question: "芯片制造中的'离子束蚀刻'主要用于什么？",
+                options: ["精确蚀刻", "各向异性", "低损伤", "以上都是"],
+                correct: 3,
+                explanation: "离子束蚀刻具有精确、各向异性和低损伤的特点。"
+            },
+            {
+                question: "以下哪个是芯片设计中的时序优化？",
+                options: ["关键路径", "时钟树", "时序约束", "以上都是"],
+                correct: 3,
+                explanation: "关键路径、时钟树、时序约束都是时序优化的内容。"
+            },
+            {
+                question: "芯片测试中的'测试成本优化'主要优化什么？",
+                options: ["测试时间", "测试设备", "测试数据", "以上都是"],
+                correct: 3,
+                explanation: "测试成本优化包括测试时间、设备和数据的优化。"
+            },
+            {
+                question: "芯片制造中的'分子束外延'主要用于什么？",
+                options: ["高质量", "精确控制", "低温生长", "以上都是"],
+                correct: 3,
+                explanation: "MBE具有高质量、精确控制和低温生长的特点。"
+            },
+            {
+                question: "以下哪种是芯片设计中的面积优化？",
+                options: ["逻辑优化", "布局优化", "布线优化", "以上都是"],
+                correct: 3,
+                explanation: "逻辑、布局、布线优化都是面积优化的方法。"
+            },
+            {
+                question: "芯片测试中的'测试质量评估'主要评估什么？",
+                options: ["故障覆盖率", "测试效率", "测试完整性", "以上都是"],
+                correct: 3,
+                explanation: "测试质量评估包括故障覆盖率、效率和完整性。"
+            },
+            {
+                question: "芯片制造中的'激光辅助蚀刻'主要用于什么？",
+                options: ["局部蚀刻", "精确控制", "高质量", "以上都是"],
+                correct: 3,
+                explanation: "激光辅助蚀刻具有局部、精确控制和高质量的特点。"
+            },
+            {
+                question: "以下哪个是芯片设计中的功耗管理？",
+                options: ["动态调节", "静态控制", "系统管理", "以上都是"],
+                correct: 3,
+                explanation: "动态调节、静态控制、系统管理都是功耗管理的方法。"
+            },
+            {
+                question: "芯片测试中的'测试效率优化'主要优化什么？",
+                options: ["测试时间", "测试覆盖率", "测试成本", "以上都是"],
+                correct: 3,
+                explanation: "测试效率优化包括测试时间、覆盖率和成本的优化。"
+            },
+            {
+                question: "芯片制造中的'等离子体增强原子层沉积'主要用于什么？",
+                options: ["低温沉积", "高质量", "快速生长", "以上都是"],
+                correct: 3,
+                explanation: "PEALD具有低温、高质量和快速生长的特点。"
+            },
+            {
+                question: "以下哪种是芯片设计中的可靠性设计？",
+                options: ["冗余设计", "容错设计", "老化设计", "以上都是"],
+                correct: 3,
+                explanation: "冗余、容错、老化设计都是可靠性设计的方法。"
+            },
+            {
+                question: "芯片测试中的'测试完整性'主要保证什么？",
+                options: ["全面测试", "充分测试", "有效测试", "以上都是"],
+                correct: 3,
+                explanation: "测试完整性保证全面、充分和有效的测试。"
+            },
+            {
+                question: "芯片制造中的'激光退火'主要用于什么？",
+                options: ["局部处理", "快速处理", "精确控制", "以上都是"],
+                correct: 3,
+                explanation: "激光退火具有局部、快速和精确控制的特点。"
+            },
+            {
+                question: "以下哪个是芯片设计中的热设计？",
+                options: ["热分析", "热优化", "热管理", "以上都是"],
+                correct: 3,
+                explanation: "热分析、热优化、热管理都是热设计的内容。"
+            },
+            {
+                question: "芯片测试中的'测试策略'主要制定什么？",
+                options: ["测试计划", "测试方法", "测试流程", "以上都是"],
+                correct: 3,
+                explanation: "测试策略制定测试计划、方法和流程。"
+            },
+            {
+                question: "芯片制造中的'选择性蚀刻'主要用于什么？",
+                options: ["材料选择", "精确控制", "高质量", "以上都是"],
+                correct: 3,
+                explanation: "选择性蚀刻具有材料选择、精确控制和高质量的特点。"
+            },
+            {
+                question: "以下哪种是芯片设计中的可制造性设计？",
+                options: ["设计规则", "工艺兼容", "良品率", "以上都是"],
+                correct: 3,
+                explanation: "设计规则、工艺兼容、良品率都是可制造性设计的内容。"
+            },
+            {
+                question: "芯片测试中的'测试方法'主要包括什么？",
+                options: ["功能测试", "参数测试", "可靠性测试", "以上都是"],
+                correct: 3,
+                explanation: "功能测试、参数测试、可靠性测试都是测试方法。"
+            },
+            {
+                question: "芯片制造中的'原子层蚀刻'主要用于什么？",
+                options: ["精确控制", "各向异性", "选择性", "以上都是"],
+                correct: 3,
+                explanation: "ALE具有精确控制、各向异性和选择性好的特点。"
+            },
+            {
+                question: "以下哪个是芯片设计中的功耗分析？",
+                options: ["静态功耗", "动态功耗", "峰值功耗", "以上都是"],
+                correct: 3,
+                explanation: "静态、动态、峰值功耗都是功耗分析的内容。"
+            },
+            {
+                question: "芯片测试中的'测试流程'主要包括什么？",
+                options: ["测试准备", "测试执行", "结果分析", "以上都是"],
+                correct: 3,
+                explanation: "测试准备、执行、结果分析都是测试流程的步骤。"
+            },
+            {
+                question: "芯片制造中的'激光辅助化学气相沉积'主要用于什么？",
+                options: ["局部沉积", "精确控制", "高质量", "以上都是"],
+                correct: 3,
+                explanation: "LCVD具有局部沉积、精确控制和高质量的特点。"
+            },
+            {
+                question: "以下哪种是芯片设计中的时序设计？",
+                options: ["时钟设计", "时序约束", "时序优化", "以上都是"],
+                correct: 3,
+                explanation: "时钟设计、时序约束、时序优化都是时序设计的内容。"
+            },
+            {
+                question: "芯片测试中的'测试评估'主要评估什么？",
+                options: ["测试效果", "测试质量", "测试效率", "以上都是"],
+                correct: 3,
+                explanation: "测试评估包括测试效果、质量和效率的评估。"
+            },
+            {
+                question: "芯片制造中的'电子束辅助化学气相沉积'主要用于什么？",
+                options: ["局部沉积", "精确控制", "高质量", "以上都是"],
+                correct: 3,
+                explanation: "EBCVD具有局部沉积、精确控制和高质量的特点。"
+            },
+            {
+                question: "以下哪个是芯片设计中的面积设计？",
+                options: ["逻辑面积", "布线面积", "总面积", "以上都是"],
+                correct: 3,
+                explanation: "逻辑面积、布线面积、总面积都是面积设计的内容。"
+            },
+            {
+                question: "芯片测试中的'测试管理'主要管理什么？",
+                options: ["测试资源", "测试进度", "测试质量", "以上都是"],
+                correct: 3,
+                explanation: "测试管理包括测试资源、进度和质量管理。"
+            },
+            {
+                question: "芯片制造中的'激光辅助原子层沉积'主要用于什么？",
+                options: ["局部沉积", "精确控制", "高质量", "以上都是"],
+                correct: 3,
+                explanation: "LALD具有局部沉积、精确控制和高质量的特点。"
+            },
+            {
+                question: "以下哪种是芯片设计中的功耗设计？",
+                options: ["低功耗设计", "功耗优化", "功耗管理", "以上都是"],
+                correct: 3,
+                explanation: "低功耗设计、功耗优化、功耗管理都是功耗设计的内容。"
+            },
+            {
+                question: "芯片测试中的'测试监控'主要监控什么？",
+                options: ["测试过程", "测试结果", "测试质量", "以上都是"],
+                correct: 3,
+                explanation: "测试监控包括测试过程、结果和质量的监控。"
+            },
+            {
+                question: "芯片制造中的'等离子体辅助原子层蚀刻'主要用于什么？",
+                options: ["精确蚀刻", "各向异性", "选择性", "以上都是"],
+                correct: 3,
+                explanation: "PAALE具有精确蚀刻、各向异性和选择性好的特点。"
+            },
+            {
+                question: "以下哪个是芯片设计中的可靠性分析？",
+                options: ["老化分析", "软错误分析", "热载流子分析", "以上都是"],
+                correct: 3,
+                explanation: "老化、软错误、热载流子分析都是可靠性分析的内容。"
+            },
+            {
+                question: "芯片测试中的'测试报告'主要包括什么？",
+                options: ["测试结果", "测试分析", "测试建议", "以上都是"],
+                correct: 3,
+                explanation: "测试报告包括测试结果、分析和建议。"
+            },
+            {
+                question: "芯片制造中的'激光辅助分子束外延'主要用于什么？",
+                options: ["局部生长", "精确控制", "高质量", "以上都是"],
+                correct: 3,
+                explanation: "LAMBE具有局部生长、精确控制和高质量的特点。"
+            },
+            {
+                question: "以下哪种是芯片设计中的热分析？",
+                options: ["稳态分析", "瞬态分析", "热应力分析", "以上都是"],
+                correct: 3,
+                explanation: "稳态、瞬态、热应力分析都是热分析的内容。"
+            },
+            {
+                question: "芯片测试中的'测试改进'主要改进什么？",
+                options: ["测试方法", "测试效率", "测试质量", "以上都是"],
+                correct: 3,
+                explanation: "测试改进包括测试方法、效率和质量的改进。"
+            },
+            {
+                question: "芯片制造中的'电子束辅助原子层沉积'主要用于什么？",
+                options: ["局部沉积", "精确控制", "高质量", "以上都是"],
+                correct: 3,
+                explanation: "EBALD具有局部沉积、精确控制和高质量的特点。"
+            },
+            {
+                question: "以下哪个是芯片设计中的面积优化？",
+                options: ["逻辑优化", "布局优化", "布线优化", "以上都是"],
+                correct: 3,
+                explanation: "逻辑、布局、布线优化都是面积优化的方法。"
+            },
+            {
+                question: "芯片测试中的'测试创新'主要包括什么？",
+                options: ["新方法", "新技术", "新工具", "以上都是"],
+                correct: 3,
+                explanation: "测试创新包括新方法、新技术和新工具的开发。"
+            },
+            {
+                question: "芯片制造中的'激光辅助等离子体增强化学气相沉积'主要用于什么？",
+                options: ["局部沉积", "精确控制", "高质量", "以上都是"],
+                correct: 3,
+                explanation: "LAPECVD具有局部沉积、精确控制和高质量的特点。"
+            },
+            {
+                question: "以下哪种是芯片设计中的功耗优化技术？",
+                options: ["门级优化", "RTL优化", "系统级优化", "以上都是"],
+                correct: 3,
+                explanation: "门级、RTL、系统级优化都是功耗优化技术。"
+            },
+            {
+                question: "芯片测试中的'测试标准化'主要标准化什么？",
+                options: ["测试方法", "测试流程", "测试接口", "以上都是"],
+                correct: 3,
+                explanation: "测试标准化包括测试方法、流程和接口的标准化。"
+            },
+            {
+                question: "芯片制造中的'激光辅助选择性外延'主要用于什么？",
+                options: ["局部生长", "精确控制", "高质量", "以上都是"],
+                correct: 3,
+                explanation: "LASE具有局部生长、精确控制和高质量的特点。"
+            },
+            {
+                question: "以下哪个是芯片设计中的时序优化技术？",
+                options: ["缓冲器插入", "逻辑重组", "时钟树优化", "以上都是"],
+                correct: 3,
+                explanation: "缓冲器插入、逻辑重组、时钟树优化都是时序优化技术。"
+            },
+            {
+                question: "芯片测试中的'测试自动化'主要自动化什么？",
+                options: ["测试生成", "测试执行", "结果分析", "以上都是"],
+                correct: 3,
+                explanation: "测试自动化包括测试生成、执行和结果分析的自动化。"
+            },
+            {
+                question: "芯片制造中的'激光辅助原子层蚀刻'主要用于什么？",
+                options: ["精确蚀刻", "各向异性", "选择性", "以上都是"],
+                correct: 3,
+                explanation: "LAALE具有精确蚀刻、各向异性和选择性好的特点。"
+            },
+            {
+                question: "以下哪种是芯片设计中的信号完整性设计？",
+                options: ["串扰控制", "反射控制", "噪声控制", "以上都是"],
+                correct: 3,
+                explanation: "串扰、反射、噪声控制都是信号完整性设计的内容。"
+            },
+            {
+                question: "芯片测试中的'测试智能化'主要包括什么？",
+                options: ["智能生成", "智能执行", "智能分析", "以上都是"],
+                correct: 3,
+                explanation: "测试智能化包括智能生成、执行和分析。"
+            },
+            {
+                question: "芯片制造中的'激光辅助分子束外延'主要用于什么？",
+                options: ["局部生长", "精确控制", "高质量", "以上都是"],
+                correct: 3,
+                explanation: "LAMBE具有局部生长、精确控制和高质量的特点。"
+            },
+            {
+                question: "以下哪个是芯片设计中的可测试性设计技术？",
+                options: ["扫描设计", "边界扫描", "内建自测试", "以上都是"],
+                correct: 3,
+                explanation: "扫描设计、边界扫描、内建自测试都是可测试性设计技术。"
+            },
+            {
+                question: "芯片测试中的'测试智能化'主要智能化什么？",
+                options: ["测试策略", "测试方法", "测试工具", "以上都是"],
+                correct: 3,
+                explanation: "测试智能化包括测试策略、方法和工具的智能化。"
+            }
+        ];
+
+        // 问答游戏函数
+        function startQuiz() {
+            // 重置游戏状态
+            quizState = {
+                currentQuestion: 0,
+                score: 0,
+                correctAnswers: 0,
+                selectedQuestions: [],
+                timeLeft: 30,
+                timer: null,
+                isPlaying: true
+            };
+
+            // 随机选择10道题目
+            const shuffled = [...quizQuestions].sort(() => 0.5 - Math.random());
+            quizState.selectedQuestions = shuffled.slice(0, 10);
+
+            // 显示开始界面
+            document.getElementById('quizStartScreen').classList.add('hidden');
+            document.getElementById('quizQuestionScreen').classList.remove('hidden');
+
+            // 显示第一道题
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const question = quizState.selectedQuestions[quizState.currentQuestion];
+            
+            // 更新题目信息
+            document.getElementById('currentQuestionNum').textContent = quizState.currentQuestion + 1;
+            document.getElementById('questionText').textContent = question.question;
+            
+            // 更新选项
+            for (let i = 0; i < 4; i++) {
+                document.getElementById(`answer${i}`).textContent = question.options[i];
+            }
+
+            // 重置按钮样式
+            document.querySelectorAll('.answer-btn').forEach(btn => {
+                btn.classList.remove('bg-green-500', 'bg-red-500', 'bg-blue-500');
+                btn.classList.add('bg-gray-700');
+                btn.disabled = false;
+            });
+
+            // 重置计时器
+            quizState.timeLeft = 30;
+            document.getElementById('timeLeft').textContent = quizState.timeLeft;
+            document.getElementById('timeProgress').style.width = '100%';
+
+            // 开始计时
+            startTimer();
+        }
+
+        function startTimer() {
+            if (quizState.timer) {
+                clearInterval(quizState.timer);
+            }
+
+            quizState.timer = setInterval(() => {
+                quizState.timeLeft--;
+                document.getElementById('timeLeft').textContent = quizState.timeLeft;
+                
+                // 更新进度条
+                const progress = (quizState.timeLeft / 30) * 100;
+                document.getElementById('timeProgress').style.width = progress + '%';
+                
+                // 时间到
+                if (quizState.timeLeft <= 0) {
+                    clearInterval(quizState.timer);
+                    selectAnswer(-1); // -1表示超时
+                }
+            }, 1000);
+        }
+
+        function selectAnswer(selectedIndex) {
+            // 停止计时器
+            if (quizState.timer) {
+                clearInterval(quizState.timer);
+            }
+
+            const question = quizState.selectedQuestions[quizState.currentQuestion];
+            const correctIndex = question.correct;
+            
+            // 禁用所有按钮
+            document.querySelectorAll('.answer-btn').forEach(btn => {
+                btn.disabled = true;
+            });
+
+            // 显示正确答案
+            document.querySelectorAll('.answer-btn').forEach((btn, index) => {
+                if (index === correctIndex) {
+                    btn.classList.remove('bg-gray-700');
+                    btn.classList.add('bg-green-500');
+                } else if (index === selectedIndex && selectedIndex !== correctIndex) {
+                    btn.classList.remove('bg-gray-700');
+                    btn.classList.add('bg-red-500');
+                }
+            });
+
+            // 检查答案
+            if (selectedIndex === correctIndex) {
+                quizState.score += 10;
+                quizState.correctAnswers++;
+            }
+
+            // 更新分数显示
+            document.getElementById('quizScore').textContent = quizState.score;
+
+            // 延迟后显示下一题或结束游戏
+            setTimeout(() => {
+                quizState.currentQuestion++;
+                if (quizState.currentQuestion < 10) {
+                    showQuestion();
+                } else {
+                    endQuiz();
+                }
+            }, 2000);
+        }
+
+        function endQuiz() {
+            quizState.isPlaying = false;
+            
+            // 隐藏题目界面
+            document.getElementById('quizQuestionScreen').classList.add('hidden');
+            
+            // 显示结果界面
+            document.getElementById('quizResultScreen').classList.remove('hidden');
+            
+            // 更新结果
+            document.getElementById('finalQuizScore').textContent = quizState.score;
+            document.getElementById('correctCount').textContent = quizState.correctAnswers;
+            document.getElementById('accuracy').textContent = (quizState.correctAnswers / 10 * 100).toFixed(0) + '%';
+            
+            // 更新最高分
+            const highScore = localStorage.getItem('quizHighScore') || 0;
+            if (quizState.score > highScore) {
+                localStorage.setItem('quizHighScore', quizState.score);
+                document.getElementById('quizHighScore').textContent = quizState.score;
+            }
+        }
+
+        function restartQuiz() {
+            // 隐藏结果界面
+            document.getElementById('quizResultScreen').classList.add('hidden');
+            
+            // 显示开始界面
+            document.getElementById('quizStartScreen').classList.remove('hidden');
+        }
+
+        // 初始化问答游戏
+        function initQuiz() {
+            // 加载最高分
+            const highScore = localStorage.getItem('quizHighScore') || 0;
+            document.getElementById('quizHighScore').textContent = highScore;
+        }
+
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initQuiz();
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // N8N工作流配置 - 智能路由
+        const N8N_CONFIG = {
+            // 自动检测N8N服务地址
+            baseUrl: getN8NBaseUrl(),
+            webhookUrls: {
+                // 测试代码生成工作流 (AI Agent)
+                codeGen: getN8NBaseUrl() + '/webhook/1e50cbd3-cc31-4ab8-80c4-aa4aadf1e5fc',
+                // 测试方案生成工作流 (AI Agent1)
+                testPlan: getN8NBaseUrl() + '/webhook/f27ab7f0-1c71-4929-8163-24d372a8761b'
+            }
+        };
+        
+        // 智能获取N8N服务地址
+        function getN8NBaseUrl() {
+            const hostname = window.location.hostname;
+            
+            // 如果是ngrok域名，网站运行在您的电脑上，可以直接访问localhost的N8N
+            if (hostname.includes('ngrok') || hostname.includes('ngrok-free')) {
+                // 网站运行在您的电脑上，可以直接访问localhost的N8N
+                return 'http://localhost:5678';
+            }
+            
+            // 如果是localhost或127.0.0.1，使用localhost
+            if (hostname === 'localhost' || hostname === '127.0.0.1') {
+                return 'http://localhost:5678';
+            }
+            
+            // 否则使用当前访问的IP地址
+            return `http://${hostname}:5678`;
+        }
+
+        // 当前选中的工作流类型
+        let currentWorkflow = 'code';
+
+
+        // Chat interface functions
+        function openChatInterface() {
+            const chatModal = document.getElementById('chatModal');
+            const chatInput = document.getElementById('chatInput');
+            const navbar = document.querySelector('.navbar');
+            
+            if (chatModal) {
+                chatModal.classList.remove('hidden');
+                // 添加body类来防止主页面滚动
+                document.body.classList.add('chat-open');
+                
+                // 添加滚动事件监听器
+                addChatScrollListeners();
+                
+                // 初始化聊天界面
+                setTimeout(() => {
+                    initializeChatInterface();
+                }, 100);
+            }
+            
+            if (navbar) {
+                navbar.classList.add('hidden');
+            }
+            
+            if (chatInput) {
+                chatInput.focus();
+            }
+        }
+        
+        // 初始化聊天界面
+        function initializeChatInterface() {
+            const chatMessages = document.getElementById('chatMessages');
+            if (chatMessages) {
+                // 确保滚动样式正确
+                chatMessages.style.overflowY = 'auto';
+                
+                // 如果内容超出容器，自动滚动到底部
+                if (chatMessages.scrollHeight > chatMessages.clientHeight) {
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+            }
+        }
+
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        function closeChatInterface() {
+            const chatModal = document.getElementById('chatModal');
+            const navbar = document.querySelector('.navbar');
+            
+            if (chatModal) {
+                chatModal.classList.add('hidden');
+                // 移除body类来恢复主页面滚动
+                document.body.classList.remove('chat-open');
+                
+                // 移除滚动事件监听器
+                removeChatScrollListeners();
+            }
+            
+            if (navbar) {
+                navbar.classList.remove('hidden');
+            }
+        }
+
+
+
+        // 聊天界面滚动事件处理
+        function addChatScrollListeners() {
+            const chatModal = document.getElementById('chatModal');
+            const chatMessages = document.getElementById('chatMessages');
+            
+            if (chatModal && chatMessages) {
+                // 防止聊天模态框的滚动事件冒泡到主页面
+                chatModal.addEventListener('wheel', preventScrollBubble, { passive: false });
+                chatModal.addEventListener('touchmove', preventScrollBubble, { passive: false });
+                
+                // 确保聊天消息区域可以正常滚动
+                chatMessages.addEventListener('wheel', allowChatScroll, { passive: false });
+                chatMessages.addEventListener('touchmove', allowChatScroll, { passive: false });
+                
+                // 添加键盘滚动支持
+                chatMessages.addEventListener('keydown', handleChatKeyboard);
+            }
+        }
+        
+        function removeChatScrollListeners() {
+            const chatModal = document.getElementById('chatModal');
+            const chatMessages = document.getElementById('chatMessages');
+            
+            if (chatModal && chatMessages) {
+                chatModal.removeEventListener('wheel', preventScrollBubble);
+                chatModal.removeEventListener('touchmove', preventScrollBubble);
+                chatMessages.removeEventListener('wheel', allowChatScroll);
+                chatMessages.removeEventListener('touchmove', allowChatScroll);
+                chatMessages.removeEventListener('keydown', handleChatKeyboard);
+            }
+        }
+        
+        function preventScrollBubble(e) {
+            // 阻止滚动事件冒泡到主页面
+            e.stopPropagation();
+        }
+        
+        function allowChatScroll(e) {
+            // 允许聊天消息区域滚动，但阻止冒泡到主页面
+            e.stopPropagation();
+        }
+        
+        function handleChatKeyboard(e) {
+            // 支持Page Up/Page Down键滚动
+            if (e.key === 'PageUp' || e.key === 'PageDown') {
+                e.preventDefault();
+                const chatMessages = document.getElementById('chatMessages');
+                const scrollAmount = chatMessages.clientHeight * 0.8;
+                if (e.key === 'PageUp') {
+                    chatMessages.scrollTop -= scrollAmount;
+                } else {
+                    chatMessages.scrollTop += scrollAmount;
+                }
+            }
+        }
+
+        // 快速输入功能
+        function quickInput(text) {
+            document.getElementById('chatInput').value = text;
+            sendMessage();
+        }
+
+        // 处理键盘事件
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // 发送消息到N8N工作流
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            // 添加用户消息到聊天界面
+            addMessageToChat(message, 'user');
+            
+            // 清空输入框
+            input.value = '';
+            
+            // 更新工作流状态
+            updateWorkflowStatus('处理中...', 'text-yellow-400');
+            
+            try {
+                // 通过本地服务器代理到 N8N（方案C）
+                const webhookUrl = '/api/chat';
+                
+                // 调试信息：显示请求详情
+                console.log('=== N8N工作流调试信息 ===');
+                console.log('当前工作流类型:', currentWorkflow);
+                console.log('目标Webhook URL:', webhookUrl);
+                console.log('请求数据:', {
+                    message: message,
+                    workflowType: currentWorkflow,
+                    timestamp: new Date().toISOString(),
+                    source: 'website_chat'
+                });
+                
+                // 验证工作流选择
+                const activeButton = document.querySelector('.workflow-btn.active');
+                console.log('当前激活的按钮:', activeButton ? activeButton.id : '未找到');
+                console.log('按钮对应的工作流:', activeButton ? activeButton.id.replace('Btn', '') : '未知');
+                
+                // 检查URL是否有效
+                if (!webhookUrl) {
+                    throw new Error('代理地址未配置');
+                }
+                
+                // 添加调试信息到聊天界面
+                addMessageToChat(`🔍 调试信息：正在请求 ${webhookUrl} (工作流类型: ${currentWorkflow})`, 'assistant');
+                
+                // 显示网络架构信息
+                if (window.location.hostname.includes('ngrok')) {
+                    addMessageToChat(`📡 网络架构：手机 → ngrok → 您的电脑(网站) → localhost(N8N)`, 'assistant');
+                }
+                
+                // 发送请求到本地代理（由代理再转发至 N8N）
+                const requestBody = {
+                    message: message,
+                    workflowType: currentWorkflow,
+                    timestamp: new Date().toISOString(),
+                    source: 'website_chat'
+                };
+                
+                console.log('发送请求体:', requestBody);
+                
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+
+                console.log('响应状态:', response.status, response.statusText);
+                console.log('响应头:', Object.fromEntries(response.headers.entries()));
+
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log('响应数据:', result);
+                    updateWorkflowStatus('完成', 'text-green-400');
+                    
+                    // 处理返回结果
+                    if (result.success && result.output) {
+                        addMessageToChat(result.output, 'assistant');
+                    } else if (result.message) {
+                        addMessageToChat(result.message, 'assistant');
+                    } else {
+                        addMessageToChat('处理完成！', 'assistant');
+                    }
+                } else {
+                    const errorData = await response.json().catch(() => ({}));
+                    console.error('HTTP错误响应:', errorData);
+                    throw new Error(errorData.message || `HTTP ${response.status}: ${response.statusText}`);
+                }
+            } catch (error) {
+                console.error('=== 详细错误信息 ===');
+                console.error('错误类型:', error.name);
+                console.error('错误消息:', error.message);
+                console.error('错误堆栈:', error.stack);
+                console.error('N8N配置:', N8N_CONFIG);
+                
+                updateWorkflowStatus('错误', 'text-red-400');
+                
+                // 根据错误类型提供更详细的错误信息
+                let errorMessage = '抱歉，工作流执行出现错误：';
+                
+                if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+                    errorMessage += `网络连接失败 (${error.message})。可能原因：
+                    • N8N实例未运行或无法访问
+                    • Webhook URL配置错误
+                    • 网络连接问题
+                    • CORS跨域问题`;
+                } else if (error.message.includes('Webhook URL未配置')) {
+                    errorMessage += error.message;
+                } else {
+                    errorMessage += error.message;
+                }
+                
+                addMessageToChat(errorMessage, 'assistant');
+                
+                // 添加调试建议
+                addMessageToChat(`💡 调试建议：
+                1. 检查浏览器控制台获取详细错误信息
+                2. 确认N8N实例正在运行
+                3. 验证Webhook URL是否正确
+                4. 检查网络连接状态`, 'assistant');
+            }
+        }
+
+        // 添加消息到聊天界面
+        function addMessageToChat(message, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'flex items-start space-x-3 mb-4';
+            
+            if (sender === 'user') {
+                messageDiv.className += ' justify-end';
+                messageDiv.innerHTML = `
+                    <div class="bg-blue-500 text-white p-3 rounded-lg max-w-xs">
+                        <p class="text-sm whitespace-pre-wrap">${message}</p>
+                        <div class="text-xs text-blue-100 mt-1">${new Date().toLocaleTimeString()}</div>
+                    </div>
+                    <div class="bg-gray-500 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-user text-white text-sm"></i>
+                    </div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-robot text-white text-sm"></i>
+                    </div>
+                    <div class="bg-gray-700 text-white p-3 rounded-lg max-w-xs">
+                        <p class="text-sm whitespace-pre-wrap">${message}</p>
+                        <div class="text-xs text-gray-400 mt-1">${new Date().toLocaleTimeString()}</div>
+                    </div>
+                `;
+            }
+            
+            chatMessages.appendChild(messageDiv);
+            // 添加动画效果
+            messageDiv.classList.add('message-enter');
+            // 平滑滚动到底部
+            chatMessages.scrollTo({
+                top: chatMessages.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
+        
+        // 清空对话功能
+        function clearChat() {
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML = `
+                <div class="flex items-start space-x-3 mb-4">
+                    <div class="bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-robot text-white text-sm"></i>
+                    </div>
+                    <div class="bg-gray-700 text-white p-3 rounded-lg max-w-xs">
+                        <p class="text-sm">您好！我是AI芯片测试助手，请告诉我您需要什么帮助？</p>
+                        <div class="text-xs text-gray-400 mt-1">${new Date().toLocaleTimeString()}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 工作流选择函数
+        function selectWorkflow(workflowType) {
+            console.log('=== 工作流切换调试 ===');
+            console.log('切换前的工作流:', currentWorkflow);
+            console.log('要切换到的工作流:', workflowType);
+            
+            currentWorkflow = workflowType;
+            
+            console.log('切换后的工作流:', currentWorkflow);
+            
+            // 更新按钮样式
+            document.querySelectorAll('.workflow-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-blue-600', 'text-white');
+                btn.classList.add('bg-gray-600', 'text-white');
+            });
+            
+            // 激活当前选择的按钮
+            const activeBtn = document.getElementById(workflowType + 'Btn');
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-gray-600');
+                activeBtn.classList.add('active', 'bg-blue-600');
+                console.log('按钮样式已更新:', activeBtn.id);
+            } else {
+                console.error('未找到按钮:', workflowType + 'Btn');
+            }
+            
+            // 更新工作流信息显示
+            updateWorkflowInfo(workflowType);
+            
+            console.log('工作流已切换到:', workflowType);
+            console.log('=== 工作流切换完成 ===');
+        }
+
+        // 更新工作流信息显示
+        function updateWorkflowInfo(workflowType) {
+            const workflowInfo = document.getElementById('workflowInfo');
+            let workflowName, testItems;
+            
+            switch(workflowType) {
+                case 'code':
+                    workflowName = '测试代码生成';
+                    testItems = 'CON, FUN, VOH, VOL, VIH, VIL, IIH, IIL, II';
+                    break;
+                case 'plan':
+                    workflowName = '测试方案生成';
+                    testItems = '测试方案, 测试向量, 测试条件';
+                    break;
+                case 'quick':
+                    workflowName = '快速测试';
+                    testItems = '快速诊断, 基础测试';
+                    break;
+                default:
+                    workflowName = '测试代码生成';
+                    testItems = 'CON, FUN, VOH, VOL, VIH, VIL, IIH, IIL, II';
+            }
+            
+            workflowInfo.innerHTML = `
+                <div class="bg-gray-800 rounded-lg p-3">
+                    <h5 class="text-blue-400 font-medium mb-2">当前工作流</h5>
+                    <p class="text-gray-300 text-sm">${workflowName}</p>
+                </div>
+                <div class="bg-gray-800 rounded-lg p-3">
+                    <h5 class="text-green-400 font-medium mb-2">支持芯片</h5>
+                    <p class="text-gray-300 text-sm">SN74LS192, SN74LS08, 等</p>
+                </div>
+                <div class="bg-gray-800 rounded-lg p-3">
+                    <h5 class="text-yellow-400 font-medium mb-2">测试项目</h5>
+                    <p class="text-gray-300 text-sm">${testItems}</p>
+                </div>
+            `;
+        }
+
+        // 更新工作流状态
+        function updateWorkflowStatus(status, colorClass) {
+            const statusElement = document.getElementById('workflowStatus');
+            statusElement.textContent = status;
+            statusElement.className = `text-sm ${colorClass}`;
+        }
+
+        // Enter key support for chat input
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('chatModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeChatInterface();
+            }
+        });
+
+        // ==================== 游戏相关代码 ====================
+        
+        // 游戏状态
+        let gameState = {
+            isPlaying: false,
+            isJumping: false,
+            score: 0,
+            highScore: localStorage.getItem('chipJumpHighScore') || 0,
+            jumpPower: 0,
+            maxJumpPower: 100,
+            jumpSpeed: 0,
+            gravity: 0.08,  // 与简单模式保持一致，创造极轻的感觉
+            scrollSpeed: 0.8,  // 基础滚动速度
+            baseScrollSpeed: 0.8,  // 基础滚动速度
+            maxScrollSpeed: 3,   // 最大滚动速度
+            speedIncreaseRate: 0.0008,  // 速度递增率
+            difficulty: 'easy',  // 默认简单模式
+            skin: localStorage.getItem('chipJumpSkin') || 'classic',  // 默认经典皮肤
+            jumpTimer: null,     // 跳跃定时器
+            platforms: [],
+            player: {
+                x: 100,
+                y: 300,
+                width: 30,
+                height: 30,
+                velocityY: 0,
+                onGround: false
+            }
+        };
+
+        // 难度配置
+        const difficultySettings = {
+            easy: {
+                gravity: 0.08,  // 大幅降低重力，创造极轻的感觉
+                baseScrollSpeed: 0.8,  // 基础滚动速度
+                maxScrollSpeed: 3,     // 最大滚动速度
+                speedIncreaseRate: 0.0008,  // 速度递增率
+                minDistance: 80,
+                maxDistance: 150,
+                minWidth: 120,
+                maxWidth: 200,
+                heightVariation: 100,
+                jumpPower: 0.15,  // 降低跳跃力度，限制跳跃高度
+                minJumpPower: 20, // 降低最小跳跃力度
+                name: '简单模式',
+                color: 'green'
+            },
+            normal: {
+                gravity: 0.1,   // 降低重力
+                baseScrollSpeed: 1.2,  // 基础滚动速度
+                maxScrollSpeed: 4,     // 最大滚动速度
+                speedIncreaseRate: 0.001,  // 速度递增率
+                minDistance: 120,
+                maxDistance: 220,
+                minWidth: 100,
+                maxWidth: 160,
+                heightVariation: 150,
+                jumpPower: 0.12,  // 降低跳跃力度
+                minJumpPower: 25, // 降低最小跳跃力度
+                name: '普通模式',
+                color: 'blue'
+            },
+            hard: {
+                gravity: 0.12,  // 降低重力
+                baseScrollSpeed: 2.0,  // 基础滚动速度
+                maxScrollSpeed: 6,     // 最大滚动速度
+                speedIncreaseRate: 0.0015,  // 速度递增率
+                minDistance: 180,
+                maxDistance: 320,
+                minWidth: 80,
+                maxWidth: 140,
+                heightVariation: 250,
+                jumpPower: 0.1,   // 降低跳跃力度
+                minJumpPower: 30, // 降低最小跳跃力度
+                name: '困难模式',
+                color: 'red'
+            }
+        };
+
+        // 皮肤配置
+        const skinSettings = {
+            classic: {
+                name: '经典芯片',
+                bodyColor: '#3b82f6',
+                pinColor: '#fbbf24',
+                textColor: '#1f2937',
+                text: 'IC',
+                description: '经典的蓝色芯片'
+            },
+            golden: {
+                name: '黄金芯片',
+                bodyColor: '#fbbf24',
+                pinColor: '#f59e0b',
+                textColor: '#92400e',
+                text: 'AU',
+                description: '珍贵的黄金芯片'
+            },
+            emerald: {
+                name: '翡翠芯片',
+                bodyColor: '#10b981',
+                pinColor: '#059669',
+                textColor: '#064e3b',
+                text: 'EM',
+                description: '清新的翡翠芯片'
+            },
+            ruby: {
+                name: '红宝石芯片',
+                bodyColor: '#ef4444',
+                pinColor: '#dc2626',
+                textColor: '#7f1d1d',
+                text: 'RB',
+                description: '火热的红宝石芯片'
+            },
+            purple: {
+                name: '紫水晶芯片',
+                bodyColor: '#8b5cf6',
+                pinColor: '#7c3aed',
+                textColor: '#4c1d95',
+                text: 'AM',
+                description: '神秘的紫水晶芯片'
+            },
+            silver: {
+                name: '银质芯片',
+                bodyColor: '#6b7280',
+                pinColor: '#9ca3af',
+                textColor: '#374151',
+                text: 'AG',
+                description: '优雅的银质芯片'
+            }
+        };
+
+        // 游戏画布
+        let canvas, ctx;
+
+        // 皮肤选择函数
+        function selectSkin(skin) {
+            gameState.skin = skin;
+            localStorage.setItem('chipJumpSkin', skin);
+            
+            // 更新按钮样式
+            document.querySelectorAll('.skin-btn').forEach(btn => {
+                btn.classList.remove('ring-4', 'ring-white', 'ring-opacity-50');
+            });
+            
+            // 高亮选中的皮肤
+            event.target.closest('.skin-btn').classList.add('ring-4', 'ring-white', 'ring-opacity-50');
+            
+            // 更新皮肤预览
+            updateSkinPreview();
+            
+            // 启用开始游戏按钮
+            document.getElementById('startGameBtn').disabled = false;
+        }
+
+        // 更新皮肤预览
+        function updateSkinPreview() {
+            const preview = document.getElementById('skinPreview');
+            const skin = skinSettings[gameState.skin];
+            preview.innerHTML = `
+                <div class="w-16 h-16 mx-auto mb-2 rounded-lg flex items-center justify-center" style="background-color: ${skin.bodyColor};">
+                    <div class="text-xs font-bold" style="color: ${skin.textColor};">${skin.text}</div>
+                </div>
+                <div class="text-xs text-center text-gray-300">${skin.name}</div>
+            `;
+        }
+
+        // 初始化皮肤选择
+        function initializeSkinSelection() {
+            // 设置默认选中的皮肤
+            const defaultSkinBtn = document.querySelector(`[onclick="selectSkin('${gameState.skin}')"]`);
+            if (defaultSkinBtn) {
+                defaultSkinBtn.classList.add('ring-4', 'ring-white', 'ring-opacity-50');
+            }
+            
+            // 设置默认选中的难度
+            const defaultDifficultyBtn = document.querySelector(`[onclick="selectDifficulty('${gameState.difficulty}')"]`);
+            if (defaultDifficultyBtn) {
+                defaultDifficultyBtn.classList.add('ring-4', 'ring-white', 'ring-opacity-50');
+            }
+            
+            // 更新皮肤预览
+            updateSkinPreview();
+            
+            // 更新难度显示
+            const settings = difficultySettings[gameState.difficulty];
+            document.getElementById('currentDifficulty').textContent = `(${settings.name})`;
+            
+            // 启用开始游戏按钮（因为已经有默认皮肤和难度选择）
+            document.getElementById('startGameBtn').disabled = false;
+        }
+
+        // 难度选择函数
+        function selectDifficulty(difficulty) {
+            gameState.difficulty = difficulty;
+            
+            // 更新按钮样式
+            document.querySelectorAll('.difficulty-btn').forEach(btn => {
+                btn.classList.remove('ring-4', 'ring-white', 'ring-opacity-50');
+            });
+            
+            // 高亮选中的难度
+            event.target.closest('.difficulty-btn').classList.add('ring-4', 'ring-white', 'ring-opacity-50');
+            
+            // 启用开始游戏按钮
+            document.getElementById('startGameBtn').disabled = false;
+            
+            // 更新游戏参数
+            const settings = difficultySettings[difficulty];
+            gameState.gravity = settings.gravity;
+            gameState.baseScrollSpeed = settings.baseScrollSpeed;
+            gameState.maxScrollSpeed = settings.maxScrollSpeed;
+            gameState.speedIncreaseRate = settings.speedIncreaseRate;
+            gameState.scrollSpeed = settings.baseScrollSpeed; // 重置为初始速度
+            
+            // 显示当前难度
+            document.getElementById('currentDifficulty').textContent = `(${settings.name})`;
+        }
+
+        // 游戏界面函数（已移动到游戏选择部分）
+
+        function closeGameInterface() {
+            document.getElementById('gameModal').classList.add('hidden');
+            stopGame();
+        }
+
+        function initGame() {
+            canvas = document.getElementById('gameCanvas');
+            ctx = canvas.getContext('2d');
+            
+            // 设置画布大小
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            // 初始化游戏
+            resetGame();
+            
+            // 初始化皮肤选择
+            initializeSkinSelection();
+            
+            // 添加事件监听器
+            canvas.addEventListener('mousedown', function(e) {
+                e.preventDefault(); // 防止鼠标事件的默认行为
+                startJump();
+            });
+            canvas.addEventListener('mouseup', function(e) {
+                e.preventDefault(); // 防止鼠标事件的默认行为
+                endJump();
+            });
+            canvas.addEventListener('touchstart', function(e) {
+                e.preventDefault(); // 防止触摸时的默认行为
+                startJump();
+            });
+            canvas.addEventListener('touchend', function(e) {
+                e.preventDefault(); // 防止触摸时的默认行为
+                endJump();
+            });
+            document.addEventListener('keydown', handleKeyDown);
+            document.addEventListener('keyup', handleKeyUp);
+        }
+
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            const maxWidth = Math.min(1200, container.clientWidth - 60);
+            const maxHeight = Math.min(800, container.clientHeight - 60);
+            
+            canvas.width = maxWidth;
+            canvas.height = maxHeight;
+            
+            // 重新绘制
+            if (gameState.isPlaying) {
+                draw();
+            }
+        }
+
+        function resetGame() {
+            gameState.isPlaying = false;
+            gameState.isJumping = false;
+            gameState.score = 0;
+            gameState.jumpPower = 0;
+            gameState.jumpSpeed = 0;
+            gameState.scrollSpeed = gameState.baseScrollSpeed; // 重置滚动速度
+            gameState.platforms = [];
+            
+            // 确保canvas已经初始化
+            if (canvas) {
+                gameState.player = {
+                    x: 100,
+                    y: canvas.height - 150,
+                    width: 30,
+                    height: 30,
+                    velocityY: 0,
+                    onGround: false
+                };
+                
+                // 创建初始平台
+                createInitialPlatforms();
+            } else {
+                // 如果canvas还没初始化，使用默认值
+                gameState.player = {
+                    x: 100,
+                    y: 300,
+                    width: 30,
+                    height: 30,
+                    velocityY: 0,
+                    onGround: false
+                };
+            }
+            
+            document.getElementById('gameScore').textContent = '0';
+            document.getElementById('startScreen').classList.remove('hidden');
+            document.getElementById('gameOverScreen').classList.add('hidden');
+        }
+
+        function createInitialPlatforms() {
+            gameState.platforms = [];
+            
+            // 确保canvas已经初始化
+            if (!canvas) return;
+            
+            // 起始平台
+            gameState.platforms.push({
+                x: 50,
+                y: canvas.height - 100,
+                width: 200,
+                height: 20,
+                type: 'start'
+            });
+            
+            // 生成更多平台
+            for (let i = 0; i < 10; i++) {
+                createRandomPlatform();
+            }
+        }
+
+        function createRandomPlatform() {
+            const lastPlatform = gameState.platforms[gameState.platforms.length - 1];
+            const settings = difficultySettings[gameState.difficulty];
+            
+            // 确保canvas已经初始化
+            if (!canvas || !lastPlatform) return;
+            
+            const distance = Math.random() * (settings.maxDistance - settings.minDistance) + settings.minDistance;
+            const width = Math.random() * (settings.maxWidth - settings.minWidth) + settings.minWidth;
+            const x = lastPlatform.x + lastPlatform.width + distance;
+            const y = canvas.height - 100 - Math.random() * settings.heightVariation;
+            
+            gameState.platforms.push({
+                x: x,
+                y: y,
+                width: width,
+                height: 20,
+                type: 'normal'
+            });
+        }
+
+        function startGame() {
+            gameState.isPlaying = true;
+            document.getElementById('startScreen').classList.add('hidden');
+            gameLoop();
+        }
+
+        function stopGame() {
+            gameState.isPlaying = false;
+        }
+
+        function restartGame() {
+            resetGame();
+            startGame();
+        }
+
+        function startJump() {
+            // 只有在游戏进行中、没有在跳跃、且玩家在地面上时才能跳跃
+            if (!gameState.isPlaying || gameState.isJumping || !gameState.player.onGround) return;
+            gameState.isJumping = true;
+            gameState.jumpPower = 0;
+            
+            // 设置一个定时器，如果快速释放则给予最小跳跃力度
+            gameState.jumpTimer = setTimeout(() => {
+                if (gameState.isJumping) {
+                    gameState.jumpPower = 15; // 给一个更小的基础跳跃力度
+                }
+            }, 50); // 50ms后开始蓄力
+        }
+
+        function endJump() {
+            if (!gameState.isPlaying || !gameState.isJumping) return;
+            gameState.isJumping = false;
+            
+            // 清除定时器
+            if (gameState.jumpTimer) {
+                clearTimeout(gameState.jumpTimer);
+                gameState.jumpTimer = null;
+            }
+            
+            const settings = difficultySettings[gameState.difficulty];
+            
+            // 如果蓄力时间很短，给予最小跳跃力度
+            if (gameState.jumpPower < 10) {
+                gameState.jumpPower = settings.minJumpPower;
+            }
+            
+            gameState.jumpSpeed = gameState.jumpPower * settings.jumpPower;
+            gameState.player.velocityY = -gameState.jumpSpeed;
+            gameState.player.onGround = false; // 跳跃后立即离开地面，防止连跳
+        }
+
+        function handleKeyDown(e) {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                startJump();
+            }
+        }
+
+        function handleKeyUp(e) {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                endJump();
+            }
+        }
+
+        function gameLoop() {
+            if (!gameState.isPlaying) return;
+            
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function update() {
+            // 更新跳跃蓄力 - 更慢的增长速度，创造精细的控制感
+            if (gameState.isJumping) {
+                gameState.jumpPower = Math.min(gameState.jumpPower + 0.8, gameState.maxJumpPower);
+            }
+            
+            // 更新玩家物理 - 添加悬浮效果
+            if (!gameState.player.onGround) {
+                // 在最高点附近时减少重力影响，创造悬浮感
+                let currentGravity = gameState.gravity;
+                if (gameState.player.velocityY > -2 && gameState.player.velocityY < 2) {
+                    // 在速度接近0时（最高点附近）大幅减少重力
+                    currentGravity *= 0.3;
+                }
+                
+                gameState.player.velocityY += currentGravity;
+                gameState.player.y += gameState.player.velocityY;
+            }
+            
+            // 检查平台碰撞 - 改进的碰撞检测
+            gameState.player.onGround = false;
+            for (let platform of gameState.platforms) {
+                // 检查玩家是否在平台附近（更宽松的检测）
+                const playerBottom = gameState.player.y + gameState.player.height;
+                const platformTop = platform.y;
+                const playerCenterX = gameState.player.x + gameState.player.width / 2;
+                const platformLeft = platform.x;
+                const platformRight = platform.x + platform.width;
+                
+                // 检查玩家是否在平台上方且X坐标重叠
+                if (playerCenterX >= platformLeft && playerCenterX <= platformRight) {
+                    // 如果玩家在平台上方或稍微重叠，都可以跳跃
+                    if (playerBottom >= platformTop - 5 && playerBottom <= platformTop + 15) {
+                        gameState.player.onGround = true;
+                        
+                        // 如果玩家正在下降且稍微在平台下方，则调整位置
+                        if (gameState.player.velocityY > 0 && playerBottom > platformTop) {
+                            gameState.player.y = platformTop - gameState.player.height;
+                            gameState.player.velocityY = 0;
+                        }
+                        break;
+                    }
+                }
+            }
+            
+            // 检查游戏结束
+            if (gameState.player.y > canvas.height) {
+                gameOver();
+                return;
+            }
+            
+            // 移动平台（创建滚动效果）
+            for (let platform of gameState.platforms) {
+                platform.x -= gameState.scrollSpeed;
+            }
+            
+            // 移除屏幕外的平台并生成新平台
+            gameState.platforms = gameState.platforms.filter(platform => platform.x + platform.width > -50);
+            if (gameState.platforms.length < 8) {
+                createRandomPlatform();
+            }
+            
+            // 更新分数
+            gameState.score += 1;
+            document.getElementById('gameScore').textContent = gameState.score;
+            
+            // 逐渐增加滚动速度
+            if (gameState.scrollSpeed < gameState.maxScrollSpeed) {
+                gameState.scrollSpeed += gameState.speedIncreaseRate;
+                // 确保不超过最大速度
+                if (gameState.scrollSpeed > gameState.maxScrollSpeed) {
+                    gameState.scrollSpeed = gameState.maxScrollSpeed;
+                }
+            }
+        }
+
+        function checkCollision(rect1, rect2) {
+            return rect1.x < rect2.x + rect2.width &&
+                   rect1.x + rect1.width > rect2.x &&
+                   rect1.y < rect2.y + rect2.height &&
+                   rect1.y + rect1.height > rect2.y;
+        }
+
+        function draw() {
+            // 清空画布
+            ctx.fillStyle = '#0f172a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // 绘制电路板背景
+            drawCircuitBackground();
+            
+            // 绘制平台
+            for (let platform of gameState.platforms) {
+                drawPlatform(platform);
+            }
+            
+            // 绘制玩家（芯片）
+            drawPlayer();
+            
+            // 绘制跳跃蓄力条
+            if (gameState.isJumping) {
+                drawJumpPowerBar();
+            }
+        }
+
+        function drawCircuitBackground() {
+            // 绘制电路线
+            ctx.strokeStyle = '#1e40af';
+            ctx.lineWidth = 1;
+            ctx.globalAlpha = 0.3;
+            
+            for (let i = 0; i < canvas.width; i += 40) {
+                ctx.beginPath();
+                ctx.moveTo(i, 0);
+                ctx.lineTo(i, canvas.height);
+                ctx.stroke();
+            }
+            
+            for (let i = 0; i < canvas.height; i += 40) {
+                ctx.beginPath();
+                ctx.moveTo(0, i);
+                ctx.lineTo(canvas.width, i);
+                ctx.stroke();
+            }
+            
+            ctx.globalAlpha = 1;
+        }
+
+        function drawPlatform(platform) {
+            // 平台主体
+            ctx.fillStyle = '#374151';
+            ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
+            
+            // 平台边框
+            ctx.strokeStyle = '#6b7280';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(platform.x, platform.y, platform.width, platform.height);
+            
+            // 电路图案
+            ctx.strokeStyle = '#3b82f6';
+            ctx.lineWidth = 1;
+            ctx.globalAlpha = 0.6;
+            
+            for (let i = platform.x + 10; i < platform.x + platform.width - 10; i += 20) {
+                ctx.beginPath();
+                ctx.moveTo(i, platform.y + 5);
+                ctx.lineTo(i, platform.y + platform.height - 5);
+                ctx.stroke();
+            }
+            
+            ctx.globalAlpha = 1;
+        }
+
+        function drawPlayer() {
+            const player = gameState.player;
+            const skin = skinSettings[gameState.skin];
+            
+            // 芯片主体 - 使用皮肤颜色
+            ctx.fillStyle = skin.bodyColor;
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+            
+            // 芯片边框 - 使用皮肤颜色
+            ctx.strokeStyle = skin.pinColor;
+            ctx.lineWidth = 2;
+            ctx.strokeRect(player.x, player.y, player.width, player.height);
+            
+            // 芯片引脚 - 使用皮肤颜色
+            ctx.fillStyle = skin.pinColor;
+            for (let i = 0; i < 4; i++) {
+                const pinX = player.x + (i % 2) * (player.width - 4) + 2;
+                const pinY = player.y + Math.floor(i / 2) * (player.height - 4) + 2;
+                ctx.fillRect(pinX, pinY, 4, 4);
+            }
+            
+            // 芯片标识 - 使用皮肤文字和颜色
+            ctx.fillStyle = skin.textColor;
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(skin.text, player.x + player.width/2, player.y + player.height/2 + 4);
+            
+            // 地面状态指示器（调试用）
+            if (gameState.player.onGround) {
+                ctx.fillStyle = '#10b981';
+                ctx.fillRect(player.x - 5, player.y - 5, 5, 5);
+            } else {
+                ctx.fillStyle = '#ef4444';
+                ctx.fillRect(player.x - 5, player.y - 5, 5, 5);
+            }
+        }
+
+        function drawJumpPowerBar() {
+            const barWidth = 200;
+            const barHeight = 20;
+            const x = canvas.width / 2 - barWidth / 2;
+            const y = 50;
+            
+            // 背景
+            ctx.fillStyle = '#374151';
+            ctx.fillRect(x, y, barWidth, barHeight);
+            
+            // 蓄力条
+            const powerWidth = (gameState.jumpPower / gameState.maxJumpPower) * barWidth;
+            ctx.fillStyle = '#10b981';
+            ctx.fillRect(x, y, powerWidth, barHeight);
+            
+            // 边框
+            ctx.strokeStyle = '#6b7280';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(x, y, barWidth, barHeight);
+            
+            // 文字
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '14px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('跳跃蓄力', canvas.width / 2, y - 10);
+            
+            // 速度显示
+            ctx.fillStyle = '#fbbf24';
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'left';
+            ctx.fillText(`速度: ${gameState.scrollSpeed.toFixed(2)}`, x + barWidth + 10, y + 15);
+        }
+
+        function gameOver() {
+            gameState.isPlaying = false;
+            
+            // 更新最高分
+            if (gameState.score > gameState.highScore) {
+                gameState.highScore = gameState.score;
+                localStorage.setItem('chipJumpHighScore', gameState.highScore);
+                document.getElementById('highScore').textContent = gameState.highScore;
+            }
+            
+            document.getElementById('finalScore').textContent = gameState.score;
+            document.getElementById('gameOverScreen').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
